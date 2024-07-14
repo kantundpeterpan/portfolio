@@ -1,0 +1,9 @@
+---
+title: "Datacamp"
+subtitle:  "Guided projects and code-alongs"
+listing:
+  type: grid
+  contents:
+    - "../datacamp_projects/*/*/*/*.ipynb"
+  fields: [image, date, title, author]
+---

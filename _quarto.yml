@@ -9,31 +9,50 @@ website:
     tools:
       - icon: github
         href: https://github.com/kantundpeterpan
+      - icon: gitlab
+        href: https://gitlab.com/kantundpeterpan
+      - icon: book
+        href: https://scholar.google.com/citations?user=fszIpZAAAAAJ&hl=en
     contents:
       - href: index.qmd
         text: Home
+        icon: house
       - href: cv/cv.qmd
         text: CV
+        icon: file-person
       - section: Projects
+        icon: kanban-fill
         contents:
-        - text: Bioinformatics
-        - text: Cheminformatics
-          href: cheminformatis.qmd
-        - section: Data Science
+        - section: "{{< fa solid dna >}} Bioinformatics"
           contents:
-            - text: NLP
-            - text: Python
-      - section: Datacamp
-        contents:
-          - text: Extended
-            href: extended.qmd
-          - href: guided.qmd
-            text: Guided
-          - text: Unguided
+            - text: "IsoTool [external]"
+              href: https://github.com/kantundpeterpan/IsoTool
+            - text: Protein sequence embedding
+            - text: Protein pocket comparison
+        - section: "{{< iconify solar:benzene-ring-bold-duotone >}} Cheminformatics"
+          contents:
+             - text: "DUDE conformer generator"
+             - text: "Pharmacophore modeling"
+        - section: Data Science
+          icon: file-bar-graph-fill
+          contents:
+            - text: Paris bike share
+            - text: Media presence of politicians
+            - section: Datacamp
+              icon: file-bar-graph-fill
+              contents:
+                - text: Competitions
+                  href: datacamp_site/competitions.qmd
+                - text: Extended
+                  href: datacamp_site/extended.qmd
+                - href: datacamp_site/guided.qmd
+                  text: Guided
+                - text: Unguided
       - about.qmd
+  draft-mode: visible
   
 format:
   html:
-    theme: pulse
+    theme: flatly
     css: styles.css
     toc: true

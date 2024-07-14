@@ -92,31 +92,44 @@ German: Native Speaker
 English: Professional proficiency  
 French: Professional proficiency 
 
-### Technical
+### Data analysis, programming and software packages
 - Programming languages: 
-    - {{< fa brands python >}}
-    - {{< fa brands r-project >}} : advanced
-    - {{< fa brands sql >}}
-    - {{< iconify devicon:julia >}}
+    - {{< fa brands python >}}  
+      routine use of *pandas, numpy, matplotlib*  
+      project dependent use of *scikit-learn, bokeh*  
+    - {{< iconify logos:sqlite >}}  
+      basic database setup and queries, joins and grouping operations
+    - {{< fa brands r-project >}}, {{< iconify devicon:julia >}} : notions
+
+### Technical lab skills
+
+- **Cellular Biology**  
+  *Human Cell Culture*: HEK-293, primary human lymphocytes  
+  *Bacterial Cell Culture*: Escherichia coli  
+
+- **Molecular Biology**  
+  mRNA-Extraction, cDNA synthesis  
+  Polymerase chain reaction  
+
+- **Biochemistry**  
+  SDS-PAGE, Western Blot  
+  Enzyme kinetics  
 
 ## PUBLICATIONS
 
-### bibtex_refs{.cheating}
+:::{.cheating}
 @atze2022heavy
 @bouchet2021traceless
 @bouchet2020diazabicyclooctane
 @le2020impact
 @triboulet2019tryptophan
 @garscha2017pharmacological
+:::
 
 ### Journal articles
-::: {#refs}
+:::{#refs}
 :::
 
-::: {.print-only}
-## References
-Available upon request
-:::
 
 ---
 :::{.cheating}
