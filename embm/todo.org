@@ -1,0 +1,79 @@
+---
+format: org
+--- 
+#+TITLE: EMBM
+
+* EMBM
+** Methods
+*** Ligand retrival for validation
+Structural information for ligand used to validate the open-source implementation of EMBM
+were extracted from the CHEMBL database using the PUBMED ID of the respekkctive publication.
+*** Ligand structure preparation
+The obtained flat files were loaded into a pandas dataframe and processed as follows:
+Starting from the smiles representation, the OpenBabel cheminformatics toolkit was used to
+assign protonation states of functional groups at pH = 7.4.
+
+The implementation of Reaction SMARTS in RDKit was used to construct ligand structure preparation
+pipelines. For the validation of the open-source implementation, molecules were truncated at the
+warhead such that substituents where varied only on one side of the warhead while the rest of molecule
+was replaced by a methyl placeholder. I anticipated that this method is applicable only to terminal
+warheads or modeling of relative energy differences in a congeneric series. For validation purposes,
+I kept the ligand preparation procedure as close as possible to the published procedure.
+Aiming for a more generally applicable approach was devised during which the ligand structure is truncated around
+the warhead. First, all atom within a distance of X(3 to 5) bonds of the electrophilic center
+of the warhead are selected. If these atoms are ring members, the rings are added to the
+selection in their entirety along with all functional groups they might bear. Second, within the
+fragmnent extracted in the first, a scan for chains of rotatable bonds is performed. All chains
+exceeding 2 sequential rotatable bonds are trimmed in order to reduce conformational complexity
+facilitating conformational searches and SQM-level geometry optimizations.
+
+and to construct representations for the anionic and neutral covalent reaction products with the two
+nucleophiles.
+Manual definition and validation of the warhead SMARTS pattern was necessary to ensure
+correct reaction mapping.
+
+** Open-source validation
+*** Thrombin
+**** Chembl target ids                                          :noexport:
+Thrombin: CHEMBL204 (Humnan Thrombin)
+Trypsin: CHEMBL3769 (Bovine Trypsin)
+**** Refs                                                          :noexport:
+***** TRAIN Constanzo, 2005, J Med Chem, PMID 15771442 
+- compound_key 50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,4,1b
+- target_id CHEMBL204
+- assay_id CHEMBL838818
+***** DONE TEST Bachand, 2001, Bioorg Med Chem Lett, PMID 11212093 [1/1]
+- compound_key 2b,2c,2d,2e,2f,2h,2i,2j,2k
+*** TODO Trypsin I
+!!! Train and test set molecules were tested against different targets!!!
+**** Refs
+***** TRAIN Constanzo, 2005, J Med Chem, PMID 15771442
+Exclusion of compounds 50 and 54 without any comment
+- compound_key 51,52,53,55,56,57,58,59,60,61,62,63,64,65,66,67,68,4,1b
+- target_id CHEMBL3769
+- assay_id CHEMBL828215
+***** DONE TEST Bachand, 2001, Bioorg Med Chem Lett, PMID 11212093 [1/1]
+compounds 2e and 2k excluded due to missing data
+- compound_key 2b,2c,2d,2f,2h,2i,2j
+- target_id CHEMBL209 (HUMAN trypsin)
+- assay_id CHEMBL817084
+   
+*** TODO Trypsin II
+**** Refs
+***** TRAIN Constanzo, 2005, J Med Chem, PMID 15771442
+- compound_keys 50,52,53,54,55,58,59,60,63,64,65,66,67,68,4,1b
+- target_id CHEMBL3769
+- assay_id CHEMBL828215
+***** TEST Constanzo, 2005, J Med Chem, PMID 15771442
+- compound_keys 51,56,57,61,62
+- target_id CHEBML3769
+- assay_id CHEMBL828215 
+*** Human neutrophil elastase (HNE)
+**** Refs
+***** TRAIN Edwards, 1995, J Med Chem, PMID 7837243
+- compound_keys all but 1d and 1m
+*** FAAH
+*** Cathepsin K
+*** Human rhinovirus 3C cysteine protease
+* COVPDB
+https://drug-discovery.vm.uni-freiburg.de/covpdb/warheads_list_by_id/search_type=by_residue_idsearch_id=1
