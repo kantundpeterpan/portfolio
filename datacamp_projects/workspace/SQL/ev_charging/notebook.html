@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Datacamp &amp; Heiner Atze">
 
-<title>notebook – Heiner Atze, PhD</title>
+<title>SQL - Electric vehicle charging – Heiner Atze, PhD</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../../../styles.css">
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -117,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">SQL - Electric vehicle charging</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -129,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
       <a href="../../../../index.html" class="sidebar-logo-link">
       <img src="data:image/jpeg;base64,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" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -228,18 +229,151 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#table-schema-of-charging_sessions" id="toc-table-schema-of-charging_sessions" class="nav-link" data-scroll-target="#table-schema-of-charging_sessions">Table schema of <code>charging_sessions</code></a></li>
+  <li><a href="#queries" id="toc-queries" class="nav-link" data-scroll-target="#queries">Queries</a>
+  <ul class="collapse">
+  <li><a href="#unique-users-per-garage" id="toc-unique-users-per-garage" class="nav-link" data-scroll-target="#unique-users-per-garage">Unique users per garage</a></li>
+  <li><a href="#most-popular-starting-times-per-weekday-for-shared-charging-columns" id="toc-most-popular-starting-times-per-weekday-for-shared-charging-columns" class="nav-link" data-scroll-target="#most-popular-starting-times-per-weekday-for-shared-charging-columns">Most popular starting times per weekday for shared charging columns</a></li>
+  <li><a href="#users-with-longest-avergae-charging-time-on-shared-columns" id="toc-users-with-longest-avergae-charging-time-on-shared-columns" class="nav-link" data-scroll-target="#users-with-longest-avergae-charging-time-on-shared-columns">Users with longest avergae charging time on shared columns</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">SQL - Electric vehicle charging</h1>
+</div>
 
 
 
-<p>As electronic vehicles (EVs) become more popular, there is an increasing need for access to charging stations, also known as ports. To that end, many modern apartment buildings have begun retrofitting their parking garages to include shared charging stations. A charging station is shared if it is accessible by anyone in the building.<img src="charging_station.jpg" alt="EV Charging" width="500" height="auto">But with increasing demand comes competition for these ports — nothing is more frustrating than coming home to find no charging stations available! In this project, you will use a dataset to help apartment building managers better understand their tenants’ EV charging habits.The data has been loaded into a PostgreSQL database with a table named <code>charging_sessions</code> with the following columns:## charging_sessions| Column | Definition | Data type ||-|-|-||<code>garage_id</code>| Identifier for the garage/building|<code>VARCHAR</code>||<code>user_id</code> | Identifier for the individual user|<code>VARCHAR</code>||<code>user_type</code>|Indicating whether the station is <code>Shared</code> or <code>Private</code>| <code>VARCHAR</code> ||<code>start_plugin</code>|The date and time the session started |<code>DATETIME</code>||<code>start_plugin_hour</code>|The hour (in military time) that the session started | <code>NUMERIC</code>||<code>end_plugout</code>|The date and time the session ended | <code>DATETIME</code> ||<code>eng_plugin_hour</code>|The hour (in military time) that the session ended | <code>NUMERIC</code>||<code>duration_hours</code>| The length of the session, in hours|<code>NUMERIC</code>||<code>el_kwh</code>| Amount of electricity used (in Kilowatt hours)|<code>NUMERIC</code>||<code>month_plugin</code>| The month that the session started |<code>VARCHAR</code>||<code>weekdays_plugin</code>| The day of the week that the session started|<code>VARCHAR</code>|Let’s get started!#### Sources- <strong>Data</strong>: <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>, via <a href="https://www.kaggle.com/datasets/anshtanwar/residential-ev-chargingfrom-apartment-buildings">Kaggle</a>,- <strong>Image</strong>: Julian Herzog, <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>, via Wikimedia Commons</p>
-<div id="dc3ce4b9-cae6-4e70-94a9-05bb4ec212d5" class="cell" data-customtype="sql" data-dataframevariablename="unique_users_per_garage" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-executioncancelledat="null" data-executiontime="933" data-lastexecutedat="1718140306357" data-lastexecutedbykernel="00d4f68b-0fc8-4606-b0bb-72880880a941" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="-- unique_users_per_garage -- Modify the code below SELECT garage_id, COUNT(DISTINCT user_id) as num_unique_users FROM charging_sessions WHERE user_type = 'Shared' GROUP BY garage_id ORDER BY num_unique_users DESC" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:271,&quot;type&quot;:&quot;dataFrame&quot;}}" data-execution_count="38">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> unique_users_per_garage<span class="op">--</span> Modify the code belowSELECT garage_id, COUNT(DISTINCT user_id) <span class="im">as</span> num_unique_usersFROM charging_sessionsWHERE user_type <span class="op">=</span> <span class="st">'Shared'</span>GROUP BY garage_idORDER BY num_unique_users DESC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Datacamp &amp; Heiner Atze </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>As electronic vehicles (EVs) become more popular, there is an increasing need for access to charging stations, also known as ports. To that end, many modern apartment buildings have begun retrofitting their parking garages to include shared charging stations. A charging station is shared if it is accessible by anyone in the building.</p>
+<p><img src="charging_station.jpg" alt="EV Charging" width="500" height="auto"></p>
+<p>But with increasing demand comes competition for these ports — nothing is more frustrating than coming home to find no charging stations available! In this project, you will use a dataset to help apartment building managers better understand their tenants’ EV charging habits.</p>
+<p>The data has been loaded into a PostgreSQL database with a table named <code>charging_sessions</code> with the following columns:</p>
+</section>
+<section id="table-schema-of-charging_sessions" class="level1">
+<h1>Table schema of <code>charging_sessions</code></h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Definition</th>
+<th>Data type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>garage_id</code></td>
+<td>Identifier for the garage/building</td>
+<td><code>VARCHAR</code></td>
+</tr>
+<tr class="even">
+<td><code>user_id</code></td>
+<td>Identifier for the individual user</td>
+<td><code>VARCHAR</code></td>
+</tr>
+<tr class="odd">
+<td><code>user_type</code></td>
+<td>Indicating whether the station is <code>Shared</code> or <code>Private</code></td>
+<td><code>VARCHAR</code></td>
+</tr>
+<tr class="even">
+<td><code>start_plugin</code></td>
+<td>The date and time the session started</td>
+<td><code>DATETIME</code></td>
+</tr>
+<tr class="odd">
+<td><code>start_plugin_hour</code></td>
+<td>The hour (in military time) that the session started</td>
+<td><code>NUMERIC</code></td>
+</tr>
+<tr class="even">
+<td><code>end_plugout</code></td>
+<td>The date and time the session ended</td>
+<td><code>DATETIME</code></td>
+</tr>
+<tr class="odd">
+<td><code>eng_plugin_hour</code></td>
+<td>The hour (in military time) that the session ended</td>
+<td><code>NUMERIC</code></td>
+</tr>
+<tr class="even">
+<td><code>duration_hours</code></td>
+<td>The length of the session, in hours</td>
+<td><code>NUMERIC</code></td>
+</tr>
+<tr class="odd">
+<td><code>el_kwh</code></td>
+<td>Amount of electricity used (in Kilowatt hours)</td>
+<td><code>NUMERIC</code></td>
+</tr>
+<tr class="even">
+<td><code>month_plugin</code></td>
+<td>The month that the session started</td>
+<td><code>VARCHAR</code></td>
+</tr>
+<tr class="odd">
+<td><code>weekdays_plugin</code></td>
+<td>The day of the week that the session started</td>
+<td><code>VARCHAR</code></td>
+</tr>
+</tbody>
+</table>
+<p>Let’s get started!</p>
+<section id="sources" class="level4">
+<h4 class="anchored" data-anchor-id="sources">Sources</h4>
+<ul>
+<li><strong>Data</strong>: <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>, via <a href="https://www.kaggle.com/datasets/anshtanwar/residential-ev-chargingfrom-apartment-buildings">Kaggle</a>,</li>
+<li><strong>Image</strong>: Julian Herzog, <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>, via Wikimedia Commons</li>
+</ul>
+</section>
+</section>
+<section id="queries" class="level1">
+<h1>Queries</h1>
+<section id="unique-users-per-garage" class="level2">
+<h2 class="anchored" data-anchor-id="unique-users-per-garage">Unique users per garage</h2>
+<p>Find the number of unique individuals that use each garage’s <strong>shared</strong> charging stations. The output should contain two columns: <code>garage_id</code> and <code>num_unique_users</code>. Sort your results by the number of unique users from highest to lowest. Save the result as <code>unique_users_per_garage</code>.</p>
+<div id="dc3ce4b9-cae6-4e70-94a9-05bb4ec212d5" class="cell" data-customtype="sql" data-dataframevariablename="unique_users_per_garage" data-executioncancelledat="null" data-executiontime="933" data-lastexecutedat="1718140306357" data-lastexecutedbykernel="00d4f68b-0fc8-4606-b0bb-72880880a941" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="-- unique_users_per_garage -- Modify the code below SELECT garage_id, COUNT(DISTINCT user_id) as num_unique_users FROM charging_sessions WHERE user_type = 'Shared' GROUP BY garage_id ORDER BY num_unique_users DESC" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:271,&quot;type&quot;:&quot;dataFrame&quot;}}" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> unique_users_per_garage</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>SELECT garage_id, COUNT(DISTINCT user_id) <span class="im">as</span> num_unique_users</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>FROM charging_sessions</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>WHERE user_type <span class="op">=</span> <span class="st">'Shared'</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>GROUP BY garage_id</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ORDER BY num_unique_users DESC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
 <div>
 
@@ -299,8 +433,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="87d94718-1f41-4d7b-9125-db1000905d4c" class="cell" data-customtype="sql" data-dataframevariablename="most_popular_shared_start_times" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-executioncancelledat="null" data-executiontime="1114" data-lastexecutedat="1718140307471" data-lastexecutedbykernel="00d4f68b-0fc8-4606-b0bb-72880880a941" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="-- most_popular_shared_start_times SELECT weekdays_plugin, start_plugin_hour, Count(*) as num_charging_sessions FROM charging_sessions WHERE user_type = 'Shared' GROUP BY weekdays_plugin, start_plugin_hour ORDER BY num_charging_sessions DESC LIMIT 10" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:321,&quot;type&quot;:&quot;dataFrame&quot;}}" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> most_popular_shared_start_timesSELECT weekdays_plugin, start_plugin_hour, Count(<span class="op">*</span>) <span class="im">as</span> num_charging_sessionsFROM charging_sessionsWHERE user_type <span class="op">=</span> <span class="st">'Shared'</span>GROUP BY weekdays_plugin, start_plugin_hourORDER BY num_charging_sessions DESCLIMIT <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="most-popular-starting-times-per-weekday-for-shared-charging-columns" class="level2">
+<h2 class="anchored" data-anchor-id="most-popular-starting-times-per-weekday-for-shared-charging-columns">Most popular starting times per weekday for shared charging columns</h2>
+<p>Find the top 10 most popular charging start times (by weekday and start hour) for sessions that use <strong>shared</strong> charging stations. Your result should contain three columns: <code>weekdays_plugin</code>, <code>start_plugin_hour</code>, and a column named <code>num_charging_sessions</code> containing the number of plugins on that weekday at that hour. Sort your results from the most to the least number of sessions. Save the result as <code>most_popular_shared_start_times</code>.</p>
+<div id="87d94718-1f41-4d7b-9125-db1000905d4c" class="cell" data-customtype="sql" data-dataframevariablename="most_popular_shared_start_times" data-executioncancelledat="null" data-executiontime="1114" data-lastexecutedat="1718140307471" data-lastexecutedbykernel="00d4f68b-0fc8-4606-b0bb-72880880a941" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="-- most_popular_shared_start_times SELECT weekdays_plugin, start_plugin_hour, Count(*) as num_charging_sessions FROM charging_sessions WHERE user_type = 'Shared' GROUP BY weekdays_plugin, start_plugin_hour ORDER BY num_charging_sessions DESC LIMIT 10" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:321,&quot;type&quot;:&quot;dataFrame&quot;}}" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> most_popular_shared_start_times</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>SELECT weekdays_plugin, start_plugin_hour, Count(<span class="op">*</span>) <span class="im">as</span> num_charging_sessions</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>FROM charging_sessions</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>WHERE user_type <span class="op">=</span> <span class="st">'Shared'</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>GROUP BY weekdays_plugin, start_plugin_hour</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>ORDER BY num_charging_sessions DESC</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>LIMIT <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="39">
 <div>
 
@@ -381,8 +525,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="1abe5e5b-2644-4d3a-848b-1d5ab745efdf" class="cell" data-customtype="sql" data-dataframevariablename="long_duration_shared_users" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-executioncancelledat="null" data-executiontime="null" data-lastexecutedat="null" data-lastexecutedbykernel="null" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="null" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:221,&quot;type&quot;:&quot;dataFrame&quot;}}" data-visualizedataframe="false" data-chartconfig="{&quot;bar&quot;:{&quot;hasRoundedCorners&quot;:true,&quot;stacked&quot;:false},&quot;type&quot;:&quot;bar&quot;,&quot;version&quot;:&quot;v1&quot;}" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> long_duration_shared_usersSELECT <span class="op">*</span> FROM( SELECT user_id, AVG(duration_hours) <span class="im">as</span> avg_charging_duration    FROM public.charging_sessions   WHERE user_type <span class="op">=</span> <span class="st">'Shared'</span>  GROUP BY public.charging_sessions.user_id   ORDER BY avg_charging_duration DESC ) <span class="im">as</span> calcWHERE calc.avg_charging_duration <span class="kw">is</span> <span class="kw">not</span> null AND calc.avg_charging_duration <span class="op">&gt;</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="users-with-longest-avergae-charging-time-on-shared-columns" class="level2">
+<h2 class="anchored" data-anchor-id="users-with-longest-avergae-charging-time-on-shared-columns">Users with longest avergae charging time on shared columns</h2>
+<p>Find the users whose average charging duration last longer than 10 hours when using <strong>shared</strong> charging stations. Your result should contain two columns: <code>user_id</code> and <code>avg_charging_duration</code>. Sort your result from highest to lowest average charging duration. Save the result as <code>long_duration_shared_users</code>.</p>
+<div id="1abe5e5b-2644-4d3a-848b-1d5ab745efdf" class="cell" data-chartconfig="{&quot;bar&quot;:{&quot;hasRoundedCorners&quot;:true,&quot;stacked&quot;:false},&quot;type&quot;:&quot;bar&quot;,&quot;version&quot;:&quot;v1&quot;}" data-customtype="sql" data-dataframevariablename="long_duration_shared_users" data-executioncancelledat="null" data-executiontime="null" data-lastexecutedat="null" data-lastexecutedbykernel="null" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="null" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:221,&quot;type&quot;:&quot;dataFrame&quot;}}" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-visualizedataframe="false" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> long_duration_shared_users</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>SELECT <span class="op">*</span> FROM(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    SELECT user_id, AVG(duration_hours) <span class="im">as</span> avg_charging_duration</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    FROM public.charging_sessions</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    WHERE user_type <span class="op">=</span> <span class="st">'Shared'</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    GROUP BY public.charging_sessions.user_id</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    ORDER BY avg_charging_duration DESC</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="im">as</span> calc</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>WHERE calc.avg_charging_duration <span class="kw">is</span> <span class="kw">not</span> null AND calc.avg_charging_duration <span class="op">&gt;</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="40">
 <div>
 
@@ -434,6 +590,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

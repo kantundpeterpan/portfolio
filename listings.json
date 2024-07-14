@@ -2,15 +2,16 @@
   {
     "listing": "/guided.html",
     "items": [
-      "/datacamp_projects/guided/python/nlp_movies_similarity/notebook.html",
       "/datacamp_projects/workspace/Python/NLP_gender_reviews/notebook-solution.html",
       "/datacamp_projects/workspace/Python/NLP_gender_reviews/notebook.html",
-      "/datacamp_projects/workspace/SQL/london_transport/notebook.html",
-      "/datacamp_projects/guided/python/trump_trudeau_tweets/trump_trudeau_tweets.html",
-      "/datacamp_projects/workspace/SQL/international_debt/notebook.html",
+      "/datacamp_projects/guided/python/cosmetic_ingredients/notebook.html",
+      "/datacamp_projects/guided/python/nlp_movies_similarity/notebook.html",
       "/datacamp_projects/workspace/SQL/ev_charging/notebook.html",
-      "/datacamp_projects/workspace/Python/NLP_gender_reviews/web_scraping.html",
-      "/datacamp_projects/workspace/SQL/student_mental_health/notebook.html"
+      "/datacamp_projects/workspace/SQL/international_debt/notebook.html",
+      "/datacamp_projects/workspace/SQL/london_transport/notebook.html",
+      "/datacamp_projects/workspace/SQL/student_mental_health/notebook.html",
+      "/datacamp_projects/guided/python/trump_trudeau_tweets/trump_trudeau_tweets.html",
+      "/datacamp_projects/workspace/Python/NLP_gender_reviews/web_scraping.html"
     ]
   }
 ]

@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Datacamp &amp; Heiner Atze">
 
-<title>notebook – Heiner Atze, PhD</title>
+<title>SQL - Mental health of international students – Heiner Atze, PhD</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../../../styles.css">
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -117,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">SQL - Mental health of international students</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -129,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
       <a href="../../../../index.html" class="sidebar-logo-link">
       <img src="data:image/jpeg;base64,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" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -228,13 +229,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#table-schema-of-students" id="toc-table-schema-of-students" class="nav-link" data-scroll-target="#table-schema-of-students">Table schema of <code>students</code></a></li>
+  <li><a href="#queries" id="toc-queries" class="nav-link" data-scroll-target="#queries">Queries</a>
+  <ul class="collapse">
+  <li><a href="#quick-look-at-the-data" id="toc-quick-look-at-the-data" class="nav-link" data-scroll-target="#quick-look-at-the-data">Quick look at the data</a></li>
+  <li><a href="#summary-statistics-of-internationsl-students-conditioned-on-their-length-of-stay" id="toc-summary-statistics-of-internationsl-students-conditioned-on-their-length-of-stay" class="nav-link" data-scroll-target="#summary-statistics-of-internationsl-students-conditioned-on-their-length-of-stay">Summary statistics of internationsl students conditioned on their length of stay</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">SQL - Mental health of international students</h1>
+</div>
 
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Datacamp &amp; Heiner Atze </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <div class="quarto-figure quarto-figure-center">
@@ -243,10 +278,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>Illustration of silhouetted heads</figcaption>
 </figure>
 </div>
-<p>Does going to university in a different country affect your mental health? A Japanese international university surveyed its students in 2018 and published a study the following year that was approved by several ethical and regulatory boards.The study found that international students have a higher risk of mental health difficulties than the general population, and that social connectedness (belonging to a social group) and acculturative stress (stress associated with joining a new culture) are predictive of depression.Explore the <code>students</code> data using PostgreSQL to find out if you would come to a similar conclusion for international students and see if the length of stay is a contributing factor.Here is a data description of the columns you may find helpful.</p>
-<div class="line-block">Field Name | Description || ————- | ———————————————— || <code>inter_dom</code> | Types of students (international or domestic) || <code>japanese_cate</code> | Japanese language proficiency || <code>english_cate</code> | English language proficiency || <code>academic</code> | Current academic level (undergraduate or graduate) || <code>age</code> | Current age of student || <code>stay</code> | Current length of stay in years || <code>todep</code> | Total score of depression (PHQ-9 test) || <code>tosc</code> | Total score of social connectedness (SCS test) || <code>toas</code> | Total score of acculturative stress (ASISS test) |</div>
-<div id="a60a4d75-634c-4965-8e01-804780e6df98" class="cell" data-customtype="sql" data-dataframevariablename="students" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-executiontime="1061" data-lastsuccessfullyexecutedcode="-- Run this code to view the data in students SELECT *  FROM students;" data-executioncancelledat="null" data-lastexecutedat="1718293718147" data-lastexecutedbykernel="324aef36-73f6-4038-a8e2-3a537cc21552" data-lastscheduledrunid="null" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:315,&quot;type&quot;:&quot;dataFrame&quot;}}" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> Run this code to view the data <span class="kw">in</span> studentsSELECT <span class="op">*</span> FROM students<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Does going to university in a different country affect your mental health? A Japanese international university surveyed its students in 2018 and published a study the following year that was approved by several ethical and regulatory boards.</p>
+<p>The study found that international students have a higher risk of mental health difficulties than the general population, and that social connectedness (belonging to a social group) and acculturative stress (stress associated with joining a new culture) are predictive of depression.</p>
+<p>Explore the <code>students</code> data using PostgreSQL to find out if you would come to a similar conclusion for international students and see if the length of stay is a contributing factor.</p>
+</section>
+<section id="table-schema-of-students" class="level1">
+<h1>Table schema of <code>students</code></h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Field Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>inter_dom</code></td>
+<td>Types of students (international or domestic)</td>
+</tr>
+<tr class="even">
+<td><code>japanese_cate</code></td>
+<td>Japanese language proficiency</td>
+</tr>
+<tr class="odd">
+<td><code>english_cate</code></td>
+<td>English language proficiency</td>
+</tr>
+<tr class="even">
+<td><code>academic</code></td>
+<td>Current academic level (undergraduate or graduate)</td>
+</tr>
+<tr class="odd">
+<td><code>age</code></td>
+<td>Current age of student</td>
+</tr>
+<tr class="even">
+<td><code>stay</code></td>
+<td>Current length of stay in years</td>
+</tr>
+<tr class="odd">
+<td><code>todep</code></td>
+<td>Total score of depression (PHQ-9 test)</td>
+</tr>
+<tr class="even">
+<td><code>tosc</code></td>
+<td>Total score of social connectedness (SCS test)</td>
+</tr>
+<tr class="odd">
+<td><code>toas</code></td>
+<td>Total score of acculturative stress (ASISS test)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="queries" class="level1">
+<h1>Queries</h1>
+<section id="quick-look-at-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="quick-look-at-the-data">Quick look at the data</h2>
+<div id="a60a4d75-634c-4965-8e01-804780e6df98" class="cell" data-customtype="sql" data-dataframevariablename="students" data-executioncancelledat="null" data-executiontime="1061" data-lastexecutedat="1718293718147" data-lastexecutedbykernel="324aef36-73f6-4038-a8e2-3a537cc21552" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="-- Run this code to view the data in students SELECT *  FROM students;" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:315,&quot;type&quot;:&quot;dataFrame&quot;}}" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> Run this code to view the data <span class="kw">in</span> students</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>SELECT <span class="op">*</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>FROM students<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
@@ -898,8 +992,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="ab01f727-3ae9-491a-bf8b-6d507e7dbf15" class="cell" data-customtype="sql" data-dataframevariablename="df" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-executioncancelledat="null" data-executiontime="866" data-lastexecutedat="1718293719013" data-lastexecutedbykernel="324aef36-73f6-4038-a8e2-3a537cc21552" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="-- query SELECT      stay,      COUNT(inter_dom) AS count_int,     ROUND(AVG(todep),2) AS average_phq,     ROUND(AVG(tosc),2) AS average_scs,     ROUND(AVG(toas),2) AS average_as FROM students WHERE inter_dom = 'Inter' GROUP BY stay ORDER BY stay DESC " data-visualizedataframe="false" data-chartconfig="{&quot;bar&quot;:{&quot;hasRoundedCorners&quot;:true,&quot;stacked&quot;:false},&quot;type&quot;:&quot;line&quot;,&quot;version&quot;:&quot;v1&quot;,&quot;x&quot;:{&quot;field&quot;:&quot;stay&quot;,&quot;type&quot;:&quot;integer&quot;},&quot;y&quot;:{&quot;field&quot;:&quot;average_as&quot;,&quot;type&quot;:&quot;number&quot;}}" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> querySELECT  stay,   COUNT(inter_dom) AS count_int,  ROUND(AVG(todep),<span class="dv">2</span>) AS average_phq, ROUND(AVG(tosc),<span class="dv">2</span>) AS average_scs,  ROUND(AVG(toas),<span class="dv">2</span>) AS average_asFROM studentsWHERE inter_dom <span class="op">=</span> <span class="st">'Inter'</span>GROUP BY stayORDER BY stay DESC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="summary-statistics-of-internationsl-students-conditioned-on-their-length-of-stay" class="level2">
+<h2 class="anchored" data-anchor-id="summary-statistics-of-internationsl-students-conditioned-on-their-length-of-stay">Summary statistics of internationsl students conditioned on their length of stay</h2>
+<p>
+Explore and analyze the <code>students</code> data to see how the length of stay (<code>stay</code>) impacts the average mental health diagnostic scores of the <strong>international</strong> students present in the study.
+</p>
+<ul>
+<li>
+Return a table with <strong>nine</strong> rows and <strong>five</strong> columns.
+</li>
+<li>
+The five columns should be aliased as: <code>stay</code>, <code>count_int</code>, <code>average_phq</code>, <code>average_scs</code>, and <code>average_as</code>, <strong>in that order</strong>.
+</li>
+<li>
+The average columns should contain the average of the <code>todep</code> (PHQ-9 test), <code>tosc</code> (SCS test), and <code>toas</code> (ASISS test) columns for each length of stay, <strong>rounded to two decimal places</strong>.
+</li>
+<li>
+The <code>count_int</code> column should be the number of international students for each length of stay.
+</li>
+<li>
+Sort the results by the length of stay in <strong>descending order</strong>.
+</li>
+</ul>
+<div id="ab01f727-3ae9-491a-bf8b-6d507e7dbf15" class="cell" data-chartconfig="{&quot;bar&quot;:{&quot;hasRoundedCorners&quot;:true,&quot;stacked&quot;:false},&quot;type&quot;:&quot;line&quot;,&quot;version&quot;:&quot;v1&quot;,&quot;x&quot;:{&quot;field&quot;:&quot;stay&quot;,&quot;type&quot;:&quot;integer&quot;},&quot;y&quot;:{&quot;field&quot;:&quot;average_as&quot;,&quot;type&quot;:&quot;number&quot;}}" data-customtype="sql" data-dataframevariablename="df" data-executioncancelledat="null" data-executiontime="866" data-lastexecutedat="1718293719013" data-lastexecutedbykernel="324aef36-73f6-4038-a8e2-3a537cc21552" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="-- query SELECT      stay,      COUNT(inter_dom) AS count_int,     ROUND(AVG(todep),2) AS average_phq,     ROUND(AVG(tosc),2) AS average_scs,     ROUND(AVG(toas),2) AS average_as FROM students WHERE inter_dom = 'Inter' GROUP BY stay ORDER BY stay DESC " data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-visualizedataframe="false" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> query</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>SELECT </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    stay, </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    COUNT(inter_dom) AS count_int,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ROUND(AVG(todep),<span class="dv">2</span>) AS average_phq,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    ROUND(AVG(tosc),<span class="dv">2</span>) AS average_scs,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    ROUND(AVG(toas),<span class="dv">2</span>) AS average_as</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>FROM students</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>WHERE inter_dom <span class="op">=</span> <span class="st">'Inter'</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>GROUP BY stay</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>ORDER BY stay DESC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
@@ -996,6 +1123,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

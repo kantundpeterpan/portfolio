@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Datacamp &amp; Heiner Atze">
 
-<title>notebook – Heiner Atze, PhD</title>
+<title>SQL - International debt statistics – Heiner Atze, PhD</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../../../styles.css">
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -117,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">SQL - International debt statistics</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -129,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
       <a href="../../../../index.html" class="sidebar-logo-link">
       <img src="data:image/jpeg;base64,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" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -228,18 +229,116 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#table-schema-of-international_debt" id="toc-table-schema-of-international_debt" class="nav-link" data-scroll-target="#table-schema-of-international_debt">Table schema of <code>international_debt</code></a></li>
+  <li><a href="#queries" id="toc-queries" class="nav-link" data-scroll-target="#queries">Queries</a>
+  <ul class="collapse">
+  <li><a href="#no.-of-distinct-countries" id="toc-no.-of-distinct-countries" class="nav-link" data-scroll-target="#no.-of-distinct-countries">No.&nbsp;of distinct countries</a></li>
+  <li><a href="#country-with-highest-debt" id="toc-country-with-highest-debt" class="nav-link" data-scroll-target="#country-with-highest-debt">Country with highest debt</a></li>
+  <li><a href="#county-with-lowest-amount-of-principal-repayments" id="toc-county-with-lowest-amount-of-principal-repayments" class="nav-link" data-scroll-target="#county-with-lowest-amount-of-principal-repayments">County with lowest amount of principal repayments</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">SQL - International debt statistics</h1>
+</div>
 
 
 
-<p><img src="image.jpg" class="img-fluid">Humans not only take debts to manage necessities. A country may also take debt to manage its economy. For example, infrastructure spending is one costly ingredient required for a country’s citizens to lead comfortable lives. The World Bank is the organization that provides debt to countries.In this project, you are going to analyze international debt data collected by The World Bank. The dataset contains information about the amount of debt (in USD) owed by developing countries across several categories. You are going to find the answers to the following questions:- What is the number of distinct countries present in the database?- What country has the highest amount of debt?- What country has the lowest amount of repayments?Below is a description of the table you will be working with:## <code>international_debt</code> table| Column | Definition | Data Type ||-|-|-||country_name|Name of the country|<code>varchar</code>||country_code|Code representing the country|<code>varchar</code>||indicator_name|Description of the debt indicator|<code>varchar</code>||indicator_code|Code representing the debt indicator|<code>varchar</code>||debt|Value of the debt indicator for the given country (in current US dollars)|<code>float</code>|You will execute SQL queries to answer three questions, as listed in the instructions.</p>
-<div id="63ae86de-f519-4736-a9ab-886f71129cf3" class="cell" data-customtype="sql" data-dataframevariablename="num_distinct_countries" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-executioncancelledat="null" data-executiontime="821" data-lastexecutedat="1718655949345" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="-- num_distinct_countries  SELECT COUNT(DISTINCT country_name) as total_distinct_countries FROM international_debt" data-lastexecutedbykernel="aec7449f-f032-4a97-bd07-4d76216375e4" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:96,&quot;type&quot;:&quot;dataFrame&quot;}}" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> num_distinct_countries SELECT COUNT(DISTINCT country_name) <span class="im">as</span> total_distinct_countriesFROM international_debt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Datacamp &amp; Heiner Atze </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p><img src="image.jpg" class="img-fluid"></p>
+<p>Humans not only take debts to manage necessities. A country may also take debt to manage its economy. For example, infrastructure spending is one costly ingredient required for a country’s citizens to lead comfortable lives. The World Bank is the organization that provides debt to countries.</p>
+<p>In this project, you are going to analyze international debt data collected by The World Bank. The dataset contains information about the amount of debt (in USD) owed by developing countries across several categories. You are going to find the answers to the following questions:</p>
+<ul>
+<li>What is the number of distinct countries present in the database?</li>
+<li>What country has the highest amount of debt?</li>
+<li>What country has the lowest amount of repayments?</li>
+</ul>
+<p>Below is a description of the table you will be working with:</p>
+</section>
+<section id="table-schema-of-international_debt" class="level1">
+<h1>Table schema of <code>international_debt</code></h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Definition</th>
+<th>Data Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>country_name</td>
+<td>Name of the country</td>
+<td><code>varchar</code></td>
+</tr>
+<tr class="even">
+<td>country_code</td>
+<td>Code representing the country</td>
+<td><code>varchar</code></td>
+</tr>
+<tr class="odd">
+<td>indicator_name</td>
+<td>Description of the debt indicator</td>
+<td><code>varchar</code></td>
+</tr>
+<tr class="even">
+<td>indicator_code</td>
+<td>Code representing the debt indicator</td>
+<td><code>varchar</code></td>
+</tr>
+<tr class="odd">
+<td>debt</td>
+<td>Value of the debt indicator for the given country (in current US dollars)</td>
+<td><code>float</code></td>
+</tr>
+</tbody>
+</table>
+<p>You will execute SQL queries to answer three questions, as listed in the instructions.</p>
+</section>
+<section id="queries" class="level1">
+<h1>Queries</h1>
+<section id="no.-of-distinct-countries" class="level2">
+<h2 class="anchored" data-anchor-id="no.-of-distinct-countries">No.&nbsp;of distinct countries</h2>
+<p>What is the number of distinct countries present in the database? The output should be <strong>single</strong> row and column aliased as <code>total_distinct_countries</code>. Save the query as <code>num_distinct_countries</code>.</p>
+<div id="63ae86de-f519-4736-a9ab-886f71129cf3" class="cell" data-customtype="sql" data-dataframevariablename="num_distinct_countries" data-executioncancelledat="null" data-executiontime="821" data-lastexecutedat="1718655949345" data-lastexecutedbykernel="aec7449f-f032-4a97-bd07-4d76216375e4" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="-- num_distinct_countries  SELECT COUNT(DISTINCT country_name) as total_distinct_countries FROM international_debt" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:96,&quot;type&quot;:&quot;dataFrame&quot;}}" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> num_distinct_countries </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>SELECT COUNT(DISTINCT country_name) <span class="im">as</span> total_distinct_countries</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>FROM international_debt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <div>
 
@@ -262,8 +361,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="8b8afd6e-b2eb-4637-a16f-8671b51e7317" class="cell" data-customtype="sql" data-dataframevariablename="highest_debt_country" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-executioncancelledat="null" data-executiontime="888" data-lastexecutedat="1718655950233" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="-- highest_debt_country  SELECT country_name, SUM(debt) as total_debt FROM international_debt GROUP BY country_name ORDER BY total_debt DESC LIMIT 1" data-lastexecutedbykernel="aec7449f-f032-4a97-bd07-4d76216375e4" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:96,&quot;type&quot;:&quot;dataFrame&quot;}}" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> highest_debt_country SELECT country_name, SUM(debt) <span class="im">as</span> total_debtFROM international_debtGROUP BY country_nameORDER BY total_debt DESCLIMIT <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="country-with-highest-debt" class="level2">
+<h2 class="anchored" data-anchor-id="country-with-highest-debt">Country with highest debt</h2>
+<p>What country has the highest amount of debt? Your output should contain <strong>two</strong> columns: <code>country_name</code> and <code>total_debt</code> and <strong>one</strong> row. Save the query as <code>highest_debt_country</code>.</p>
+<div id="8b8afd6e-b2eb-4637-a16f-8671b51e7317" class="cell" data-customtype="sql" data-dataframevariablename="highest_debt_country" data-executioncancelledat="null" data-executiontime="888" data-lastexecutedat="1718655950233" data-lastexecutedbykernel="aec7449f-f032-4a97-bd07-4d76216375e4" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="-- highest_debt_country  SELECT country_name, SUM(debt) as total_debt FROM international_debt GROUP BY country_name ORDER BY total_debt DESC LIMIT 1" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:96,&quot;type&quot;:&quot;dataFrame&quot;}}" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> highest_debt_country </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>SELECT country_name, SUM(debt) <span class="im">as</span> total_debt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>FROM international_debt</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>GROUP BY country_name</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ORDER BY total_debt DESC</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>LIMIT <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <div>
 
@@ -288,8 +396,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="1cdf2f88-7aa0-4702-8422-84098b742be4" class="cell" data-customtype="sql" data-dataframevariablename="lowest_principal_repayment" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-executioncancelledat="null" data-executiontime="786" data-lastexecutedat="1718655951019" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="-- lowest_principal_repayment  SELECT country_name, indicator_name, MAX(debt) as lowest_repayment FROM international_debt WHERE indicator_code = 'DT.AMT.DLXF.CD' GROUP BY country_name, indicator_name ORDER BY lowest_repayment ASC LIMIT 1" data-lastexecutedbykernel="aec7449f-f032-4a97-bd07-4d76216375e4" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:96,&quot;type&quot;:&quot;dataFrame&quot;}}" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> lowest_principal_repayment SELECT country_name, indicator_name, MAX(debt) <span class="im">as</span> lowest_repaymentFROM international_debtWHERE indicator_code <span class="op">=</span> <span class="st">'DT.AMT.DLXF.CD'</span>GROUP BY country_name, indicator_nameORDER BY lowest_repayment ASCLIMIT <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="county-with-lowest-amount-of-principal-repayments" class="level2">
+<h2 class="anchored" data-anchor-id="county-with-lowest-amount-of-principal-repayments">County with lowest amount of principal repayments</h2>
+<p>What country has the lowest amount of principal repayments (indicated by the “DT.AMT.DLXF.CD” indicator code)? The output table should contain <strong>three</strong> columns: <code>country_name</code>, <code>indicator_name</code>, and <code>lowest_repayment</code> and <strong>one</strong> row, saved in the query <code>lowest_principal_repayment</code>.</p>
+<div id="1cdf2f88-7aa0-4702-8422-84098b742be4" class="cell" data-customtype="sql" data-dataframevariablename="lowest_principal_repayment" data-executioncancelledat="null" data-executiontime="786" data-lastexecutedat="1718655951019" data-lastexecutedbykernel="aec7449f-f032-4a97-bd07-4d76216375e4" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="-- lowest_principal_repayment  SELECT country_name, indicator_name, MAX(debt) as lowest_repayment FROM international_debt WHERE indicator_code = 'DT.AMT.DLXF.CD' GROUP BY country_name, indicator_name ORDER BY lowest_repayment ASC LIMIT 1" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:96,&quot;type&quot;:&quot;dataFrame&quot;}}" data-sqlcellmode="dataFrame" data-sqlsource="{&quot;integrationId&quot;:&quot;89e17161-a224-4a8a-846b-0adc0fe7a4b1&quot;,&quot;integrationType&quot;:&quot;postgresql&quot;,&quot;type&quot;:&quot;integration&quot;}" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">--</span> lowest_principal_repayment </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>SELECT country_name, indicator_name, MAX(debt) <span class="im">as</span> lowest_repayment</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>FROM international_debt</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>WHERE indicator_code <span class="op">=</span> <span class="st">'DT.AMT.DLXF.CD'</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>GROUP BY country_name, indicator_name</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ORDER BY lowest_repayment ASC</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>LIMIT <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <div>
 
@@ -318,6 +436,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
