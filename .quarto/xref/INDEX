@@ -1,0 +1,46 @@
+{
+  "about.qmd": {
+    "about.html": "757e4b3a",
+    "about.ipynb": "4221e788"
+  },
+  "index.qmd": {
+    "index.html": "111f2710",
+    "index.ipynb": "7eb2da13"
+  },
+  "embm/embm.md": {
+    "embm.html": "dd29d084",
+    "embm.ipynb": "364d6a24"
+  },
+  "datacamp/gender/NLP_gender_reviews/web_scraping.ipynb": {
+    "web_scraping.html": "abebe9c1"
+  },
+  "datacamp/gender/NLP_gender_reviews/notebook-solution.ipynb": {
+    "notebook-solution.html": "402154e8"
+  },
+  "datacamp/gender/NLP_gender_reviews/notebook.ipynb": {
+    "notebook.html": "49aa1f3b",
+    "notebook.out.ipynb": "e4d34e91"
+  },
+  "guided.qmd": {
+    "guided.html": "aa6bd3b7",
+    "guided.ipynb": "6b2ac13f",
+    "guided.org": "97f748e1"
+  },
+  "embm/todo.md": {
+    "todo.html": "255ebeb9",
+    "todo.ipynb": "3656867f"
+  },
+  "datacamp/gender/NLP_gender_reviews/notebook.md": {
+    "notebook.html": "7d93c56f"
+  },
+  "ttt/trump_trudeau_tweets.ipynb": {
+    "trump_trudeau_tweets.html": "f2cff48c",
+    "trump_trudeau_tweets.out.ipynb": "a83493e9"
+  },
+  "cv.qmd": {
+    "cv.html": "6f5de2b1",
+    "cv.ipynb": "b8a4e151",
+    "cv.pdf": "f6c7449c",
+    "cv.tex": "2cfb7ef6"
+  }
+}

@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.54">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Datacamp &amp; Heiner Atze">
+
+<title>Do students describe professors differently based on gender? – Heiner Atze, PhD</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Heiner Atze, PhD
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../../">Heiner Atze, PhD</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/kantundpeterpan" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CV</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../guided.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Datacamp</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../guided.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guided</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">Unguided</span>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#scraping-the-web-for-reviews-of-professors" id="toc-scraping-the-web-for-reviews-of-professors" class="nav-link active" data-scroll-target="#scraping-the-web-for-reviews-of-professors">1. Scraping the web for reviews of professors</a>
+  <ul class="collapse">
+  <li><a href="#task-1a.-what-relevant-packages-do-we-need-for-web-scraping-and-reading-in-data" id="toc-task-1a.-what-relevant-packages-do-we-need-for-web-scraping-and-reading-in-data" class="nav-link" data-scroll-target="#task-1a.-what-relevant-packages-do-we-need-for-web-scraping-and-reading-in-data">Task 1a. What relevant packages do we need for web scraping and reading in data?</a></li>
+  <li><a href="#task-1b.-which-professors-will-we-be-looking-at" id="toc-task-1b.-which-professors-will-we-be-looking-at" class="nav-link" data-scroll-target="#task-1b.-which-professors-will-we-be-looking-at">Task 1b. Which professors will we be looking at?</a></li>
+  <li><a href="#task-1c.-how-can-we-use-urls-to-scrape-relevant-data-about-professors" id="toc-task-1c.-how-can-we-use-urls-to-scrape-relevant-data-about-professors" class="nav-link" data-scroll-target="#task-1c.-how-can-we-use-urls-to-scrape-relevant-data-about-professors">Task 1c. How can we use urls to scrape relevant data about professors?</a></li>
+  </ul></li>
+  <li><a href="#sample-code-to-loop-through-the-whole-list-of-professors" id="toc-sample-code-to-loop-through-the-whole-list-of-professors" class="nav-link" data-scroll-target="#sample-code-to-loop-through-the-whole-list-of-professors">1. Sample code to loop through the whole list of professors</a></li>
+  <li><a href="#for-s-in-range40-lenprofs10" id="toc-for-s-in-range40-lenprofs10" class="nav-link" data-scroll-target="#for-s-in-range40-lenprofs10">for s in (range(40, len(profs),10)):</a></li>
+  <li><a href="#sample-code-to-loop-through-the-first-10-professors" id="toc-sample-code-to-loop-through-the-first-10-professors" class="nav-link" data-scroll-target="#sample-code-to-loop-through-the-first-10-professors">2. Sample code to loop through the first 10 professors</a></li>
+  <li><a href="#reading-pre-scraped-data" id="toc-reading-pre-scraped-data" class="nav-link" data-scroll-target="#reading-pre-scraped-data">2. Reading pre-scraped data</a>
+  <ul class="collapse">
+  <li><a href="#task-2a.-how-can-we-read-a-directory-of-scraped-professor-reviews-and-concatenate-them" id="toc-task-2a.-how-can-we-read-a-directory-of-scraped-professor-reviews-and-concatenate-them" class="nav-link" data-scroll-target="#task-2a.-how-can-we-read-a-directory-of-scraped-professor-reviews-and-concatenate-them">Task 2a. How can we read a directory of scraped professor reviews and concatenate them?</a></li>
+  <li><a href="#task-2b.-what-does-the-final-shape-of-our-dataframe-look-like" id="toc-task-2b.-what-does-the-final-shape-of-our-dataframe-look-like" class="nav-link" data-scroll-target="#task-2b.-what-does-the-final-shape-of-our-dataframe-look-like">Task 2b. What does the final shape of our DataFrame look like?</a></li>
+  </ul></li>
+  <li><a href="#text-analysis" id="toc-text-analysis" class="nav-link" data-scroll-target="#text-analysis">3. Text Analysis</a>
+  <ul class="collapse">
+  <li><a href="#a.-what-additional-package-imports-are-required-for-data-visualization-and-nlp" id="toc-a.-what-additional-package-imports-are-required-for-data-visualization-and-nlp" class="nav-link" data-scroll-target="#a.-what-additional-package-imports-are-required-for-data-visualization-and-nlp">3a. What additional package imports are required for data visualization and NLP?</a></li>
+  </ul></li>
+  <li><a href="#for-plotting" id="toc-for-plotting" class="nav-link" data-scroll-target="#for-plotting">For plotting</a>
+  <ul class="collapse">
+  <li><a href="#b.-how-can-we-assign-gender-labels-to-professors" id="toc-b.-how-can-we-assign-gender-labels-to-professors" class="nav-link" data-scroll-target="#b.-how-can-we-assign-gender-labels-to-professors">3b. How can we assign gender labels to professors?</a></li>
+  <li><a href="#c.-are-there-any-initial-differences-between-male-and-female-professors-based-on-their-overall-ratings" id="toc-c.-are-there-any-initial-differences-between-male-and-female-professors-based-on-their-overall-ratings" class="nav-link" data-scroll-target="#c.-are-there-any-initial-differences-between-male-and-female-professors-based-on-their-overall-ratings">3c. Are there any initial differences between male and female professors based on their overall ratings?</a></li>
+  <li><a href="#task-3d.-what-are-the-most-important-words-being-used-to-describe-professors-in-reviews" id="toc-task-3d.-what-are-the-most-important-words-being-used-to-describe-professors-in-reviews" class="nav-link" data-scroll-target="#task-3d.-what-are-the-most-important-words-being-used-to-describe-professors-in-reviews">Task 3d. What are the most important words being used to describe professors in reviews?</a></li>
+  <li><a href="#congratulations-on-making-it-to-the-end" id="toc-congratulations-on-making-it-to-the-end" class="nav-link" data-scroll-target="#congratulations-on-making-it-to-the-end">Congratulations on making it to the end!</a>
+  <ul class="collapse">
+  <li><a href="#where-to-from-here" id="toc-where-to-from-here" class="nav-link" data-scroll-target="#where-to-from-here">Where to from here?</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#list-files-and-directories-in-the-current-directory" id="toc-list-files-and-directories-in-the-current-directory" class="nav-link" data-scroll-target="#list-files-and-directories-in-the-current-directory">List files and directories in the current directory</a></li>
+  <li><a href="#create-an-html-list-to-display-the-files" id="toc-create-an-html-list-to-display-the-files" class="nav-link" data-scroll-target="#create-an-html-list-to-display-the-files">Create an HTML list to display the files</a></li>
+  <li><a href="#display-the-html" id="toc-display-the-html" class="nav-link" data-scroll-target="#display-the-html">Display the HTML</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Do students describe professors differently based on gender?</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Datacamp &amp; Heiner Atze </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>Note: You can consult the solution of this live training in the file browser as <code>notebook-solution.ipynb</code></em></p>
+<p>Language plays a crucial role in shaping our perceptions and attitudes towards gender in the workplace, in classrooms, and personal relationships. Studies have shown that gender bias in language can have a significant impact on the way people are perceived and treated.</p>
+<p>For example, research has found that job advertisements that use masculine-coded language tend to attract more male applicants, while those that use feminine-coded language tend to attract more female applicants. Similarly, gendered language can perpetuate differences in the classroom.</p>
+<p>In this project, we’ll using scraped student reviews from <a href="https://ratemyprofessors.com">ratemyprofessors.com</a> to identify differences in language commonly used for male vs.&nbsp;female professors, and explore subtleties in how language in the classroom can be gendered.</p>
+<p>This excellent <a href="https://benschmidt.org/profGender/#%7B%22database%22%3A%22RMP%22%2C%22plotType%22%3A%22pointchart%22%2C%22method%22%3A%22return_json%22%2C%22search_limits%22%3A%7B%22word%22%3A%5B%22aggressive%22%5D%2C%22department__id%22%3A%7B%22%24lte%22%3A25%7D%2C%22rHelpful%22%3A%5B1%2C2%5D%2C%22rClarity%22%3A%5B1%2C2%5D%7D%2C%22aesthetic%22%3A%7B%22x%22%3A%22WordsPerMillion%22%2C%22y%22%3A%22department%22%2C%22color%22%3A%22gender%22%7D%2C%22counttype%22%3A%5B%22WordsPerMillion%22%5D%2C%22groups%22%3A%5B%22department%22%2C%22gender%22%5D%2C%22testGroup%22%3A%22C%22%7D">tool</a> created by Ben Schmidt allows us to enter the words and phrases that we find in our analysis and explore them in more depth. We’ll do this at the end.</p>
+<p>Catalyst also does some incredible work on <a href="https://www.catalyst.org/2015/05/07/can-you-spot-the-gender-bias-in-this-job-description/">decoding</a> gendered language.</p>
+<section id="scraping-the-web-for-reviews-of-professors" class="level1">
+<h1>1. Scraping the web for reviews of professors</h1>
+<p>Text data––especially gendered text data, is hard to come by. Web scraping can be a helpful data collection tool when datasets are unable for this kind of work. We can write web scrapers to compile datasets on job descriptions, freelancer reviews, and, as in our use-case, professor reviews by students.</p>
+<p><a href="https://www.ratemyprofessors.com/professor?tid=589">ratemyprofessors.com</a> provides a wonderful combination of qualitative and quantitative metrics that we can analyze.</p>
+<p>Although the data on their websites is not labeled by gender, we’ll use pronouns used by students to label professors “Male” or “Female”. Of course, this approach is not perfect, as it relies on the <em>students’</em> use of pronouns. Professors with non-binary pronouns will also be under-represented in the data, since very few reviews will have them, and so it’s not trivial to write an algorithm to detect them. These are definitely important questions in the world of gender analysis though, so we encourage you to pick them up as extensions of this project!</p>
+<section id="task-1a.-what-relevant-packages-do-we-need-for-web-scraping-and-reading-in-data" class="level3">
+<h3 class="anchored" data-anchor-id="task-1a.-what-relevant-packages-do-we-need-for-web-scraping-and-reading-in-data">Task 1a. What relevant packages do we need for web scraping and reading in data?</h3>
+<p>let’s see if some text does the trick</p>
+<div id="5d32b671-a5a9-4b1c-b730-dbd276406a93" class="cell" data-executioncancelledat="null" data-executiontime="31" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-lastexecutedat="1719766529332" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="" data-execution_count="78">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Used to parse html</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lxml <span class="im">import</span> etree</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Used to pause code intermittently so that our scraper is not blocked</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#For data manipulation and analysis</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#To access our data filenames so we can read them</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-1b.-which-professors-will-we-be-looking-at" class="level3">
+<h3 class="anchored" data-anchor-id="task-1b.-which-professors-will-we-be-looking-at">Task 1b. Which professors will we be looking at?</h3>
+<p>The <code>web_scraping.ipynb</code> notebook provided in this workspace provides some code using selenium that was used to find urls from <a href="https://ratemyprofessors.com">ratemyprofessors.com</a> that we’ll be scraping in this notebook.</p>
+<p>Whilst the specific selenium code used to generate this list of URLs is beyond what we can cover today, we encourage you to explore this code to understand how we generated this list of professors!</p>
+<p>For now, we’ll open the file <code>profs_888.txt</code> and read each professor’s url in a new line, and save this variable as <code>profs</code>.</p>
+<div id="83b8efe1-4c75-4755-9534-a8889b82c6d6" class="cell" data-executioncancelledat="null" data-executiontime="180" data-lastexecutedat="1719766529512" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="with open(r'profs_1244.txt', 'r') as f:     profs = [x.strip() for x in f.readlines()]" data-tags="[]" data-execution_count="79">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># maybe we need to start with a comment</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="vs">r'profs_1244.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    profs <span class="op">=</span> [x.strip() <span class="cf">for</span> x <span class="kw">in</span> f.readlines()]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#if</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#this</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#is</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#getting</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#a</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># reall</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#really</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#really</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#long</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#comment</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#maybe</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#the</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#error</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#can</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#be</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#reproduced</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="22e4d4d2-d11a-44a1-95bd-f03b37f1fcc4" class="cell" data-executioncancelledat="null" data-executiontime="52" data-lastexecutedat="1719766529566" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="profs[0]" data-execution_count="80">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>profs[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="80">
+<pre><code>'https://www.ratemyprofessors.com/professor?tid=398'</code></pre>
+</div>
+</div>
+</section>
+<section id="task-1c.-how-can-we-use-urls-to-scrape-relevant-data-about-professors" class="level3">
+<h3 class="anchored" data-anchor-id="task-1c.-how-can-we-use-urls-to-scrape-relevant-data-about-professors">Task 1c. How can we use urls to scrape relevant data about professors?</h3>
+<p>Each professor has an overall rating that looks like this <img src="img/overall_rating_example.png" width="400"></p>
+<p>and a series of reviews that look like this <img src="img/review_example.png" class="img-fluid" alt="Review example"></p>
+<p>The code below can be used to iterate through all or part of the list of urls in <code>profs</code>, and scrape them for qualtiative and quantitative data. <strong>You won’t need to run through this whole list though, because the <code>data/</code> folder already contains the reviews of several professors that we have scraped for you!</strong></p>
+<ul>
+<li>The overall rating for the professor</li>
+<li>All the individual reviews written by students about the professor</li>
+<li>The “emotion” corresponding to each individual review: <code>😎 AWESOME</code>, <code>😐 AVERAGE</code>, or <code>😖 AWFUL</code></li>
+<li>A numerical “quality” rating corresponding to each individual review</li>
+</ul>
+<p>We won’t be using the “difficulty” ratings shown here.</p>
+<div id="68bb1e9b-dbda-45fe-8ba3-ba3d8110d3eb" class="cell" data-executioncancelledat="null" data-executiontime="54" data-lastexecutedat="1719766529620" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="from io import StringIO" data-execution_count="81">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9fc15814-5c07-4691-a9f3-76e0d73e3030" class="cell" data-executioncancelledat="null" data-executiontime="47" data-lastexecutedat="1719766529668" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="import numpy as np" data-execution_count="82">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>::: {#432d6789-8153-4de1-baae-ae211ca49c23 .cell executionCancelledAt=‘null’ executionTime=‘36228’ jupyter=‘{“outputs_hidden”:false,“source_hidden”:false}’ lastExecutedAt=‘1719766565897’ lastExecutedByKernel=‘f6c43d9d-c556-42d8-9544-e49e4eaa9fbc’ lastScheduledRunId=‘null’ lastSuccessfullyExecutedCode=’# USE ONLY ONE OF THE FOLLOWING FOR STATWEMENTS</p>
+</section>
+</section>
+<section id="sample-code-to-loop-through-the-whole-list-of-professors" class="level1">
+<h1>1. Sample code to loop through the whole list of professors</h1>
+</section>
+<section id="for-s-in-range40-lenprofs10" class="level1">
+<h1>for s in (range(40, len(profs),10)):</h1>
+</section>
+<section id="sample-code-to-loop-through-the-first-10-professors" class="level1">
+<h1>2. Sample code to loop through the first 10 professors</h1>
+<p>for s in range(0,10,10):</p>
+<pre><code>texts = [] # Initialzie an empty array
+print((s, s+10)) # Iterate through 10 professors at a time
+
+for url in profs[s:s+10]: # Iterate through this block
+    time.sleep(3) # To prevent sending too many requests at once
+    r = requests.get(url) # Open URL
+    htmlparser = etree.HTMLParser() # Instantiate a parser to parse HTML
+    tree = etree.parse(StringIO(r.text), htmlparser) # Parse HTML returned by the url
+    
+    text = tree.xpath(\'//*[@id="ratingsList"]/li[*]/div/div/div[3]/div[3]/text()\') # Extract reviews
+    ratings = tree.xpath(\'//*[@id="root"]/div/div/div[3]/div[2]/div[1]/div[1]/div[1]/div/div[1]\') # Extract ratings
+    emotion = tree.xpath(\'//*[@id="ratingsList"]/li[*]/div/div/div[1]/div[1]/div[2]/text()\') # Extract emotion
+    quality = tree.xpath(\'//*[@id="ratingsList"]/li[*]/div/div/div[2]/div[1]/div/div[2]\') # Extract quality
+    texts.append((url,
+                  text,
+                  [i.text for i in ratings][0],
+                  emotion,
+                  [i.text for i in quality],
+                 )) # Append metrics to empty list
+
+print() # Print new line for readability
+df = pd.DataFrame(texts, columns = [\'url\', \'review\', \'rating\', \'emtion\', \'quality\'])
+df.to_csv(f\'df_{s}_to_{s+10}.csv\') # Write result to df in blocks of 10 professors at a time
+time.sleep(3) # Pause to prevent sending too many requests at once' outputsMetadata='{"0":{"height":59,"type":"stream"}}' execution_count=83}</code></pre>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># USE ONLY ONE OF THE FOLLOWING FOR STATWEMENTS</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Sample code to loop through the whole list of professors    </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># for s in (range(40, len(profs),10)):</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Sample code to loop through the first 10 professors</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">10</span>):</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    texts <span class="op">=</span> [] <span class="co"># Initialzie an empty array</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>((s, s<span class="op">+</span><span class="dv">10</span>)) <span class="co"># Iterate through 10 professors at a time</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> url <span class="kw">in</span> profs[s:s<span class="op">+</span><span class="dv">10</span>]: <span class="co"># Iterate through this block</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="dv">3</span>) <span class="co"># To prevent sending too many requests at once</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> requests.get(url) <span class="co"># Open URL</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        htmlparser <span class="op">=</span> etree.HTMLParser() <span class="co"># Instantiate a parser to parse HTML</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        tree <span class="op">=</span> etree.parse(StringIO(r.text), htmlparser) <span class="co"># Parse HTML returned by the url</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> tree.xpath(<span class="st">'//*[@id="ratingsList"]/li[*]/div/div/div[3]/div[3]/text()'</span>) <span class="co"># Extract reviews</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        ratings <span class="op">=</span> tree.xpath(<span class="st">'//*[@id="root"]/div/div/div[3]/div[2]/div[1]/div[1]/div[1]/div/div[1]'</span>) <span class="co"># Extract ratings</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        emotion <span class="op">=</span> tree.xpath(<span class="st">'//*[@id="ratingsList"]/li[*]/div/div/div[1]/div[1]/div[2]/text()'</span>) <span class="co"># Extract emotion</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        quality <span class="op">=</span> tree.xpath(<span class="st">'//*[@id="ratingsList"]/li[*]/div/div/div[2]/div[1]/div/div[2]'</span>) <span class="co"># Extract quality</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        texts.append((url,</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>                      text,</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>                      [i.text <span class="cf">for</span> i <span class="kw">in</span> ratings][<span class="dv">0</span>],</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                      emotion,</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>                      [i.text <span class="cf">for</span> i <span class="kw">in</span> quality],</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>                     )) <span class="co"># Append metrics to empty list</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>() <span class="co"># Print new line for readability</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(texts, columns <span class="op">=</span> [<span class="st">'url'</span>, <span class="st">'review'</span>, <span class="st">'rating'</span>, <span class="st">'emtion'</span>, <span class="st">'quality'</span>])</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    df.to_csv(<span class="ss">f'df_</span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">_to_</span><span class="sc">{</span>s<span class="op">+</span><span class="dv">10</span><span class="sc">}</span><span class="ss">.csv'</span>) <span class="co"># Write result to df in blocks of 10 professors at a time</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">3</span>) <span class="co"># Pause to prevent sending too many requests at once</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(0, 10)
+</code></pre>
+</div>
+<p>:::</p>
+</section>
+<section id="reading-pre-scraped-data" class="level1">
+<h1>2. Reading pre-scraped data</h1>
+<section id="task-2a.-how-can-we-read-a-directory-of-scraped-professor-reviews-and-concatenate-them" class="level3">
+<h3 class="anchored" data-anchor-id="task-2a.-how-can-we-read-a-directory-of-scraped-professor-reviews-and-concatenate-them">Task 2a. How can we read a directory of scraped professor reviews and concatenate them?</h3>
+<p>Since we have already scraped reviews from several professors for you, let’s begin by concatenating all the files in the <code>data</code> folder provided. These have already been scraped for you.</p>
+<p>Since <code>review</code>, <code>emotion</code> and <code>quality</code> are lists but were recorded in string form, we’ll apply <code>eval()</code> to them to turn them back from a string into a list.</p>
+<div id="00a06042-4be0-4c2e-967c-68a0664d55b1" class="cell" data-executioncancelledat="null" data-executiontime="50" data-lastexecutedat="1719766565948" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="from glob import glob" data-execution_count="84">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> glob <span class="im">import</span> glob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="8d0eb371-f339-4c0a-b3e2-0a5840af2706" class="cell" data-executioncancelledat="null" data-executiontime="2848" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-lastexecutedat="1719766568797" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="df = pd.concat([pd.read_csv(x, index_col=0) for x in glob('data/*.csv')]).reset_index(drop = True) df['review'] = df['review'].apply(lambda x: eval(x)) df['emotion'] = df['emotion'].apply(lambda x: eval(x)) df['quality'] = df['quality'].apply(lambda x: eval(x))" data-execution_count="85">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.concat([pd.read_csv(x, index_col<span class="op">=</span><span class="dv">0</span>) <span class="cf">for</span> x <span class="kw">in</span> glob(<span class="st">'data/*.csv'</span>)]).reset_index(drop <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'review'</span>] <span class="op">=</span> df[<span class="st">'review'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">eval</span>(x))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'emotion'</span>] <span class="op">=</span> df[<span class="st">'emotion'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">eval</span>(x))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'quality'</span>] <span class="op">=</span> df[<span class="st">'quality'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">eval</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-2b.-what-does-the-final-shape-of-our-dataframe-look-like" class="level3">
+<h3 class="anchored" data-anchor-id="task-2b.-what-does-the-final-shape-of-our-dataframe-look-like">Task 2b. What does the final shape of our DataFrame look like?</h3>
+<p>Browse the <code>df</code> below to familiarize yourself with the dataset we’ll be working with. The DataFrame contains one row for each professor, containing: - Their url - All the raw text reviews for that professor - Their overall rating - All the emotion labels associated with reviews of that professor - All quality ratings assigned to that professor</p>
+<div id="33dbb820-d76a-4607-96f3-0ff3859c0e6b" class="cell" data-executioncancelledat="null" data-executiontime="178" data-lastexecutedat="1719766568977" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="df" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:321,&quot;type&quot;:&quot;dataFrame&quot;}}" data-execution_count="86">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="86">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">prof</th>
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">rating</th>
+<th data-quarto-table-cell-role="th">emotion</th>
+<th data-quarto-table-cell-role="th">quality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>https://www.ratemyprofessors.com/professor?tid...</td>
+<td>[Good experience for a class online. It was un...</td>
+<td>3.1</td>
+<td>[awesome, awful, awful, awful, average, awful,...</td>
+<td>[4.0, 2.0, 1.0, 1.0, 3.0, 2.5, 1.5, 2.0, 2.0, ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>https://www.ratemyprofessors.com/professor?tid...</td>
+<td>[I used to like Geography before I took Ali. G...</td>
+<td>3.1</td>
+<td>[awful, average, awful, awful, awful, average,...</td>
+<td>[2.5, 3.5, 2.5, 2.5, 2.0, 3.0, 4.5, 4.5, 4.0, ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>https://www.ratemyprofessors.com/professor?tid...</td>
+<td>[She was a good professor. It was a pass/fail ...</td>
+<td>3.9</td>
+<td>[awesome, awesome, awesome, awesome, awesome, ...</td>
+<td>[5.0, 5.0, 5.0, 5.0, 4.0, 4.0, 1.5, 5.0, 1.5, ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>https://www.ratemyprofessors.com/professor?tid...</td>
+<td>[Writing 104 with someone else is the class yo...</td>
+<td>2.0</td>
+<td>[awful, awesome, awful, awful, awful, awesome,...</td>
+<td>[1.0, 4.0, 1.0, 1.0, 1.5, 4.0, 2.0, 2.0, 4.0, ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>https://www.ratemyprofessors.com/professor?tid...</td>
+<td>[Honestly, this guy is great. I took him a few...</td>
+<td>4.1</td>
+<td>[awesome, average, awesome, awesome, awesome, ...</td>
+<td>[5.0, 3.0, 4.5, 5.0, 4.0, 5.0, 4.5, 2.0, 1.0, ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">575</td>
+<td>https://www.ratemyprofessors.com/professor?tid...</td>
+<td>[This is one of the better profs at CSUSB. I s...</td>
+<td>2.6</td>
+<td>[average, awful, awesome, awful, awesome, awfu...</td>
+<td>[3.0, 1.0, 4.0, 1.0, 4.0, 1.0, 1.0, 4.0, 3.0, ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">576</td>
+<td>https://www.ratemyprofessors.com/professor?tid...</td>
+<td>[His class is extremely hard. I usually make v...</td>
+<td>2.8</td>
+<td>[awful, awful, awful, awful, awful, awesome, a...</td>
+<td>[1.0, 1.0, 1.0, 2.0, 1.5, 4.5, 2.0, 3.0, 5.0, ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">577</td>
+<td>https://www.ratemyprofessors.com/professor?tid...</td>
+<td>[(Chem 8) Prides himself on being a "fair" pro...</td>
+<td>3.1</td>
+<td>[awful, awesome, average, awesome, average, aw...</td>
+<td>[1.0, 5.0, 3.5, 4.0, 3.0, 2.5, 3.0, 3.5, 4.0, ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">578</td>
+<td>https://www.ratemyprofessors.com/professor?tid...</td>
+<td>[I had him back in 1980! Some things never ch...</td>
+<td>3.6</td>
+<td>[average, awesome, awful, awesome, awesome, av...</td>
+<td>[3.0, 4.0, 2.5, 4.0, 5.0, 3.5, 2.5, 4.5, 4.5, ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">579</td>
+<td>https://www.ratemyprofessors.com/professor?tid...</td>
+<td>[She is the worst teacher to have. I had her a...</td>
+<td>3.4</td>
+<td>[awful, awful, awesome, average, awful, awful,...</td>
+<td>[1.0, 1.0, 4.0, 3.5, 2.0, 1.0, 3.5, 3.5, 1.5, ...</td>
+</tr>
+</tbody>
+</table>
+
+<p>580 rows × 5 columns</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="text-analysis" class="level1">
+<h1>3. Text Analysis</h1>
+<section id="a.-what-additional-package-imports-are-required-for-data-visualization-and-nlp" class="level2">
+<h2 class="anchored" data-anchor-id="a.-what-additional-package-imports-are-required-for-data-visualization-and-nlp">3a. What additional package imports are required for data visualization and NLP?</h2>
+<p>::: {#8d6a7a01-887d-4df1-98b6-5a3c95e35519 .cell executionCancelledAt=‘null’ executionTime=‘1184’ jupyter=‘{“outputs_hidden”:false,“source_hidden”:false}’ lastExecutedAt=‘1719766570161’ lastExecutedByKernel=‘f6c43d9d-c556-42d8-9544-e49e4eaa9fbc’ lastScheduledRunId=‘null’ lastSuccessfullyExecutedCode=’import numpy as np # For manipulating matrices during NLP</p>
+<p>import nltk # Natural language toolkit from nltk.tokenize import word_tokenize # Used for breaking up strings of text (e.g.&nbsp;sentences) into words from nltk.stem.porter import PorterStemmer # Used to return the dictionary base of a word from nltk.tokenize import WhitespaceTokenizer # Used for breaking up strings of text (e.g.&nbsp;sentences) into words based on white space</p>
+<p>nltk.download('punkt')</p>
+<p>from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer # Used to count the occurences of words and phrases from sklearn.feature_extraction import text # Using to extrat features from text</p>
+</section>
+</section>
+<section id="for-plotting" class="level1">
+<h1>For plotting</h1>
+<p>import matplotlib.pyplot as plt import seaborn as sns sns.set(style='white')’ outputsMetadata=‘{“0”:{“height”:59,“type”:“stream”}}’ execution_count=87}</p>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np <span class="co"># For manipulating matrices during NLP</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk <span class="co"># Natural language toolkit</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> word_tokenize <span class="co"># Used for breaking up strings of text (e.g. sentences) into words</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem.porter <span class="im">import</span> PorterStemmer <span class="co"># Used to return the dictionary base of a word</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> WhitespaceTokenizer <span class="co"># Used for breaking up strings of text (e.g. sentences) into words based on white space</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">'punkt'</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> TfidfVectorizer, CountVectorizer <span class="co"># Used to count the occurences of words and phrases</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction <span class="im">import</span> text <span class="im">as</span> sktext<span class="co"># Using to extrat features from text</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># For plotting</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">'white'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>[nltk_data] Downloading package punkt to
+[nltk_data]     /home/kantundpeterpan/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!</code></pre>
+</div>
+<p>:::</p>
+<section id="b.-how-can-we-assign-gender-labels-to-professors" class="level3">
+<h3 class="anchored" data-anchor-id="b.-how-can-we-assign-gender-labels-to-professors">3b. How can we assign gender labels to professors?</h3>
+<p>Let’s write a custom function that assigns a gender label to professors based on the pronouns most commontly used for him. Specifically: - If any of <code>['she', 'her', 'herself', 'shes']</code> occur more than 5 times across all reviews for that professor, we label the professor “F”. - If any of <code>['him', 'he', 'his', 'himself']</code> occur more than 5 times across all reviews for that professor, we label the professor “F”.</p>
+<div id="507d2c12-93f3-4a14-96a6-b6cd95c5976c" class="cell" data-executioncancelledat="null" data-executiontime="58" data-lastexecutedat="1719766570220" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="from collections import Counter" data-execution_count="88">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>::: {#b44c0b61-91e6-4a2e-b969-8e12d9dca25e .cell executionCancelledAt=‘null’ executionTime=‘47’ jupyter=‘{“outputs_hidden”:false,“source_hidden”:false}’ lastExecutedAt=‘1719766570268’ lastExecutedByKernel=‘f6c43d9d-c556-42d8-9544-e49e4eaa9fbc’ lastScheduledRunId=‘null’ lastSuccessfullyExecutedCode=’def assign_pronoun(review_list):</p>
+<pre><code>she_ps = [\'she\', \'her\', \'herself\', \'shes\']
+he_ps = [\'him\', \'he\', \'his\', \'himself\']
+
+counters = [Counter(word_tokenize(r.lower())) for r in review_list]
+
+### FEMALE
+she_ps_counter = dict()
+
+for sp in she_ps:
+    she_ps_counter[sp] = 0
+    she_ps_counter[sp] = sum([c[sp] if sp in c.keys() else 0 for c in counters])
+    
+she_ps_counts = np.array([she_ps_counter[sp] for sp in she_ps])
+
+if np.sum(she_ps_counts) &gt; 5:
+    return "F"
+
+### MALE
+he_ps_counter = dict()
+
+for hp in he_ps:
+    he_ps_counter[hp] = 0
+    he_ps_counter[hp] = sum([c[hp] if hp in c.keys() else 0 for c in counters])
+    
+he_ps_counts = np.array([he_ps_counter[hp] for hp in he_ps])
+
+if np.sum(he_ps_counts) &gt; 5:
+    return "M"' execution_count=89}</code></pre>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> assign_pronoun(review_list):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    she_ps <span class="op">=</span> [<span class="st">'she'</span>, <span class="st">'her'</span>, <span class="st">'herself'</span>, <span class="st">'shes'</span>]</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    he_ps <span class="op">=</span> [<span class="st">'him'</span>, <span class="st">'he'</span>, <span class="st">'his'</span>, <span class="st">'himself'</span>]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    counters <span class="op">=</span> [Counter(word_tokenize(r.lower())) <span class="cf">for</span> r <span class="kw">in</span> review_list]</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">### FEMALE</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    she_ps_counter <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> sp <span class="kw">in</span> she_ps:</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        she_ps_counter[sp] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        she_ps_counter[sp] <span class="op">=</span> <span class="bu">sum</span>([c[sp] <span class="cf">if</span> sp <span class="kw">in</span> c.keys() <span class="cf">else</span> <span class="dv">0</span> <span class="cf">for</span> c <span class="kw">in</span> counters])</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    she_ps_counts <span class="op">=</span> np.array([she_ps_counter[sp] <span class="cf">for</span> sp <span class="kw">in</span> she_ps])</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> np.<span class="bu">sum</span>(she_ps_counts) <span class="op">&gt;</span> <span class="dv">5</span>:</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"F"</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">### MALE</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    he_ps_counter <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> hp <span class="kw">in</span> he_ps:</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>        he_ps_counter[hp] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>        he_ps_counter[hp] <span class="op">=</span> <span class="bu">sum</span>([c[hp] <span class="cf">if</span> hp <span class="kw">in</span> c.keys() <span class="cf">else</span> <span class="dv">0</span> <span class="cf">for</span> c <span class="kw">in</span> counters])</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>    he_ps_counts <span class="op">=</span> np.array([he_ps_counter[hp] <span class="cf">for</span> hp <span class="kw">in</span> he_ps])</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> np.<span class="bu">sum</span>(he_ps_counts) <span class="op">&gt;</span> <span class="dv">5</span>:</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"M"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>:::</p>
+<div id="051288f7-17ac-448b-9fe9-43f5d3f133ec" class="cell" data-executioncancelledat="null" data-executiontime="48" data-lastexecutedat="1719766570316" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="assign_pronoun(df.review.iloc[6])" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:101,&quot;type&quot;:&quot;stream&quot;}}" data-execution_count="90">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>assign_pronoun(df.review.iloc[<span class="dv">6</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="90">
+<pre><code>'M'</code></pre>
+</div>
+</div>
+<div id="ceafc103-6ee0-4d16-a61c-aadbf489900c" class="cell" data-executioncancelledat="null" data-executiontime="3308" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-lastexecutedat="1719766573624" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="df['pronouns'] = df.review.apply(assign_pronoun)" data-execution_count="91">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'pronouns'</span>] <span class="op">=</span> df.review.<span class="bu">apply</span>(assign_pronoun)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="36558614-c9ea-44d5-b25a-84cd8313cb88" class="cell" data-executioncancelledat="null" data-executiontime="51" data-lastexecutedat="1719766573677" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="df.pronouns.value_counts()" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:121,&quot;type&quot;:&quot;dataFrame&quot;}}" data-execution_count="92">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df.pronouns.value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="92">
+<pre><code>pronouns
+M    417
+F    139
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="c.-are-there-any-initial-differences-between-male-and-female-professors-based-on-their-overall-ratings" class="level3">
+<h3 class="anchored" data-anchor-id="c.-are-there-any-initial-differences-between-male-and-female-professors-based-on-their-overall-ratings">3c. Are there any initial differences between male and female professors based on their overall ratings?</h3>
+<p>Let’s start with a barplot.</p>
+<div id="d839f267-6424-4f91-9753-6f14741947e8" class="cell" data-executioncancelledat="null" data-executiontime="428" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-lastexecutedat="1719766574105" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="plt.figure(figsize=(4,4)) sns.barplot(df, x = 'pronouns', y = 'rating', estimator = 'median',             palette = 'magma') plt.show()" data-execution_count="93">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>,<span class="dv">4</span>))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sns.barplot(data <span class="op">=</span> df, x <span class="op">=</span> <span class="st">'pronouns'</span>, y <span class="op">=</span> <span class="st">'rating'</span>, estimator <span class="op">=</span> <span class="st">'median'</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>            palette <span class="op">=</span> <span class="st">'magma'</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_1311222/2203816405.py:2: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(data = df, x = 'pronouns', y = 'rating', estimator = 'median',</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notebook_files/figure-html/cell-17-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A boxplot overlaid with a stripplot will give us a better sense of the distribution of the data.</p>
+<div id="171c79c8-f16b-43c7-9692-5123a609d72e" class="cell" data-executioncancelledat="null" data-executiontime="262" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-lastexecutedat="1719766574367" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="plt.figure(figsize=(5,5)) sns.boxplot(df, x = 'pronouns', y = 'rating', palette = 'magma') sns.stripplot(df, x = 'pronouns', y = 'rating', jitter = 0.2, color = 'lightblue',               edgecolor = 'k', linewidth=1) plt.show()" data-execution_count="94">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(df, x <span class="op">=</span> <span class="st">'pronouns'</span>, y <span class="op">=</span> <span class="st">'rating'</span>, palette <span class="op">=</span> <span class="st">'magma'</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>sns.stripplot(data <span class="op">=</span> df, x <span class="op">=</span> <span class="st">'pronouns'</span>, y <span class="op">=</span> <span class="st">'rating'</span>, jitter <span class="op">=</span> <span class="fl">0.2</span>, color <span class="op">=</span> <span class="st">'lightblue'</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>              edgecolor <span class="op">=</span> <span class="st">'k'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_1311222/1838852018.py:2: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(df, x = 'pronouns', y = 'rating', palette = 'magma')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notebook_files/figure-html/cell-18-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="task-3d.-what-are-the-most-important-words-being-used-to-describe-professors-in-reviews" class="level2">
+<h2 class="anchored" data-anchor-id="task-3d.-what-are-the-most-important-words-being-used-to-describe-professors-in-reviews">Task 3d. What are the most important words being used to describe professors in reviews?</h2>
+<p>Let’s write a custom function that <strong>tokenizes</strong> and <strong>lemmatizes</strong> our list of words. - <strong>Word tokenization</strong>: process of splitting text into individual words, called tokens. A common preprocessing step in natural language processing (NLP) so that text can be analyzed and processed more easily. Methods include whitespace tokenization, regular expression-based tokenization, and rule-based tokenization. We’ll be using the <code>word_tokenize</code> tokenizer from <code>nltk</code>, with all its defaults. - <strong>Lemmatization</strong>: process of reducing words to their base or dictionary form, called the lemma. Also a common pre-processing step in NLP, so that words with a common base form are treated the same way. For example, the lemma of “am” is “be”, of “running” is “run”, and of “mice” is “mouse”.</p>
+<div id="d9446182-ac3e-4346-8d0d-3538fb39de7f" class="cell" data-execution_count="95">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>PorterStemmer().stem(<span class="st">"she</span><span class="ch">\'</span><span class="st">s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="95">
+<pre><code>"she'"</code></pre>
+</div>
+</div>
+<div id="8d2ad9b7-22b1-42ff-910d-c242e4ed2756" class="cell" data-execution_count="96">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>word_tokenize(<span class="st">'she</span><span class="ch">\'</span><span class="st">s a girl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="96">
+<pre><code>['she', "'s", 'a', 'girl']</code></pre>
+</div>
+</div>
+<div id="db3dfce9-6056-404c-a5b0-18ac4c0205f8" class="cell" data-execution_count="97">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="14af1c53-1fae-4673-b8a9-c80945fcf6b0" class="cell" data-executioncancelledat="null" data-executiontime="53" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-lastexecutedat="1719766574420" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="def tokenize(text):     tk = WhitespaceTokenizer()     tokens = tk.tokenize(text)     stems = []     for item in tokens:         stems.append(PorterStemmer().stem(item))     return stems" data-execution_count="98">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tokenize(text):</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    tk <span class="op">=</span> WhitespaceTokenizer()</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    tokens <span class="op">=</span> tk.tokenize(text)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    stems <span class="op">=</span> []</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> item <span class="kw">in</span> tokens:</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>        stems.append(PorterStemmer().stem(item).strip(string.punctuation))</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> stems</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s import a list of stop words, which are common English words that we will be ignoring in our analysis. <code>sklearn</code> provides a common list of stop words, and we can append additional words to this list. Below, we append pronouns, along with the words “class” and “student”. Feel free to add any additional words you’d like to ignore to this list later on as you try to build upon this analysis!</p>
+<div id="17fee0ae-b095-4132-b09b-f06bf8dda71b" class="cell" data-executioncancelledat="null" data-executiontime="47" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-lastexecutedat="1719766574468" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="my_stop_words = text.ENGLISH_STOP_WORDS.union([&quot;he&quot;,&quot;she&quot;,&quot;his&quot;,&quot;her&quot;,                                               &quot;himself&quot;,&quot;herself&quot;, &quot;hers&quot;,&quot;shes&quot;                                               &quot;class&quot;,&quot;student&quot;])" data-execution_count="99">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>my_stop_words <span class="op">=</span> sktext.ENGLISH_STOP_WORDS.union([<span class="st">"he"</span>,<span class="st">"she"</span>,<span class="st">"his"</span>,<span class="st">"her"</span>,</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">"himself"</span>,<span class="st">"herself"</span>, <span class="st">"hers"</span>,<span class="st">"shes"</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">"class"</span>,<span class="st">"student"</span>, <span class="st">'man'</span>, <span class="st">'woman'</span>, <span class="st">'girl'</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">'guy'</span>, <span class="st">'lady'</span>, <span class="st">'mr'</span>, <span class="st">'mrs'</span>, <span class="st">'ms'</span>])</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>my_stop_words <span class="op">=</span> my_stop_words.union([tokenize(word)[<span class="dv">0</span>] <span class="cf">for</span> word <span class="kw">in</span> my_stop_words])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For the purpose of analyzing review texts, we want to move from having one row for each professor to one row for each review. Lets do this with <code>.explode()</code> from pandas.</p>
+<div id="91f24d99-a96d-4a6b-8f19-b972aac0885f" class="cell" data-executioncancelledat="null" data-executiontime="59" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-lastexecutedat="1719766574528" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="df_quality = df[(df['review'].apply(len) == df['quality'].apply(len))] q = df_quality[['pronouns','review','quality']].explode(['review','quality'], ignore_index=True).dropna() q['quality'] = q['quality'].astype(float)" data-execution_count="100">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df_quality <span class="op">=</span> df[(df[<span class="st">'review'</span>].<span class="bu">apply</span>(<span class="bu">len</span>) <span class="op">==</span> df[<span class="st">'quality'</span>].<span class="bu">apply</span>(<span class="bu">len</span>))]</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> df_quality[[<span class="st">'pronouns'</span>,<span class="st">'review'</span>,<span class="st">'quality'</span>]].explode([<span class="st">'review'</span>,<span class="st">'quality'</span>], ignore_index<span class="op">=</span><span class="va">True</span>).dropna()</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>q[<span class="st">'quality'</span>] <span class="op">=</span> q[<span class="st">'quality'</span>].astype(<span class="bu">float</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0f1c3778-4b39-4bf5-a86e-eb9f07f12976" class="cell" data-executioncancelledat="null" data-executiontime="60" data-lastexecutedat="1719766574589" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="q.head(5)" data-outputsmetadata="{&quot;0&quot;:{&quot;height&quot;:196,&quot;type&quot;:&quot;dataFrame&quot;}}" data-execution_count="101">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>q.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="101">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">pronouns</th>
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">quality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>F</td>
+<td>Good experience for a class online. It was unc...</td>
+<td>4.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>F</td>
+<td>Honestly she didnt teach good at all and she w...</td>
+<td>2.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>F</td>
+<td>I think if you go by word for word in the modu...</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>F</td>
+<td>Took her online class CSS64. We started buildi...</td>
+<td>1.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>F</td>
+<td>Took her for a late start hybrid class (Bus43)...</td>
+<td>3.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>TFIDF vectorization is the process of assigning scores to each review in a document based on how frequently the word occurs, normalized by how frequently the word occurs in the dataset overall.</p>
+<p>We’ll use <code>TfidfVectorizer()</code> to generate these scores. This will return a matrix, with as many rows as reviews, and as many columns as words in our dataset.</p>
+<div id="7ff1b94d-755e-4777-a149-57af7c806207" class="cell" data-executioncancelledat="null" data-executiontime="10209" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-lastexecutedat="1719766584798" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="vec = TfidfVectorizer(     tokenizer = tokenize,     stop_words = list(my_stop_words),     ngram_range = (1,4) ) X = vec.fit_transform(q.review) feature_names = vec.get_feature_names_out()" data-execution_count="102">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>vec <span class="op">=</span> TfidfVectorizer(</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    tokenizer <span class="op">=</span> tokenize,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    stop_words <span class="op">=</span> <span class="bu">list</span>(my_stop_words),</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    ngram_range <span class="op">=</span> (<span class="dv">1</span>,<span class="dv">4</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> vec.fit_transform(q.review)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>feature_names <span class="op">=</span> vec.get_feature_names_out()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/kantundpeterpan/miniconda3/envs/nlp/lib/python3.12/site-packages/sklearn/feature_extraction/text.py:523: UserWarning: The parameter 'token_pattern' will not be used since 'tokenizer' is not None'
+  warnings.warn(
+/home/kantundpeterpan/miniconda3/envs/nlp/lib/python3.12/site-packages/sklearn/feature_extraction/text.py:408: UserWarning: Your stop_words may be inconsistent with your preprocessing. Tokenizing the stop words generated tokens ['anywh', 'becau', 'el', 'elsewh', 'everywh', 'ind', 'otherwi', 'plea', 'somewh'] not in stop_words.
+  warnings.warn(</code></pre>
+</div>
+</div>
+<div id="d9d3d355-64ed-48ef-8bf9-fff922d8477d" class="cell" data-executioncancelledat="null" data-executiontime="48" data-lastexecutedat="1719766584848" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="feature_names.shape" data-execution_count="103">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>feature_names.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="103">
+<pre><code>(365516,)</code></pre>
+</div>
+</div>
+<div id="65c74493-d641-40d9-ba95-f26312642997" class="cell" data-executioncancelledat="null" data-executiontime="53" data-lastexecutedat="1719766584901" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="np.random.choice(feature_names, size = 10)" data-execution_count="104">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>np.random.choice(feature_names, size <span class="op">=</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="104">
+<pre><code>array(['tell obviou wast', 'specif test', 'english 70 fail class',
+       'took cours pass/fail', 'class easi understand let',
+       'offic hours realli', 'short tests attend determin', 'a.m',
+       'inform educ', 'suppos like market'], dtype=object)</code></pre>
+</div>
+</div>
+<p><code>X</code> is a sparse matrix. We’ll now move into filtering X for: - Rows with male professors and reviews of high quality - Rows with female professors and reviews of high quality - Rows with male professors and reviews of low quality - Rows with female professors and reviews of low quality</p>
+<p>We can explore feature importance in each of these to get a sense of which words and phrases are coming up most often in the data.</p>
+<div id="0cb257b4-57ac-4f36-8605-d28cd9beeae0" class="cell" data-executioncancelledat="null" data-executiontime="51" data-lastexecutedat="1719766584952" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="m_pos = X[q.pronouns.eq('M') &amp; q.quality.ge(4.5)]" data-execution_count="105">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>m_pos <span class="op">=</span> X[q.pronouns.eq(<span class="st">'M'</span>) <span class="op">&amp;</span> q.quality.ge(<span class="fl">4.5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="28537a88-8a7e-42c4-ba8b-276532defc87" class="cell" data-executioncancelledat="null" data-executiontime="52" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-lastexecutedat="1719766585004" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="m_pos = X[q.pronouns.eq('M') &amp; q.quality.ge(4.5)] f_pos = X[q.pronouns.eq('F') &amp; q.quality.ge(4.5)] m_neg = X[q.pronouns.eq('M') &amp; q.quality.le(2.5)] f_neg = X[q.pronouns.eq('F') &amp; q.quality.le(2.5)]" data-execution_count="106">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>m_pos <span class="op">=</span> X[q.pronouns.eq(<span class="st">'M'</span>) <span class="op">&amp;</span> q.quality.ge(<span class="fl">4.5</span>)]</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>f_pos <span class="op">=</span> X[q.pronouns.eq(<span class="st">'F'</span>) <span class="op">&amp;</span> q.quality.ge(<span class="fl">4.5</span>)]</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>m_neg <span class="op">=</span> X[q.pronouns.eq(<span class="st">'M'</span>) <span class="op">&amp;</span> q.quality.le(<span class="fl">2.5</span>)]</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>f_neg <span class="op">=</span> X[q.pronouns.eq(<span class="st">'F'</span>) <span class="op">&amp;</span> q.quality.le(<span class="fl">2.5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="57bd3bd1-4eb7-4a35-83d3-3e4c943500f4" class="cell" data-executioncancelledat="null" data-executiontime="51" data-lastexecutedat="1719766585056" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="np.unique(np.array(m_pos[0,:].todense()))" data-execution_count="107">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>np.unique(np.array(m_pos[<span class="dv">0</span>,:].todense()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="107">
+<pre><code>array([0.        , 0.04840186, 0.05048048, 0.05840671, 0.0588915 ,
+       0.06440657, 0.07216968, 0.07743822, 0.08628339, 0.0890904 ,
+       0.09454997, 0.09609708, 0.0982585 , 0.09872669, 0.10101388,
+       0.10570444, 0.11337177, 0.12547472, 0.13281775, 0.13699447,
+       0.146295  , 0.15107613, 0.15781475])</code></pre>
+</div>
+</div>
+<p>Let’s have a look at what language students are using to describe male professors positively. The code below will return the 300 most important ngrams.</p>
+<div id="0f03fbae-4024-4c85-b9a5-7924d06af553" class="cell" data-executioncancelledat="null" data-executiontime="52" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-lastexecutedat="1719766585108" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="importance = np.argsort(np.asarray(m_pos.sum(axis = 0)))[0,::-1] m_pos_features = feature_names[importance[:300]]" data-execution_count="108">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>importance <span class="op">=</span> np.argsort(np.asarray(m_pos.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">0</span>)))[<span class="dv">0</span>,::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>m_pos_features <span class="op">=</span> feature_names[importance[:<span class="dv">300</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Print out the 25 most important features</p>
+<div id="2132d526-9676-4a39-b0f6-22af9b72205a" class="cell" data-executioncancelledat="null" data-executiontime="52" data-lastexecutedat="1719766585161" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="m_pos_features[:25]" data-execution_count="109">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>m_pos_features[:<span class="dv">25</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="109">
+<pre><code>array(['comment', 'great', 'class', 'teacher', 'best', 'professor',
+       'prof', 'good', 'help', 'realli', 'make', 'easi', 'love',
+       'great teacher', 'awesom', 'know', 'learn', '', 'work', 'lot',
+       'lectur', 'amaz', 'cours', 'nice', 'test'], dtype=object)</code></pre>
+</div>
+</div>
+<p>Let’s have a look at what language students are using to describe female professors positively.</p>
+<div id="6cdc8b08-e149-4938-a490-658e336ef797" class="cell" data-executioncancelledat="null" data-executiontime="52" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-lastexecutedat="1719766585213" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="importance = np.argsort(np.asarray(f_pos.sum(axis = 0)))[0,::-1] f_pos_features = feature_names[importance[:300]] f_pos_features[:25]" data-execution_count="110">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>importance <span class="op">=</span> np.argsort(np.asarray(f_pos.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">0</span>)))[<span class="dv">0</span>,::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>f_pos_features <span class="op">=</span> feature_names[importance[:<span class="dv">300</span>]]</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>f_pos_features[:<span class="dv">25</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="110">
+<pre><code>array(['comment', 'great', 'class', 'teacher', 'prof', 'help',
+       'professor', 'best', 'good', 'easi', 'realli', 'work', 'nice',
+       'lot', 'love', 'make', 'learn', 'helpful', 'great teacher', '',
+       'amaz', 'great prof', 'cours', 'lectur', 'hard'], dtype=object)</code></pre>
+</div>
+</div>
+<p>It should be interesting if there are words exclusively used for one gender</p>
+<div id="d466f834-bb0d-4374-a848-42d1f4b8ee8b" class="cell" data-executioncancelledat="null" data-executiontime="56" data-lastexecutedat="1719766585269" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="#male only_m_pos = ~np.in1d(m_pos_features, f_pos_features) m_pos_features[only_m_pos][:25]" data-execution_count="111">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#male</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>only_m_pos <span class="op">=</span> <span class="op">~</span>np.in1d(m_pos_features, f_pos_features)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>m_pos_features[only_m_pos][:<span class="dv">25</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_1311222/3886134522.py:2: DeprecationWarning: `in1d` is deprecated. Use `np.isin` instead.
+  only_m_pos = ~np.in1d(m_pos_features, f_pos_features)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="111">
+<pre><code>array(['fantast', 'excel teacher', 'topic', 'awesom professor',
+       'excel professor', 'u', 'brilliant', 'realli enjoy', '2', 'old',
+       'amaz professor', "professor i'v", "teacher i'v", 'mark', 'b',
+       'hot', 'review', 'genuin', 'bore', "he'll", 'reason', 'hours',
+       'want learn', 'overal', 'feel'], dtype=object)</code></pre>
+</div>
+</div>
+<div id="60fc4bc2-acf5-4e0e-8395-0730b97023dc" class="cell" data-executioncancelledat="null" data-executiontime="52" data-lastexecutedat="1719766585321" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="#female only_f_pos = ~np.in1d(f_pos_features, m_pos_features) f_pos_features[only_f_pos][:25]" data-execution_count="112">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co">#female</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>only_f_pos <span class="op">=</span> <span class="op">~</span>np.isin(f_pos_features, m_pos_features)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>f_pos_features[only_f_pos][:<span class="dv">25</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="112">
+<pre><code>array(['extra credit', 'especi', 'spanish', "she'll", 'assignments',
+       'realli nice', 'offer', 'help prof', 'class nice', 'succeed',
+       'realli want', 'alot', 'onlin class', 'knowledgable', 'group',
+       'good lectur', 'attention', 'nice help', "i'd", 'real world',
+       'easi grade', 'awsom', 'account', 'guid', 'semester'], dtype=object)</code></pre>
+</div>
+</div>
+<p>Let’s have a look at what language students are using to describe male professors negatively.</p>
+<div id="bcc7dfc9-edab-4d8c-9a37-d02aa3549ec7" class="cell" data-executioncancelledat="null" data-executiontime="47" data-lastexecutedat="1719766585368" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="importance = np.argsort(np.asarray(m_neg.sum(axis = 0)))[0,::-1] m_neg_features = feature_names[importance[:300]] m_neg_features[:25]" data-execution_count="113">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>importance <span class="op">=</span> np.argsort(np.asarray(m_neg.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">0</span>)))[<span class="dv">0</span>,::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>m_neg_features <span class="op">=</span> feature_names[importance[:<span class="dv">300</span>]]</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>m_neg_features[:<span class="dv">25</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="113">
+<pre><code>array(['comment', 'class', 'teach', 'hard', 'test', 'worst', 'professor',
+       'teacher', 'lectur', '', 'time', 'know', 'like', 'grade', "don't",
+       "doesn't", 'just', 'prof', 'avoid', 'bore', 'question', 'good',
+       'make', 'doe', 'read'], dtype=object)</code></pre>
+</div>
+</div>
+<p>Let’s have a look at what language students are using to describe female professors negatively.</p>
+<div id="a970b19e-371d-4e4e-b0e3-b1f4529c40bc" class="cell" data-executioncancelledat="null" data-executiontime="57" data-lastexecutedat="1719766585425" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="importance = np.argsort(np.asarray(f_neg.sum(axis = 0)))[0,::-1] f_neg_features = feature_names[importance[:300]] f_neg_features[:25]" data-execution_count="114">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>importance <span class="op">=</span> np.argsort(np.asarray(f_neg.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">0</span>)))[<span class="dv">0</span>,::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>f_neg_features <span class="op">=</span> feature_names[importance[:<span class="dv">300</span>]]</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>f_neg_features[:<span class="dv">25</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="114">
+<pre><code>array(['comment', 'class', 'worst', 'grade', 'teacher', 'hard', 'teach',
+       "don't", "doesn't", 'help', 'like', 'test', '', 'just', 'time',
+       'work', 'professor', 'good', 'doe', 'question', 'make', 'know',
+       'horribl', 'learn', 'unclear'], dtype=object)</code></pre>
+</div>
+</div>
+<p>Same analysis for exclusive words:</p>
+<div id="23d3b19e-48bc-40a1-95d7-90b1a62b51d2" class="cell" data-executioncancelledat="null" data-executiontime="52" data-lastexecutedat="1719766585477" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="#male only_m_neg = ~np.in1d(m_neg_features, f_neg_features) m_neg_features[only_m_neg][:25]" data-execution_count="115">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co">#male</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>only_m_neg <span class="op">=</span> <span class="op">~</span>np.in1d(m_neg_features, f_neg_features)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>m_neg_features[only_m_neg][:<span class="dv">25</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_1311222/728473888.py:2: DeprecationWarning: `in1d` is deprecated. Use `np.isin` instead.
+  only_m_neg = ~np.in1d(m_neg_features, f_neg_features)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="115">
+<pre><code>array(['speak', 'hard understand', 'great', 'arrog', 'hear', 'costs',
+       'smart', 'hardest', 'taught', 'listen', 'rambl', 'english',
+       'exampl', 'let', 'sit', 'incred', 'wrote', 'knowledg', 'possible',
+       'probabl', 'avoid costs', 'gpa', 'offic', '1', "can't teach"],
+      dtype=object)</code></pre>
+</div>
+</div>
+<div id="4b9c9575-019a-49bc-8228-500e78d75849" class="cell" data-executioncancelledat="null" data-executiontime="51" data-lastexecutedat="1719766585529" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="#female only_f_neg = ~np.in1d(f_neg_features, m_neg_features) f_neg_features[only_f_neg][:25]" data-execution_count="116">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co">#female</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>only_f_neg <span class="op">=</span> <span class="op">~</span>np.in1d(f_neg_features, m_neg_features)</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>f_neg_features[only_f_neg][:<span class="dv">25</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_1311222/1584707764.py:2: DeprecationWarning: `in1d` is deprecated. Use `np.isin` instead.
+  only_f_neg = ~np.in1d(f_neg_features, m_neg_features)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="116">
+<pre><code>array(['late', 'disorgan', 'gave', 'advis', 'annoy', 'feedback', 'cost',
+       'agre', 'helpful', 'disorganized', 'nice person', 'avoid cost',
+       'unorganized', 'opinion', 'slow', 'quit', 'colleg', 'honestli',
+       'fan', 'papers', 'spanish', 'easi class', 'favorites', 'instead',
+       '5'], dtype=object)</code></pre>
+</div>
+</div>
+</section>
+<section id="congratulations-on-making-it-to-the-end" class="level2">
+<h2 class="anchored" data-anchor-id="congratulations-on-making-it-to-the-end">Congratulations on making it to the end!</h2>
+<section id="where-to-from-here" class="level3">
+<h3 class="anchored" data-anchor-id="where-to-from-here">Where to from here?</h3>
+<ul>
+<li>We can feed these words into Ben Schmidt’s <a href="https://benschmidt.org/profGender/#%7B%22database%22%3A%22RMP%22%2C%22plotType%22%3A%22pointchart%22%2C%22method%22%3A%22return_json%22%2C%22search_limits%22%3A%7B%22word%22%3A%5B%22his%20kids%22%2C%22her%20kids%22%5D%2C%22department__id%22%3A%7B%22%24lte%22%3A25%7D%7D%2C%22aesthetic%22%3A%7B%22x%22%3A%22WordsPerMillion%22%2C%22y%22%3A%22department%22%2C%22color%22%3A%22gender%22%7D%2C%22counttype%22%3A%5B%22WordCount%22%2C%22TotalWords%22%5D%2C%22groups%22%3A%5B%22unigram%22%5D%2C%22testGroup%22%3A%22C%22%7D">tool</a> to derive insights by field.</li>
+<li>If you’re interested in learning more about <a href="https://app.datacamp.com/learn/courses/web-scraping-with-python">web scraping</a>, take our courses on Web Scraping in Python</li>
+<li>If you’re intersted in diving in to the world of Natural Language Processing, explore our <a href="https://app.datacamp.com/learn/skill-tracks/natural-language-processing-in-python">skill track</a>.</li>
+</ul>
+<p>::: {#f592331c-f5d8-4c32-8791-2eee74269815 .cell executionCancelledAt=‘null’ executionTime=‘48’ jupyter=‘{“source_hidden”:true}’ lastExecutedAt=‘1719766585577’ lastExecutedByKernel=‘f6c43d9d-c556-42d8-9544-e49e4eaa9fbc’ lastScheduledRunId=‘null’ lastSuccessfullyExecutedCode=’import os from IPython.display import display, HTML</p>
+</section>
+</section>
+</section>
+<section id="list-files-and-directories-in-the-current-directory" class="level1">
+<h1>List files and directories in the current directory</h1>
+<p>files = os.listdir('.')</p>
+</section>
+<section id="create-an-html-list-to-display-the-files" class="level1">
+<h1>Create an HTML list to display the files</h1>
+html = “&lt;h1 style='background-color:salmon;text-indent: 1.2em;color:white'&gt;roject extension
+
+<p>”</p>
+</section>
+<section id="display-the-html" class="level1">
+<h1>Display the HTML</h1>
+<p>display(HTML(html)) ’ tags=‘[]’ execution_count=117}</p>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co"># List files and directories in the current directory</span></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>files <span class="op">=</span> os.listdir(<span class="st">'.'</span>)</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an HTML list to display the files</span></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>html <span class="op">=</span> <span class="st">"&lt;h1 style='background-color:salmon;text-indent: 1.2em;color:white'&gt;</span><span class="ch">\t</span><span class="st"> Project extension&lt;/h1&gt;"</span></span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the HTML</span></span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>display(HTML(html))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<h1 style="background-color:salmon;text-indent: 1.2em;color:white">  Project extension</h1>
+</div>
+<p>:::</p>
+<p>Unfortunately Ben Schmidt’s tool does not seem to work anymore. So, in order to investigate gender bias in this dataset, I came up with the following research question: Is the sentiment of the review associated with the use of stereotypical words for the two genders?</p>
+<p>In order to answer that question, I looked for a lexicon that I could screen the reviews against. While I found some (a lot!) papers addressing detection of gender stereotypes using NLP, I could not find said lexicon - but I foudn that Language Models based on word embeddings also learn the gender bias implicit in the corpus they are trained on.</p>
+<p>So I figured that maybe it would be possible to exploit that to construct - in a quick and dirty kind of fashion - this lexicon myself by asking Google’s GEMINI. Some prompt engineering was necessary: <a href="[url](https://g.co/gemini/share/db15535c30d9)">you can have a look for yourself</a>. Ironically, Gemini seemed more hesitant to compile a list of words stereotypically negatively associated with women than for men.</p>
+<p>Let’s parse those lists:</p>
+<p>::: {#886fdf04-c004-4172-839d-743eaea1a976 .cell executionCancelledAt=‘null’ executionTime=‘47’ lastExecutedAt=‘1719766585624’ lastExecutedByKernel=‘f6c43d9d-c556-42d8-9544-e49e4eaa9fbc’ lastScheduledRunId=‘null’ lastSuccessfullyExecutedCode=’def parse_gemini_list(s: str) -&gt; list: “““parse comma separated list of words remove annotations in parentheses”“” new = [w.strip() for w in s.split(',')] for i,n in enumerate(new): if '(' in n: new[i] = n.split('(')[0]</p>
+<pre><code>return new' execution_count=118}</code></pre>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_gemini_list(s: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">list</span>:</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""parse comma separated list of words remove annotations in parentheses"""</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>    new <span class="op">=</span> [w.strip() <span class="cf">for</span> w <span class="kw">in</span> s.split(<span class="st">','</span>)]</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i,n <span class="kw">in</span> <span class="bu">enumerate</span>(new):</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'('</span> <span class="kw">in</span> n:</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>            new[i] <span class="op">=</span> n.split(<span class="st">'('</span>)[<span class="dv">0</span>]</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>    new <span class="op">=</span> np.unique([x <span class="cf">for</span> word <span class="kw">in</span> new <span class="cf">for</span> x <span class="kw">in</span> tokenize(word)])</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>:::</p>
+<div id="bd994153-eea1-4475-9778-8753e3cc5d38" class="cell" data-executioncancelledat="null" data-executiontime="17" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-lastexecutedat="1719767634723" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="with open('w_pos_lex', 'r') as f:     w_pos_lex = parse_gemini_list(f.read()) w_pos_ex = np.unique([tokenize(word) for word in w_pos_lex])" data-execution_count="119">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'w_pos_lex'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>    w_pos_lex <span class="op">=</span> parse_gemini_list(f.read())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9f9d135a-d7ab-4bd8-a2cc-e616cd1fb1e3" class="cell" data-executioncancelledat="null" data-executiontime="12" data-lastexecutedat="1719767635017" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="with open('w_neg_lex', 'r') as f:     w_neg_lex = parse_gemini_list(f.read())" data-execution_count="120">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'w_neg_lex'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>    w_neg_lex <span class="op">=</span> parse_gemini_list(f.read())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="df1fddda-6d00-4913-8442-02fb87632afa" class="cell" data-executioncancelledat="null" data-executiontime="12" data-lastexecutedat="1719767487043" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="with open('m_pos_lex', 'r') as f:     m_pos_lex = parse_gemini_list(f.read())" data-execution_count="121">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'m_pos_lex'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>    m_pos_lex <span class="op">=</span> parse_gemini_list(f.read())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b88b5fe3-ee53-4bde-808b-cc733c985ee4" class="cell" data-executioncancelledat="null" data-executiontime="11" data-lastexecutedat="1719767488680" data-lastexecutedbykernel="f6c43d9d-c556-42d8-9544-e49e4eaa9fbc" data-lastscheduledrunid="null" data-lastsuccessfullyexecutedcode="with open('m_neg_lex', 'r') as f:     m_neg_lex = parse_gemini_list(f.read())" data-execution_count="122">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'m_neg_lex'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>    m_neg_lex <span class="op">=</span> parse_gemini_list(f.read())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="e1d0d731-080b-41d6-a61c-2ec7265bf2b8" class="cell" data-execution_count="123">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>w_pos_lex_uni <span class="op">=</span> w_pos_lex[<span class="op">~</span>np.isin(w_pos_lex, m_pos_lex)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="3180b223-eac0-439d-8404-a8a8ed08d18e" class="cell" data-execution_count="124">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>m_pos_lex_uni <span class="op">=</span> m_pos_lex[<span class="op">~</span>np.isin(m_pos_lex, w_pos_lex)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="edff4a40-9c8a-49c5-8eea-2790c56455f8" class="cell" data-execution_count="125">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>w_neg_lex_uni <span class="op">=</span> w_neg_lex[<span class="op">~</span>np.isin(w_neg_lex, m_neg_lex)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="c7830185-e05a-4e69-bf5d-628d81aca519" class="cell" data-execution_count="126">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>m_neg_lex_uni <span class="op">=</span> m_neg_lex[<span class="op">~</span>np.isin(m_neg_lex, w_neg_lex)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2329a767-54d7-42d8-b6f3-933573401bcf" class="cell" data-execution_count="127">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>q.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="127">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">pronouns</th>
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">quality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>F</td>
+<td>Good experience for a class online. It was unc...</td>
+<td>4.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>F</td>
+<td>Honestly she didnt teach good at all and she w...</td>
+<td>2.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>F</td>
+<td>I think if you go by word for word in the modu...</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>F</td>
+<td>Took her online class CSS64. We started buildi...</td>
+<td>1.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>F</td>
+<td>Took her for a late start hybrid class (Bus43)...</td>
+<td>3.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="83c2523b-7fce-4eee-990a-dc868b299f80" class="cell" data-execution_count="128">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>stereo_count_w_pos <span class="op">=</span> q.loc[q.pronouns.eq(<span class="st">'F'</span>) <span class="op">&amp;</span> q.quality.ge(<span class="fl">4.5</span>)].review.<span class="bu">apply</span>(tokenize).<span class="bu">apply</span>(</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>    np.isin, args <span class="op">=</span> (w_pos_lex_uni,)).<span class="bu">apply</span>(np.<span class="bu">sum</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="dedefea8-066b-4599-82b8-baf576b9ceb2" class="cell" data-execution_count="129">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>dist_w_pos <span class="op">=</span> stereo_count_w_pos.value_counts()</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>dist_w_pos.plot(kind <span class="op">=</span> <span class="st">'bar'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notebook_files/figure-html/cell-53-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="a72366d9-2b2f-4001-b485-158fd1002683" class="cell" data-execution_count="130">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>stereo_count_m_pos <span class="op">=</span> q.loc[q.pronouns.eq(<span class="st">'M'</span>) <span class="op">&amp;</span> q.quality.ge(<span class="fl">4.5</span>)].review.<span class="bu">apply</span>(tokenize).<span class="bu">apply</span>(</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>    np.isin, args <span class="op">=</span> (m_pos_lex_uni,)).<span class="bu">apply</span>(np.<span class="bu">sum</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="aa666a50-7194-47b8-8fa2-8e1ae738617e" class="cell" data-execution_count="131">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>dist_m_pos <span class="op">=</span> stereo_count_m_pos.value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="3056b449-58cd-4267-8748-b9da93ec02a8" class="cell" data-execution_count="132">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>dist_m_pos.plot(kind <span class="op">=</span> <span class="st">'bar'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notebook_files/figure-html/cell-56-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="22c92288-d2e8-4461-85b9-46ac66942121" class="cell" data-execution_count="133">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>stereo_count_w_neg <span class="op">=</span> q.loc[q.pronouns.eq(<span class="st">'F'</span>) <span class="op">&amp;</span> q.quality.le(<span class="fl">2.5</span>)].review.<span class="bu">apply</span>(tokenize).<span class="bu">apply</span>(</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>    np.isin, args <span class="op">=</span> (w_neg_lex_uni,)).<span class="bu">apply</span>(np.<span class="bu">sum</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="a1d8e3ad-c3ff-48a8-91b9-12f6ee868d8b" class="cell" data-execution_count="134">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>dist_w_neg <span class="op">=</span> stereo_count_w_neg.value_counts().sort_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="93cb893f-c994-4a57-8332-1ae75ac34036" class="cell" data-execution_count="135">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>dist_w_neg.plot(kind <span class="op">=</span> <span class="st">'bar'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notebook_files/figure-html/cell-59-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="fe5a75f6-143c-4da3-9973-11260c8517db" class="cell" data-execution_count="136">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>stereo_count_m_neg <span class="op">=</span> q.loc[q.pronouns.eq(<span class="st">'M'</span>) <span class="op">&amp;</span> q.quality.le(<span class="fl">2.5</span>)].review.<span class="bu">apply</span>(tokenize).<span class="bu">apply</span>(</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>    np.isin, args <span class="op">=</span> (m_neg_lex_uni,)).<span class="bu">apply</span>(np.<span class="bu">sum</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="c5f73dec-197b-4499-a1c6-375c97b599c8" class="cell" data-execution_count="137">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>dist_m_neg <span class="op">=</span> stereo_count_m_neg.value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="c8b85d84-388b-43e0-a74e-4fc1d5b3ddc7" class="cell" data-execution_count="138">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>dist_m_neg.plot(kind <span class="op">=</span> <span class="st">'bar'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notebook_files/figure-html/cell-62-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="bc30f7ed-aa4b-49cd-b8b6-a3f904ead4bc" class="cell" data-execution_count="139">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>dist_m_neg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="139">
+<pre><code>review
+0    2218
+1     240
+2      37
+3      10
+4       9
+5       1
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="7dc12035-ad18-4b76-9ae1-f8e6f1b71836" class="cell" data-execution_count="140">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2_contingency</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="d22b9ce5-724f-4702-b984-fe3743e01b4e" class="cell" data-execution_count="141">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> np.zeros((<span class="dv">2</span>,  <span class="bu">max</span>(dist_w_neg.shape[<span class="dv">0</span>], dist_m_neg.shape[<span class="dv">0</span>])), dtype <span class="op">=</span> <span class="bu">int</span>)</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>table[<span class="dv">0</span>, :dist_w_neg.shape[<span class="dv">0</span>]] <span class="op">=</span> dist_w_neg.values</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>table[<span class="dv">1</span>, :dist_m_neg.shape[<span class="dv">0</span>]] <span class="op">=</span> dist_m_neg.values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="c00206dd-8b13-4c2e-b639-08000509c17a" class="cell" data-execution_count="142">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="142">
+<pre><code>array([[ 278,  229,  146,   86,   37,   20,    3,    1,    1],
+       [2218,  240,   37,   10,    9,    1,    0,    0,    0]])</code></pre>
+</div>
+</div>
+<div id="2fb4f434-9de7-4794-9294-fc9d00028706" class="cell" data-execution_count="143">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>chi2_table <span class="op">=</span> pd.DataFrame(table, index <span class="op">=</span> [<span class="st">'F'</span>, <span class="st">'M'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="3a6adb10-2f71-44a8-a9ab-1b1cb310d120" class="cell" data-execution_count="144">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>chi2_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="144">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">0</th>
+<th data-quarto-table-cell-role="th">1</th>
+<th data-quarto-table-cell-role="th">2</th>
+<th data-quarto-table-cell-role="th">3</th>
+<th data-quarto-table-cell-role="th">4</th>
+<th data-quarto-table-cell-role="th">5</th>
+<th data-quarto-table-cell-role="th">6</th>
+<th data-quarto-table-cell-role="th">7</th>
+<th data-quarto-table-cell-role="th">8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">F</td>
+<td>278</td>
+<td>229</td>
+<td>146</td>
+<td>86</td>
+<td>37</td>
+<td>20</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">M</td>
+<td>2218</td>
+<td>240</td>
+<td>37</td>
+<td>10</td>
+<td>9</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="ae2235ff-ce83-4aa6-b581-65b1be3c7693" class="cell" data-execution_count="145">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>chi2_contingency(chi2_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="145">
+<pre><code>Chi2ContingencyResult(statistic=np.float64(1073.2259818314606), pvalue=np.float64(2.3184709261716882e-226), dof=8, expected_freq=array([[6.02924005e+02, 1.13289807e+02, 4.42047648e+01, 2.31893848e+01,
+        1.11115802e+01, 5.07267793e+00, 7.24668275e-01, 2.41556092e-01,
+        2.41556092e-01],
+       [1.89307600e+03, 3.55710193e+02, 1.38795235e+02, 7.28106152e+01,
+        3.48884198e+01, 1.59273221e+01, 2.27533172e+00, 7.58443908e-01,
+        7.58443908e-01]]))</code></pre>
+</div>
+</div>
+<div id="08caeb59-fc5d-42f4-8ffe-d99ff05e50cf" class="cell" data-execution_count="146">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> np.zeros((<span class="dv">2</span>, <span class="bu">max</span>(dist_w_pos.shape[<span class="dv">0</span>], dist_m_pos.shape[<span class="dv">0</span>])), dtype <span class="op">=</span> <span class="bu">int</span>)</span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>table[<span class="dv">0</span>, :dist_w_pos.shape[<span class="dv">0</span>]] <span class="op">=</span> dist_w_pos.values</span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>table[<span class="dv">1</span>, :dist_m_pos.shape[<span class="dv">0</span>]] <span class="op">=</span> dist_m_pos.values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9a303cdb-e2ea-4435-80f0-896b80d41aae" class="cell" data-execution_count="147">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>chi2_table <span class="op">=</span> pd.DataFrame(table, index <span class="op">=</span> [<span class="st">'F'</span>, <span class="st">'M'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="1b671b41-4db7-4b29-872d-6c035505a7c8" class="cell" data-execution_count="148">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>chi2_contingency(chi2_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="148">
+<pre><code>Chi2ContingencyResult(statistic=np.float64(35.680653072523995), pvalue=np.float64(1.1002520334386392e-06), dof=5, expected_freq=array([[6.76990876e+02, 2.24479927e+02, 6.08759124e+01, 9.13138686e+00,
+        1.26824818e+00, 2.53649635e-01],
+       [1.99200912e+03, 6.60520073e+02, 1.79124088e+02, 2.68686131e+01,
+        3.73175182e+00, 7.46350365e-01]]))</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
