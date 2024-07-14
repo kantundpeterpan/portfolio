@@ -1,0 +1,3 @@
+[submodule "datacamp_projects"]
+	path = datacamp_projects
+	url = git@github.com:kantundpeterpan/datacamp_projects.git
