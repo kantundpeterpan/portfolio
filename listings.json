@@ -1,6 +1,6 @@
 [
   {
-    "listing": "/guided.html",
+    "listing": "/datacamp_site/guided.html",
     "items": [
       "/datacamp_projects/workspace/Python/NLP_gender_reviews/notebook-solution.html",
       "/datacamp_projects/workspace/Python/NLP_gender_reviews/notebook.html",
@@ -15,7 +15,7 @@
     ]
   },
   {
-    "listing": "/extended.html",
+    "listing": "/datacamp_site/extended.html",
     "items": []
   }
 ]
