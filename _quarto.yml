@@ -12,7 +12,7 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      - href: cv.qmd
+      - href: cv/cv.qmd
         text: CV
       - section: Projects
         contents:

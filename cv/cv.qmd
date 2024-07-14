@@ -1,0 +1,123 @@
+---
+title: "Curriculum Vitae"
+format:
+  html:
+    toc: true
+#  pdf:
+ #   author: Heiner Atze
+    #pdf-engine: tectonic
+css: cv.css
+bibliography: cv.bib
+#bibliographystyle: nature
+#csl: https://www.zotero.org/styles/apa-with-abstract
+#csl: emerald-harvard.csl
+suppress-bibliography: false
+#format-links: [pdf]
+---
+
+::: {.print-only .contact-block}
+heiner.atze@gmx.net, +33 7 80 84 91 20, Gentilly
+:::
+
+## EDUCATION
+**Postgraduate diploma -- Biostatistics and Methods in Public Health** <br> *Paris Saclay University, Paris, France* [*Oct 2023 --- Sep 2024*]{.cvdate}
+
+Master level courses in :
+
+-   Probability and Statistics
+-   Clinical Research
+-   Quantitative Epidemiology
+
+**Doctor of Philosophy -- Biochemistry, Microbiology** <br> *Sorbonne University, Paris, France* [*Nov 2018 --- Sep 2021*]{.cvdate}
+
+**Master of Science - Medicinal Chemistry** <br> *Friedrich-Schiller-University, Jena, Germany* [*Sep 2014 --- Sep 2016*]{.cvdate}
+
+* German *Diplom*
+
+**State examination - Pharmacy** <br> * *Friedrich-Schiller-University, Jena, Germany* [*Sep 2010 --- Sep 2014*]{.cvdate}
+
+## RESEARCH EXPERIENCE
+
+**Doctoral Researcher -- Biochemistry, Microbiology** <br> *INSERM, Paris, France* [*Jun 2018 --- Sep 2021*]{.cvdate}
+
+Researcher in Team 12 "Structures implicated in antibiotic resistance" at the *Centre de Recherche des Cordeliers*, Paris
+
+Two main axes of research:
+
+1) Biological characterization of new generation β-lactamase inhibitors
+    
+    *in vitro* and *in vivo* characterization of inhibitors, data analysis and interpretation,
+    feedback into the consult-design-test-repeat cycle in collaboration with the team of organic chemists
+
+
+2) Fundamental research on cell wall metabolism in gram-negative bacteria
+
+    *De novo* method development: isotopic labeling of cell cultures, sample preparation,
+    analysis by mass spectrometry, custom data analysis tools and pipelines
+
+Key achievements and skills:
+
+- Exploration of the chemical space around the core inhibitor and identification of curcial         ligand-target-interactions
+- Handling and managing a large amount of results and data from biological experiments
+
+**Research assistant -- Medicinal and Pharmaceutical Chemistry** <br>
+*Friedrich-Schiller-University, Jena, Germany* [*Sep 2014 --- Sep 2016*]{.cvdate}
+
+Biological charaterization of putative anti-inflammatory substances, fundamental research on signaling cascades in inflammation using biochemical methods and imaging techniques
+
+## WORK EXPERIENCE{style="page-break-before: always"}
+
+### Pharmacist
+
+***Pharmacie Attal*** <br>
+*Fontenay-aux-Roses, France* [Oct 2021 -- present]{.cvdate}
+
+Pharmaceutical counseling of patients  
+Responsible for communication with medical staff in nursing homes  
+Supervision of technical staff and pharmacy students
+
+***Other Pharmacies*** <br> *Jena, Germany* [Nov 2015 -- May 2018]{.cvdate}
+
+### Pre-registration pharmacist
+
+***F. Hoffmann-La Roche*** <br> *Basel, Switzerland* [May 2015 -- Oct 2015]{.cvdate}
+
+::: {.no-print}
+## SKILLS
+
+### Languages
+German: Native Speaker  
+English: Professional proficiency  
+French: Professional proficiency 
+
+### Technical
+- Programming languages:
+    - {{< fa brands python >}}
+    - {{< fa brands r-project >}} : advanced
+    - {{< fa brands sql >}}
+    - {{< iconify devicon:julia >}}
+
+
+
+## PUBLICATIONS
+
+### bibtex_refs{.cheating}
+@atze2022heavy
+@bouchet2021traceless
+@bouchet2020diazabicyclooctane
+@le2020impact
+@triboulet2019tryptophan
+@garscha2017pharmacological
+
+### Journal articles
+::: {#refs}
+:::
+
+::: {.print-only}
+## References
+Available upon request
+:::
+
+---
+CV template adapted from huang2023
+
