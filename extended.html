@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Datacamp guided projects and code-alongs – Heiner Atze, PhD</title>
+<title>Datacamp extended projects – Heiner Atze, PhD</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -78,9 +78,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: [{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
+      searchColumns: [],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -131,7 +131,7 @@ window.Quarto = {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -140,7 +140,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./extended.html">Datacamp</a></li><li class="breadcrumb-item"><a href="./guided.html">Guided</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./extended.html">Datacamp</a></li><li class="breadcrumb-item"><a href="./extended.html">Extended</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -228,13 +228,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./extended.html" class="sidebar-item-text sidebar-link">
+  <a href="./extended.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Extended</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./guided.html" class="sidebar-item-text sidebar-link active">
+  <a href="./guided.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Guided</span></a>
   </div>
 </li>
@@ -254,21 +254,13 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#can-i-give-some-explanation-here" id="toc-can-i-give-some-explanation-here" class="nav-link active" data-scroll-target="#can-i-give-some-explanation-here">Can I give some explanation here ?</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./extended.html">Datacamp</a></li><li class="breadcrumb-item"><a href="./guided.html">Guided</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./extended.html">Datacamp</a></li><li class="breadcrumb-item"><a href="./extended.html">Extended</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Datacamp guided projects and code-alongs</h1>
+<h1 class="title">Datacamp extended projects</h1>
 </div>
 
 
@@ -293,209 +285,21 @@ window.Quarto = {
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1720955911078" data-listing-reading-time-sort="7" data-listing-word-count-sort="1315">
-<a href="./datacamp_projects/workspace/Python/NLP_gender_reviews/notebook-solution.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="datacamp_projects/workspace/Python/NLP_gender_reviews/img/overall_rating_example.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Do students describe professors differently based on gender?
-</h5>
-<div class="card-text listing-description">
-Language plays a crucial role in shaping our perceptions and attitudes towards gender in the workplace, in classrooms, and personal relationships. Studies have shown that…
+<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<div class="listing-actions-group">
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1720968594024" data-listing-reading-time-sort="8" data-listing-word-count-sort="1544">
-<a href="./datacamp_projects/workspace/Python/NLP_gender_reviews/notebook.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="datacamp_projects/workspace/Python/NLP_gender_reviews/img/overall_rating_example.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Do students describe professors differently based on gender?
-</h5>
-<div class="card-text listing-description">
-<em>Note: You can consult the solution of this live training in the file browser as <code>notebook-solution.ipynb</code></em>
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-Datacamp &amp; Heiner Atze
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1720960634045" data-listing-reading-time-sort="6" data-listing-word-count-sort="1167">
-<a href="./datacamp_projects/guided/python/cosmetic_ingredients/notebook.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Exploring ingredients of cosmetics
-</h5>
-<div class="card-text listing-description">
-
-Whenever I want to try a new cosmetic item, it’s so difficult to choose. It’s actually more than difficult. It’s sometimes scary because new items that I’ve never tried end…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-Datacamp &amp; Heiner Atze
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="3" data-listing-file-modified-sort="1720958101874" data-listing-reading-time-sort="9" data-listing-word-count-sort="1776">
-<a href="./datacamp_projects/guided/python/nlp_movies_similarity/notebook.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Exploring movie plots using NLP
-</h5>
-<div class="card-text listing-description">
-
-We all love watching movies! There are some movies we like, some we don’t. Most people have a preference for movies of a similar genre. Some of us love watching action…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-Datacamp &amp; Heiner Atze
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="4" data-listing-file-modified-sort="1720962536212" data-listing-reading-time-sort="2" data-listing-word-count-sort="395">
-<a href="./datacamp_projects/workspace/SQL/ev_charging/notebook.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="datacamp_projects/workspace/SQL/ev_charging/charging_station.jpg" alt="EV Charging" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-SQL - Electric vehicle charging
-</h5>
-<div class="card-text listing-description">
-As electronic vehicles (EVs) become more popular, there is an increasing need for access to charging stations, also known as ports. To that end, many modern apartment…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-Datacamp &amp; Heiner Atze
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="5" data-listing-file-modified-sort="1720962510055" data-listing-reading-time-sort="2" data-listing-word-count-sort="278">
-<a href="./datacamp_projects/workspace/SQL/international_debt/notebook.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="datacamp_projects/workspace/SQL/international_debt/image.jpg" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-SQL - International debt statistics
-</h5>
-<div class="card-text listing-description">
-Humans not only take debts to manage necessities. A country may also take debt to manage its economy. For example, infrastructure spending is one costly ingredient required…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-Datacamp &amp; Heiner Atze
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="6" data-listing-file-modified-sort="1720962553196" data-listing-reading-time-sort="3" data-listing-word-count-sort="431">
-<a href="./datacamp_projects/workspace/SQL/london_transport/notebook.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="datacamp_projects/workspace/SQL/london_transport/london.jpg" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-SQL - London transportation dataset
-</h5>
-<div class="card-text listing-description">
-London, or as the Romans called it “Londonium”! Home to over 8.5 million residents who speak over 300 languages. While the City of London is a little over one square mile…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-Datacamp &amp; Heiner Atze
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="7" data-listing-file-modified-sort="1720965588602" data-listing-reading-time-sort="3" data-listing-word-count-sort="510">
-<a href="./datacamp_projects/workspace/SQL/student_mental_health/notebook.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="datacamp_projects/workspace/SQL/student_mental_health/mentalhealth.jpg" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-SQL - Mental health of international students
-</h5>
-<div class="card-text listing-description">
-Does going to university in a different country affect your mental health? A Japanese international university surveyed its students in 2018 and published a study the…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-Datacamp &amp; Heiner Atze
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="8" data-listing-file-modified-sort="1720956354729" data-listing-reading-time-sort="6" data-listing-word-count-sort="1003">
-<a href="./datacamp_projects/guided/python/trump_trudeau_tweets/trump_trudeau_tweets.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Trump vs.&nbsp;Trudeau: Tweet classification
-</h5>
-<div class="card-text listing-description">
-
-So you think you can classify text? How about tweets? In this notebook, we’ll take a dive into the world of social media text classification by investigating how to…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-Datacamp &amp; Heiner Atze
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="9" data-listing-file-modified-sort="1720955911078" data-listing-reading-time-sort="1" data-listing-word-count-sort="31">
-<a href="./datacamp_projects/workspace/Python/NLP_gender_reviews/web_scraping.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<div class="card-text listing-description">
-This code won’t run in wowrkspace, but you can download it locally if you are interested in learning about how we obtained the URLs of the professors used in this project.
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+</tr>
+</thead>
+<tbody class="list">
+</tbody>
+</table>
 <div class="listing-no-matching d-none">
 No matching items
 </div>

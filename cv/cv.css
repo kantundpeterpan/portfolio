@@ -33,6 +33,11 @@ from: https://github.com/quarto-dev/quarto-cli/discussions/2538#discussioncommen
         content: counter(page)
       }
   }
+
+  .cheating {
+    display: none;
+  }
+
   .no-print {
       display: none;
   }
