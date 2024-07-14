@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.54">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1. Import and observe dataset – Heiner Atze, PhD</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">1. Import and observe dataset</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../../../index.html" class="sidebar-logo-link">
+      <img src="data:image/jpeg;base64,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" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main">
+    <a href="https://github.com/kantundpeterpan" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../cv/cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CV</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+ <span class="menu-text">Bioinformatics</span>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../cheminformatis.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cheminformatics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data Science</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+ <span class="menu-text">NLP</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">Python</span>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Datacamp</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+ <span class="menu-text">Extended</span>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../guided.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guided</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">Unguided</span>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">1. Import and observe dataset</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>
+We all love watching movies! There are some movies we like, some we don’t. Most people have a preference for movies of a similar genre. Some of us love watching action movies, while some of us like watching horror. Some of us like watching movies that have ninjas in them, while some of us like watching superheroes.
+</p>
+<p>
+Movies within a genre often share common base parameters. Consider the following two movies:
+</p>
+<p>
+<img style="margin:5px 20px 5px 1px; height: 250px; display: inline-block;" alt="2001: A Space Odyssey" src="https://assets.datacamp.com/production/project_648/img/movie1.jpg"> <img style="margin:5px 20px 5px 1px; height: 250px; display: inline-block;" alt="Close Encounters of the Third Kind" src="https://assets.datacamp.com/production/project_648/img/movie2.jpg">
+</p>
+<p>
+Both movies, <em>2001: A Space Odyssey</em> and <em>Close Encounters of the Third Kind</em>, are movies based on aliens coming to Earth. I’ve seen both, and they indeed share many similarities. We could conclude that both of these fall into the same genre of movies based on intuition, but that’s no fun in a data science context. In this notebook, we will quantify the similarity of movies based on their plot summaries available on IMDb and Wikipedia, then separate them into groups, also known as clusters. We’ll create a dendrogram to represent how closely the movies are related to each other.
+</p>
+<p>
+Let’s start by importing the dataset and observing the data provided.
+</p>
+<div id="cell-2" class="cell" data-dc="{&quot;key&quot;:&quot;3&quot;}" data-tags="[&quot;sample_code&quot;]" data-trusted="true" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import modulesimport numpy as npimport pandas as pdimport nltk# Set seed for reproducibilitynp.random.seed(5)# Read in IMDb and Wikipedia movie data (both in same file)movies_df = pd.read_csv('datasets/movies.csv')print("Number of movies loaded: %s " % (len(movies_df)))# Display the datamovies_df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of movies loaded: 100 </code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="51">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">rank</th>
+<th data-quarto-table-cell-role="th">title</th>
+<th data-quarto-table-cell-role="th">genre</th>
+<th data-quarto-table-cell-role="th">wiki_plot</th>
+<th data-quarto-table-cell-role="th">imdb_plot</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0</td>
+<td>The Godfather</td>
+<td>[u' Crime', u' Drama']</td>
+<td>On the day of his only daughter's wedding, Vit...</td>
+<td>In late summer 1945, guests are gathered for t...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1</td>
+<td>The Shawshank Redemption</td>
+<td>[u' Crime', u' Drama']</td>
+<td>In 1947, banker Andy Dufresne is convicted of ...</td>
+<td>In 1947, Andy Dufresne (Tim Robbins), a banker...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2</td>
+<td>Schindler's List</td>
+<td>[u' Biography', u' Drama', u' History']</td>
+<td>In 1939, the Germans move Polish Jews into the...</td>
+<td>The relocation of Polish Jews from surrounding...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>3</td>
+<td>Raging Bull</td>
+<td>[u' Biography', u' Drama', u' Sport']</td>
+<td>In a brief scene in 1964, an aging, overweight...</td>
+<td>The film opens in 1964, where an older and fat...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>4</td>
+<td>Casablanca</td>
+<td>[u' Drama', u' Romance', u' War']</td>
+<td>It is early December 1941. American expatriate...</td>
+<td>In the early years of World War II, December 1...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>5</td>
+<td>One Flew Over the Cuckoo's Nest</td>
+<td>[u' Drama']</td>
+<td>In 1963 Oregon, Randle Patrick "Mac" McMurphy ...</td>
+<td>In 1963 Oregon, Randle Patrick McMurphy (Nicho...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>6</td>
+<td>Gone with the Wind</td>
+<td>[u' Drama', u' Romance', u' War']</td>
+<td>\nPart 1\n \n Part 1 Part 1 \n \n On the...</td>
+<td>The film opens in Tara, a cotton plantation ow...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>7</td>
+<td>Citizen Kane</td>
+<td>[u' Drama', u' Mystery']</td>
+<td>\n\n\n\nOrson Welles as Charles Foster Kane\n\...</td>
+<td>It's 1941, and newspaper tycoon Charles Foster...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>8</td>
+<td>The Wizard of Oz</td>
+<td>[u' Adventure', u' Family', u' Fantasy', u' Mu...</td>
+<td>The film starts in sepia-tinted Kansas in the ...</td>
+<td>Dorothy Gale (Judy Garland) is an orphaned tee...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>9</td>
+<td>Titanic</td>
+<td>[u' Drama', u' Romance']</td>
+<td>In 1996, treasure hunter Brock Lovett and his ...</td>
+<td>In 1996, treasure hunter Brock Lovett and his ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>10</td>
+<td>Lawrence of Arabia</td>
+<td>[u' Adventure', u' Biography', u' Drama', u' H...</td>
+<td>] \n The film is presented in two parts, s...</td>
+<td>In 1935, T. E. Lawrence (Peter O'Toole) is kil...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>11</td>
+<td>The Godfather: Part II</td>
+<td>[u' Crime', u' Drama']</td>
+<td>\nIn 1901 Corleone, Sicily, nine-year-old Vito...</td>
+<td>The Godfather Part II presents two parallel st...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>12</td>
+<td>Psycho</td>
+<td>[u' Horror', u' Mystery', u' Thriller']</td>
+<td>Patrick Bateman is a wealthy investment banker...</td>
+<td>In a Phoenix hotel room on a Friday afternoon,...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>13</td>
+<td>Sunset Blvd.</td>
+<td>[u' Drama', u' Film-Noir']</td>
+<td>At a Sunset Boulevard mansion, the body of Joe...</td>
+<td>The film opens with the camera tracking down S...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>14</td>
+<td>Vertigo</td>
+<td>[u' Mystery', u' Romance', u' Thriller']</td>
+<td>ridge, Fort Point\n\n \n \n\n\n"Madeleine" a...</td>
+<td>A woman's face gives way to a kaleidoscope of ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>15</td>
+<td>On the Waterfront</td>
+<td>[u' Crime', u' Drama']</td>
+<td>Mob-connected union boss Johnny Friendly (Lee ...</td>
+<td>Terry Malloy (Marlon Brando) once dreamt of be...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>16</td>
+<td>Forrest Gump</td>
+<td>[u' Drama', u' Romance']</td>
+<td>While waiting at a bus stop in 1981, Forrest G...</td>
+<td>The film begins with a feather falling to the ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17</td>
+<td>17</td>
+<td>The Sound of Music</td>
+<td>[u' Biography', u' Drama', u' Family', u' Musi...</td>
+<td>In 1938, while living as a young postulant at ...</td>
+<td>The widowed, retired Austrian naval officer, C...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">18</td>
+<td>18</td>
+<td>West Side Story</td>
+<td>[u' Crime', u' Drama', u' Musical', u' Romance...</td>
+<td>] ] \n In the West Side's Lincoln Square ne...</td>
+<td>A fight set to music between an American gang,...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>19</td>
+<td>Star Wars</td>
+<td>[u' Action', u' Adventure', u' Fantasy', u' Sc...</td>
+<td>The galaxy is in a civil war, and spies for th...</td>
+<td>\nNote: Italicized paragraphs denote scenes ad...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">20</td>
+<td>20</td>
+<td>E.T. the Extra-Terrestrial</td>
+<td>[u' Adventure', u' Family', u' Sci-Fi']</td>
+<td>In a California forest, a group of alien botan...</td>
+<td>In a forested area overlooking a sprawling sub...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21</td>
+<td>21</td>
+<td>2001: A Space Odyssey</td>
+<td>[u' Mystery', u' Sci-Fi']</td>
+<td>The film consists of four major sections, all ...</td>
+<td>To Richard Strauss' tone poem "Thus Spake Zara...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">22</td>
+<td>22</td>
+<td>The Silence of the Lambs</td>
+<td>[u' Crime', u' Drama', u' Thriller']</td>
+<td>is pulled from her training at the FBI Academy...</td>
+<td>Promising FBI Academy student Clarice Starling...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">23</td>
+<td>23</td>
+<td>Chinatown</td>
+<td>[u' Drama', u' Mystery', u' Thriller']</td>
+<td>A woman identifying herself as Evelyn Mulwray ...</td>
+<td>Set in 1937 Los Angeles, a private investigato...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">24</td>
+<td>24</td>
+<td>The Bridge on the River Kwai</td>
+<td>[u' Adventure', u' Drama', u' War']</td>
+<td>In World War II, British prisoners arrive at a...</td>
+<td>this synopsis is primarily from the wikipedia ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">25</td>
+<td>25</td>
+<td>Singin' in the Rain</td>
+<td>[u' Comedy', u' Musical', u' Romance']</td>
+<td>Don Lockwood is a popular silent film star wit...</td>
+<td>Don Lockwood (Gene Kelly) is a popular silent ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">26</td>
+<td>26</td>
+<td>It's a Wonderful Life</td>
+<td>[u' Drama', u' Family', u' Fantasy']</td>
+<td>\n\n\n\nDonna Reed (as Mary Bailey) and James ...</td>
+<td>This movie is about a divine intervention by a...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">27</td>
+<td>27</td>
+<td>Some Like It Hot</td>
+<td>[u' Comedy']</td>
+<td>It is February 1929 in the city of Chicago. Jo...</td>
+<td>Joe and Jerry, a saxophonist and bassist, resp...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">28</td>
+<td>28</td>
+<td>12 Angry Men</td>
+<td>[u' Drama']</td>
+<td>The story begins in a New York City courthous...</td>
+<td>A teenaged Hispanic boy has just been tried fo...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">29</td>
+<td>29</td>
+<td>Dr. Strangelove or: How I Learned to Stop Worr...</td>
+<td>[u' Comedy', u' War']</td>
+<td>United States Air Force Brigadier General Jack...</td>
+<td>At the Burpelson U.S. Air Force Base somewhere...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">70</td>
+<td>70</td>
+<td>Rain Man</td>
+<td>[u' Drama']</td>
+<td>Charlie Babbitt is in the middle of importing ...</td>
+<td>Charlie Babbitt (Tom Cruise), a Los Angeles ca...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">71</td>
+<td>71</td>
+<td>Annie Hall</td>
+<td>[u' Comedy', u' Drama', u' Romance']</td>
+<td>The comedian Alvy Singer (Woody Allen) is tryi...</td>
+<td>Annie Hall is a film about a comedian, Alvy Si...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">72</td>
+<td>72</td>
+<td>Out of Africa</td>
+<td>[u' Biography', u' Drama', u' Romance']</td>
+<td>The story begins in 1913 in Denmark, when Kare...</td>
+<td>[Out Of Africa]A well-heeled Danish lady goes ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">73</td>
+<td>73</td>
+<td>Good Will Hunting</td>
+<td>[u' Drama']</td>
+<td>Twenty-year-old Will Hunting (Damon) of South ...</td>
+<td>Though Will Hunting (Matt Damon) has genius-le...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">74</td>
+<td>74</td>
+<td>Terms of Endearment</td>
+<td>[u' Comedy', u' Drama']</td>
+<td>Aurora Greenway (Shirley MacLaine) and her dau...</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75</td>
+<td>75</td>
+<td>Tootsie</td>
+<td>[u' Comedy', u' Drama', u' Romance']</td>
+<td>Michael Dorsey (Dustin Hoffman) is a respected...</td>
+<td>Michael Dorsey is an actor living and working ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">76</td>
+<td>76</td>
+<td>Fargo</td>
+<td>[u' Crime', u' Drama', u' Thriller']</td>
+<td>In the winter of 1987, Minneapolis car salesma...</td>
+<td>The movie opens with a car towing a new tan Ol...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">77</td>
+<td>77</td>
+<td>Giant</td>
+<td>[u' Drama', u' Romance']</td>
+<td>Jordan "Bick" Benedict (Rock Hudson), head of ...</td>
+<td>In the early 1920s, Jordan "Bick" Benedict (Ro...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">78</td>
+<td>78</td>
+<td>The Grapes of Wrath</td>
+<td>[u' Drama']</td>
+<td>The film opens with Tom Joad (Henry Fonda), re...</td>
+<td>After serving four years in prison for killing...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">79</td>
+<td>79</td>
+<td>Shane</td>
+<td>[u' Drama', u' Romance', u' Western']</td>
+<td>\n\n\n\nAlan Ladd and Jean Arthur\n\n \n \n\...</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">80</td>
+<td>80</td>
+<td>The Green Mile</td>
+<td>[u' Crime', u' Drama', u' Fantasy', u' Mystery']</td>
+<td>In a Louisiana nursing home in 1999, Paul Edge...</td>
+<td>The movie begins with an old man named Paul Ed...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">81</td>
+<td>81</td>
+<td>Close Encounters of the Third Kind</td>
+<td>[u' Drama', u' Sci-Fi']</td>
+<td>In the Sonoran Desert, French scientist Claude...</td>
+<td>In what appers to be the Sonoran Desert; in or...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">82</td>
+<td>82</td>
+<td>Network</td>
+<td>[u' Drama']</td>
+<td>Howard Beale, the longtime anchor of the Union...</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">83</td>
+<td>83</td>
+<td>Nashville</td>
+<td>[u' Drama', u' Music']</td>
+<td>The overarching plot takes place over five day...</td>
+<td>The overarching plot takes place over five day...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">84</td>
+<td>84</td>
+<td>The Graduate</td>
+<td>[u' Comedy', u' Drama', u' Romance']</td>
+<td>Benjamin Braddock, going on from twenty to twe...</td>
+<td>The film explores the life of 21-year-old Ben ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">85</td>
+<td>85</td>
+<td>American Graffiti</td>
+<td>[u' Comedy', u' Drama']</td>
+<td>In late August 1962 recent high school graduat...</td>
+<td>It's the last night of the summer in 1962, and...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">86</td>
+<td>86</td>
+<td>Pulp Fiction</td>
+<td>[u' Crime', u' Drama', u' Thriller']</td>
+<td>The Diner" "Prologue—The Diner" \n "Pumpkin...</td>
+<td>Late one morning in the Hawthorne Grill, a res...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">87</td>
+<td>87</td>
+<td>The African Queen</td>
+<td>[u' Adventure', u' Romance', u' War']</td>
+<td>Robert Morley and Katharine Hepburn play Samue...</td>
+<td>An English spinster, Rose (Katharine Hepburn),...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">88</td>
+<td>88</td>
+<td>Stagecoach</td>
+<td>[u' Adventure', u' Western']</td>
+<td>In 1880, a motley group of strangers boards th...</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">89</td>
+<td>89</td>
+<td>Mutiny on the Bounty</td>
+<td>[u' Adventure', u' Drama', u' History']</td>
+<td>In the year 1787, the Bounty sets sail from En...</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">90</td>
+<td>90</td>
+<td>The Maltese Falcon</td>
+<td>[u' Drama', u' Film-Noir', u' Mystery']</td>
+<td>\n\n\nIn 1539 the Knight Templars of Malta, pa...</td>
+<td>Private eye Sam Spade and his partner Miles Ar...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">91</td>
+<td>91</td>
+<td>A Clockwork Orange</td>
+<td>[u' Crime', u' Drama', u' Sci-Fi']</td>
+<td>In futuristic London, Alex DeLarge is the lead...</td>
+<td>A bit of the old ultra-violence".London, Engla...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">92</td>
+<td>92</td>
+<td>Taxi Driver</td>
+<td>[u' Crime', u' Drama']</td>
+<td>Travis Bickle, an honorably discharged U.S. Ma...</td>
+<td>Travis Bickle (Robert De Niro) goes to a New Y...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">93</td>
+<td>93</td>
+<td>Wuthering Heights</td>
+<td>[u' Drama', u' Romance']</td>
+<td>A traveller named Lockwood (Miles Mander) is c...</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">94</td>
+<td>94</td>
+<td>Double Indemnity</td>
+<td>[u' Crime', u' Drama', u' Film-Noir', u' Thril...</td>
+<td>\n\n\n\nNeff confesses into a Dictaphone.\n\n ...</td>
+<td>Walter Neff (MacMurray) is a successful insura...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">95</td>
+<td>95</td>
+<td>Rebel Without a Cause</td>
+<td>[u' Drama']</td>
+<td>\n\n\n\nJim Stark is in police custody.\n\n \...</td>
+<td>Shortly after moving to Los Angeles with his p...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">96</td>
+<td>96</td>
+<td>Rear Window</td>
+<td>[u' Mystery', u' Thriller']</td>
+<td>\n\n\n\nJames Stewart as L.B. Jefferies\n\n \...</td>
+<td>L.B. "Jeff" Jeffries (James Stewart) recuperat...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">97</td>
+<td>97</td>
+<td>The Third Man</td>
+<td>[u' Film-Noir', u' Mystery', u' Thriller']</td>
+<td>\n\n\n\nSocial network mapping all major chara...</td>
+<td>Sights of Vienna, Austria, flash across the sc...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">98</td>
+<td>98</td>
+<td>North by Northwest</td>
+<td>[u' Mystery', u' Thriller']</td>
+<td>Advertising executive Roger O. Thornhill is mi...</td>
+<td>At the end of an ordinary work day, advertisin...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">99</td>
+<td>99</td>
+<td>Yankee Doodle Dandy</td>
+<td>[u' Biography', u' Drama', u' Musical']</td>
+<td>\n In the early days of World War II, Cohan ...</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>100 rows × 5 columns</p>
+</div>
+</div>
+</div>
+## 2. Combine Wikipedia and IMDb plot summaries
+<p>
+The dataset we imported currently contains two columns titled <code>wiki_plot</code> and <code>imdb_plot</code>. They are the plot found for the movies on Wikipedia and IMDb, respectively. The text in the two columns is similar, however, they are often written in different tones and thus provide context on a movie in a different manner of linguistic expression. Further, sometimes the text in one column may mention a feature of the plot that is not present in the other column. For example, consider the following plot extracts from <em>The Godfather</em>:
+</p>
+<ul>
+<li>
+Wikipedia: “On the day of his only daughter’s wedding, Vito Corleone”
+</li>
+<li>
+IMDb: “In late summer 1945, guests are gathered for the wedding reception of Don Vito Corleone’s daughter Connie”
+</li>
+</ul>
+<p>
+While the Wikipedia plot only mentions it is the day of the daughter’s wedding, the IMDb plot also mentions the year of the scene and the name of the daughter.
+</p>
+<p>
+Let’s combine both the columns to avoid the overheads in computation associated with extra columns to process.
+</p>
+<div id="cell-4" class="cell" data-dc="{&quot;key&quot;:&quot;10&quot;}" data-tags="[&quot;sample_code&quot;]" data-trusted="true" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine wiki_plot and imdb_plot into a single columnmovies_df['plot'] = movies_df['wiki_plot'].astype(str) + "\n" + \                 movies_df['imdb_plot'].astype(str)# Inspect the new DataFramemovies_df.head()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="53">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">rank</th>
+<th data-quarto-table-cell-role="th">title</th>
+<th data-quarto-table-cell-role="th">genre</th>
+<th data-quarto-table-cell-role="th">wiki_plot</th>
+<th data-quarto-table-cell-role="th">imdb_plot</th>
+<th data-quarto-table-cell-role="th">plot</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0</td>
+<td>The Godfather</td>
+<td>[u' Crime', u' Drama']</td>
+<td>On the day of his only daughter's wedding, Vit...</td>
+<td>In late summer 1945, guests are gathered for t...</td>
+<td>On the day of his only daughter's wedding, Vit...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1</td>
+<td>The Shawshank Redemption</td>
+<td>[u' Crime', u' Drama']</td>
+<td>In 1947, banker Andy Dufresne is convicted of ...</td>
+<td>In 1947, Andy Dufresne (Tim Robbins), a banker...</td>
+<td>In 1947, banker Andy Dufresne is convicted of ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2</td>
+<td>Schindler's List</td>
+<td>[u' Biography', u' Drama', u' History']</td>
+<td>In 1939, the Germans move Polish Jews into the...</td>
+<td>The relocation of Polish Jews from surrounding...</td>
+<td>In 1939, the Germans move Polish Jews into the...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>3</td>
+<td>Raging Bull</td>
+<td>[u' Biography', u' Drama', u' Sport']</td>
+<td>In a brief scene in 1964, an aging, overweight...</td>
+<td>The film opens in 1964, where an older and fat...</td>
+<td>In a brief scene in 1964, an aging, overweight...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>4</td>
+<td>Casablanca</td>
+<td>[u' Drama', u' Romance', u' War']</td>
+<td>It is early December 1941. American expatriate...</td>
+<td>In the early years of World War II, December 1...</td>
+<td>It is early December 1941. American expatriate...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+## 3. Tokenization
+<p>
+Tokenization is the process by which we break down articles into individual sentences or words, as needed. Besides the tokenization method provided by NLTK, we might have to perform additional filtration to remove tokens which are entirely numeric values or punctuation.
+</p>
+<p>
+While a program may fail to build context from “While waiting at a bus stop in 1981” (<em>Forrest Gump</em>), because this string would not match in any dictionary, it is possible to build context from the words “while”, “waiting” or “bus” because they are present in the English dictionary.
+</p>
+<p>
+Let us perform tokenization on a small extract from <em>The Godfather</em>.
+</p>
+<div id="cell-6" class="cell" data-dc="{&quot;key&quot;:&quot;17&quot;}" data-tags="[&quot;sample_code&quot;]" data-trusted="true" data-execution_count="55">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize a paragraph into sentences and store in sent_tokenizedsent_tokenized = [sent for sent in nltk.sent_tokenize("""                        Today (May 19, 2016) is his only daughter's wedding.                         Vito Corleone is the Godfather.                        """)]# Word Tokenize first sentence from sent_tokenized, save as words_tokenizedwords_tokenized = [word for word in nltk.word_tokenize(sent_tokenized[0])]# Remove tokens that do not contain any letters from words_tokenizedimport refiltered = [word for word in words_tokenized if re.search('[a-zA-Z]', word)]# Display filtered words to observe words after tokenizationfiltered</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="55">
+<pre><code>['Today', 'May', 'is', 'his', 'only', 'daughter', "'s", 'wedding']</code></pre>
+</div>
+</div>
+## 4. Stemming
+<p>
+Stemming is the process by which we bring down a word from its different forms to the root word. This helps us establish meaning to different forms of the same words without having to deal with each form separately. For example, the words ‘fishing’, ‘fished’, and ‘fisher’ all get stemmed to the word ‘fish’.
+</p>
+<p>
+Consider the following sentences:
+</p>
+<ul>
+<li>
+“Young William Wallace witnesses the treachery of Longshanks” ~ <em>Gladiator</em>
+</li>
+<li>
+“escapes to the city walls only to witness Cicero’s death” ~ <em>Braveheart</em>
+</li>
+</ul>
+<p>
+Instead of building separate dictionary entries for both witnesses and witness, which mean the same thing outside of quantity, stemming them reduces them to ‘wit’.
+</p>
+<p>
+There are different algorithms available for stemming such as the Porter Stemmer, Snowball Stemmer, etc. We shall use the Snowball Stemmer.
+</p>
+<div id="cell-8" class="cell" data-dc="{&quot;key&quot;:&quot;24&quot;}" data-tags="[&quot;sample_code&quot;]" data-trusted="true" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the SnowballStemmer to perform stemmingfrom nltk.stem.snowball import SnowballStemmer# Create an English language SnowballStemmer objectstemmer = SnowballStemmer("english")# Print filtered to observe words without stemmingprint("Without stemming: ", filtered)# Stem the words from filtered and store in stemmed_wordsstemmed_words = [stemmer.stem(word) for word in filtered]# Print the stemmed_words to observe words after stemmingprint("After stemming:   ", stemmed_words)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Without stemming:  ['Today', 'May', 'is', 'his', 'only', 'daughter', "'s", 'wedding']
+After stemming:    ['today', 'may', 'is', 'his', 'onli', 'daughter', "'s", 'wed']</code></pre>
+</div>
+</div>
+## 5. Club together Tokenize &amp; Stem
+<p>
+We are now able to tokenize and stem sentences. But we may have to use the two functions repeatedly one after the other to handle a large amount of data, hence we can think of wrapping them in a function and passing the text to be tokenized and stemmed as the function argument. Then we can pass the new wrapping function, which shall perform both tokenizing and stemming instead of just tokenizing, as the tokenizer argument while creating the TF-IDF vector of the text.
+</p>
+<p>
+What difference does it make though? Consider the sentence from the plot of <em>The Godfather</em>: “Today (May 19, 2016) is his only daughter’s wedding.” If we do a ‘tokenize-only’ for this sentence, we have the following result:
+</p>
+<blockquote class="blockquote">
+<p>
+‘today’, ‘may’, ‘is’, ‘his’, ‘only’, ‘daughter’, “‘s”, ’wedding’
+</p>
+</blockquote>
+<p>
+But when we do a ‘tokenize-and-stem’ operation we get:
+</p>
+<blockquote class="blockquote">
+<p>
+‘today’, ‘may’, ‘is’, ‘his’, ‘onli’, ‘daughter’, “‘s”, ’wed’
+</p>
+</blockquote>
+<p>
+All the words are in their root form, which will lead to a better establishment of meaning as some of the non-root forms may not be present in the NLTK training corpus.
+</p>
+<div id="cell-10" class="cell" data-dc="{&quot;key&quot;:&quot;31&quot;}" data-tags="[&quot;sample_code&quot;]" data-trusted="true" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a function to perform both stemming and tokenizationdef tokenize_and_stem(text):        # Tokenize by sentence, then by word    tokens = [sent for sent in nltk.sent_tokenize(text)]    tokens = [word for x in tokens for word in nltk.word_tokenize(x)]        # Filter out raw tokens to remove noise    filtered_tokens = [token for token in tokens if re.search('[a-zA-Z]', token)]        # Stem the filtered_tokens    stems = [stemmer.stem(token) for token in filtered_tokens]        return stemswords_stemmed = tokenize_and_stem("Today (May 19, 2016) is his only daughter's wedding.")print(words_stemmed)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['today', 'may', 'is', 'his', 'onli', 'daughter', "'s", 'wed']</code></pre>
+</div>
+</div>
+## 6. Create TfidfVectorizer
+<p>
+Computers do not <em>understand</em> text. These are machines only capable of understanding numbers and performing numerical computation. Hence, we must convert our textual plot summaries to numbers for the computer to be able to extract meaning from them. One simple method of doing this would be to count all the occurrences of each word in the entire vocabulary and return the counts in a vector. Enter <code>CountVectorizer</code>.
+</p>
+<p>
+Consider the word ‘the’. It appears quite frequently in almost all movie plots and will have a high count in each case. But obviously, it isn’t the theme of all the movies! <a href="https://campus.datacamp.com/courses/natural-language-processing-fundamentals-in-python/simple-topic-identification?ex=11">Term Frequency-Inverse Document Frequency</a> (TF-IDF) is one method which overcomes the shortcomings of <code>CountVectorizer</code>. The Term Frequency of a word is the measure of how often it appears in a document, while the Inverse Document Frequency is the parameter which reduces the importance of a word if it frequently appears in several documents.
+</p>
+<p>
+For example, when we apply the TF-IDF on the first 3 sentences from the plot of <em>The Wizard of Oz</em>, we are told that the most important word there is ‘Toto’, the pet dog of the lead character. This is because the movie begins with ‘Toto’ biting someone due to which the journey of Oz begins!
+</p>
+<p>
+In simplest terms, TF-IDF recognizes words which are unique and important to any given document. Let’s create one for our purposes.
+</p>
+<div id="cell-12" class="cell" data-dc="{&quot;key&quot;:&quot;38&quot;}" data-tags="[&quot;sample_code&quot;]" data-trusted="true" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import TfidfVectorizer to create TF-IDF vectorsfrom sklearn.feature_extraction.text import TfidfVectorizer# Instantiate TfidfVectorizer object with stopwords and tokenizer# parameters for efficient processing of texttfidf_vectorizer = TfidfVectorizer(max_df=0.8, max_features=200000,                                 min_df=0.2, stop_words='english',                                 use_idf=True, tokenizer=tokenize_and_stem,                                 ngram_range=(1,3))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+## 7. Fit transform TfidfVectorizer
+<p>
+Once we create a TF-IDF Vectorizer, we must fit the text to it and then transform the text to produce the corresponding numeric form of the data which the computer will be able to understand and derive meaning from. To do this, we use the <code>fit_transform()</code> method of the <code>TfidfVectorizer</code> object.
+</p>
+<p>
+If we observe the <code>TfidfVectorizer</code> object we created, we come across a parameter stopwords. ‘stopwords’ are those words in a given text which do not contribute considerably towards the meaning of the sentence and are generally grammatical filler words. For example, in the sentence ‘Dorothy Gale lives with her dog Toto on the farm of her Aunt Em and Uncle Henry’, we could drop the words ‘her’ and ‘the’, and still have a similar overall meaning to the sentence. Thus, ‘her’ and ‘the’ are stopwords and can be conveniently dropped from the sentence.
+</p>
+<p>
+On setting the stopwords to ‘english’, we direct the vectorizer to drop all stopwords from a pre-defined list of English language stopwords present in the nltk module. Another parameter, <code>ngram_range</code>, defines the length of the ngrams to be formed while vectorizing the text.
+</p>
+<div id="cell-14" class="cell" data-dc="{&quot;key&quot;:&quot;45&quot;}" data-tags="[&quot;sample_code&quot;]" data-trusted="true" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit and transform the tfidf_vectorizer with the "plot" of each movie# to create a vector representation of the plot summariestfidf_matrix = tfidf_vectorizer.fit_transform([x for x in movies_df["plot"]])print(tfidf_matrix.shape)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(100, 564)</code></pre>
+</div>
+</div>
+## 8. Import KMeans and create clusters
+<p>
+To determine how closely one movie is related to the other by the help of unsupervised learning, we can use clustering techniques. Clustering is the method of grouping together a number of items such that they exhibit similar properties. According to the measure of similarity desired, a given sample of items can have one or more clusters.
+</p>
+<p>
+A good basis of clustering in our dataset could be the genre of the movies. Say we could have a cluster ‘0’ which holds movies of the ‘Drama’ genre. We would expect movies like <em>Chinatown</em> or <em>Psycho</em> to belong to this cluster. Similarly, the cluster ‘1’ in this project holds movies which belong to the ‘Adventure’ genre (<em>Lawrence of Arabia</em> and the <em>Raiders of the Lost Ark</em>, for example).
+</p>
+<p>
+K-means is an algorithm which helps us to implement clustering in Python. The name derives from its method of implementation: the given sample is divided into <b><i>K</i></b> clusters where each cluster is denoted by the <b><i>mean</i></b> of all the items lying in that cluster.
+</p>
+<p>
+We get the following distribution for the clusters:
+</p>
+<p>
+<img src="https://assets.datacamp.com/production/project_648/img/bar_clusters.png" alt="bar graph of clusters">
+</p>
+<div id="cell-16" class="cell" data-dc="{&quot;key&quot;:&quot;52&quot;}" data-tags="[&quot;sample_code&quot;]" data-trusted="true" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import k-means to perform clustersfrom sklearn.cluster import KMeans# Create a KMeans object with 5 clusters and save as kmkm = KMeans(n_clusters=5)# Fit the k-means object with tfidf_matrixkm.fit(tfidf_matrix)clusters = km.labels_.tolist()# Create a column cluster to denote the generated cluster for each moviemovies_df["cluster"] = clusters# Display number of films per cluster (clusters from 0 to 4)movies_df['cluster'].value_counts() </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<pre><code>2    35
+1    21
+3    20
+0    17
+4     7
+Name: cluster, dtype: int64</code></pre>
+</div>
+</div>
+## 9. Calculate similarity distance
+<p>
+Consider the following two sentences from the movie <em>The Wizard of Oz</em>:
+</p>
+<blockquote class="blockquote">
+<p>
+“they find in the Emerald City”
+</p>
+<p>
+“they finally reach the Emerald City”
+</p>
+</blockquote>
+<p>
+If we put the above sentences in a <code>CountVectorizer</code>, the vocabulary produced would be “they, find, in, the, Emerald, City, finally, reach” and the vectors for each sentence would be as follows:
+</p>
+<blockquote class="blockquote">
+<p>
+1, 1, 1, 1, 1, 1, 0, 0
+</p>
+<p>
+1, 0, 0, 1, 1, 1, 1, 1
+</p>
+</blockquote>
+<p>
+When we calculate the cosine angle formed between the vectors represented by the above, we get a score of 0.667. This means the above sentences are very closely related. <em>Similarity distance</em> is 1 - <a href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine similarity angle</a>. This follows from that if the vectors are similar, the cosine of their angle would be 1 and hence, the distance between then would be 1 - 1 = 0.
+</p>
+<p>
+Let’s calculate the similarity distance for all of our movies.
+</p>
+<div id="cell-18" class="cell" data-dc="{&quot;key&quot;:&quot;59&quot;}" data-tags="[&quot;sample_code&quot;]" data-trusted="true" data-execution_count="67">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import cosine_similarity to calculate similarity of movie plotsfrom sklearn.metrics.pairwise import cosine_similarity# Calculate the similarity distancesimilarity_distance = 1 - cosine_similarity(tfidf_matrix)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+## 10. Import Matplotlib, Linkage, and Dendrograms
+<p>
+We shall now create a tree-like diagram (called a dendrogram) of the movie titles to help us understand the level of similarity between them visually. Dendrograms help visualize the results of hierarchical clustering, which is an alternative to k-means clustering. Two pairs of movies at the same level of hierarchical clustering are expected to have similar strength of similarity between the corresponding pairs of movies. For example, the movie <em>Fargo</em> would be as similar to <em>North By Northwest</em> as the movie <em>Platoon</em> is to <em>Saving Private Ryan</em>, given both the pairs exhibit the same level of the hierarchy.
+</p>
+<p>
+Let’s import the modules we’ll need to create our dendrogram.
+</p>
+<div id="cell-20" class="cell" data-dc="{&quot;key&quot;:&quot;66&quot;}" data-tags="[&quot;sample_code&quot;]" data-trusted="true" data-execution_count="76">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import matplotlib.pyplot for plotting graphsimport matplotlib.pyplot as plt# Configure matplotlib to display the output inline%matplotlib inline# Import modules necessary to plot dendrogramfrom scipy.cluster.hierarchy import linkage, dendrogram</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>DEBUG:matplotlib.pyplot:Loaded backend module://ipykernel.pylab.backend_inline version unknown.</code></pre>
+</div>
+</div>
+## 11. Create merging and plot dendrogram
+<p>
+We shall plot a dendrogram of the movies whose similarity measure will be given by the similarity distance we previously calculated. The lower the similarity distance between any two movies, the lower their linkage will make an intercept on the y-axis. For instance, the lowest dendrogram linkage we shall discover will be between the movies, <em>It’s a Wonderful Life</em> and <em>A Place in the Sun</em>. This indicates that the movies are very similar to each other in their plots.
+</p>
+<div id="cell-22" class="cell" data-dc="{&quot;key&quot;:&quot;73&quot;}" data-tags="[&quot;sample_code&quot;]" data-trusted="true" data-execution_count="77">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create mergings matrix mergings = linkage(similarity_distance, method='complete')# Plot the dendrogram, using title as label columndendrogram_ = dendrogram(mergings,               labels=[x for x in movies_df["title"]],               leaf_rotation=90,               leaf_font_size=16,)# Adjust the plotfig = plt.gcf()_ = [lbl.set_color('r') for lbl in plt.gca().get_xmajorticklabels()]fig.set_size_inches(108, 21)# Show the plotted dendrogramplt.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notebook_files/figure-html/cell-12-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+## 12. Which movies are most similar?
+<p>
+We can now determine the similarity between movies based on their plots! To wrap up, let’s answer one final question: which movie is most similar to the movie <em>Braveheart</em>?
+</p>
+<div id="cell-24" class="cell" data-dc="{&quot;key&quot;:&quot;80&quot;}" data-trusted="true" data-execution_count="84">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bidx <span class="op">=</span> movies_df.title.eq(<span class="st">'Braveheart'</span>).idxmax()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-25" class="cell" data-dc="{&quot;key&quot;:&quot;80&quot;}" data-trusted="true" data-execution_count="89">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>np.argsort(similarity_distance[bidx])[]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="89">
+<pre><code>array([50, 34,  6,  0, 33, 57, 11, 48, 42, 15, 60, 36, 55, 35, 70, 44, 47,
+       62, 16,  3, 31, 30, 61, 58, 66, 72, 46,  2, 77, 19, 79, 73, 88, 53,
+       45,  4, 52, 10, 49, 86, 38, 18, 51, 87, 24, 74, 95, 65,  5, 28,  8,
+       64, 92, 29, 98, 71, 97, 39, 68, 90, 37, 32, 76, 82, 14, 56, 43, 23,
+        7, 59, 20, 80, 12, 27, 13, 94, 81, 75, 91, 84, 93, 83, 40, 22, 63,
+       54,  1, 21, 99, 85, 69, 89, 96, 78, 25,  9, 41, 67, 26, 17])</code></pre>
+</div>
+</div>
+<div id="cell-26" class="cell" data-dc="{&quot;key&quot;:&quot;80&quot;}" data-trusted="true" data-execution_count="88">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a> movies_df.title.iloc[<span class="dv">50</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="88">
+<pre><code>'Braveheart'</code></pre>
+</div>
+</div>
+<div id="cell-27" class="cell" data-dc="{&quot;key&quot;:&quot;80&quot;}" data-tags="[&quot;sample_code&quot;]" data-trusted="true">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Answer the questionans = "The Sound of Music"print(ans)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/kantundpeterpan\.github\.io\/portfolio\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
