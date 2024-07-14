@@ -3,16 +3,17 @@ title: "Curriculum Vitae"
 format:
   html:
     toc: true
-#  pdf:
- #   author: Heiner Atze
-    #pdf-engine: tectonic
+    subtitle: "Heiner Atze, PhD"
+  pdf:
+    author: Heiner Atze
+    pdf-engine: weasyprint
 css: cv.css
 bibliography: cv.bib
 #bibliographystyle: nature
 #csl: https://www.zotero.org/styles/apa-with-abstract
-#csl: emerald-harvard.csl
+csl: emerald-harvard.csl
 suppress-bibliography: false
-#format-links: [pdf]
+format-links: [pdf]
 ---
 
 ::: {.print-only .contact-block}
@@ -30,17 +31,17 @@ Master level courses in :
 
 **Doctor of Philosophy -- Biochemistry, Microbiology** <br> *Sorbonne University, Paris, France* [*Nov 2018 --- Sep 2021*]{.cvdate}
 
-**Master of Science - Medicinal Chemistry** <br> *Friedrich-Schiller-University, Jena, Germany* [*Sep 2014 --- Sep 2016*]{.cvdate}
+**Master of Science(\*) - Medicinal Chemistry** <br> *Friedrich-Schiller-University, Jena, Germany* [*Sep 2014 --- Sep 2016*]{.cvdate}
 
-* German *Diplom*
+[(\*)German *Diplom*, degree awarded after 5 years of study and submission of a research thesis]{.cvdate} \
 
-**State examination - Pharmacy** <br> * *Friedrich-Schiller-University, Jena, Germany* [*Sep 2010 --- Sep 2014*]{.cvdate}
+**State examination - Pharmacy** <br> *Friedrich-Schiller-University, Jena, Germany* [*Sep 2010 --- Sep 2014*]{.cvdate}
 
 ## RESEARCH EXPERIENCE
 
 **Doctoral Researcher -- Biochemistry, Microbiology** <br> *INSERM, Paris, France* [*Jun 2018 --- Sep 2021*]{.cvdate}
 
-Researcher in Team 12 "Structures implicated in antibiotic resistance" at the *Centre de Recherche des Cordeliers*, Paris
+Researcher in Team 12 "Bacterial structures implicated in antibiotic resistance" at the *Centre de Recherche des Cordeliers*, Paris
 
 Two main axes of research:
 
@@ -59,9 +60,10 @@ Key achievements and skills:
 
 - Exploration of the chemical space around the core inhibitor and identification of curcial         ligand-target-interactions
 - Handling and managing a large amount of results and data from biological experiments
+- Development and maintentance of custom data analysis tools availabale at [Gitlab](https://kantundpeterpan.gitlab.io/masseltof)
 
 **Research assistant -- Medicinal and Pharmaceutical Chemistry** <br>
-*Friedrich-Schiller-University, Jena, Germany* [*Sep 2014 --- Sep 2016*]{.cvdate}
+*Friedrich-Schiller-University, Jena, Germany* [*Nov 2014 --- Apr 2015*]{.cvdate}
 
 Biological charaterization of putative anti-inflammatory substances, fundamental research on signaling cascades in inflammation using biochemical methods and imaging techniques
 
@@ -70,7 +72,7 @@ Biological charaterization of putative anti-inflammatory substances, fundamental
 ### Pharmacist
 
 ***Pharmacie Attal*** <br>
-*Fontenay-aux-Roses, France* [Oct 2021 -- present]{.cvdate}
+*Fontenay-aux-Roses, France* [Oct 2021 --- present]{.cvdate}
 
 Pharmaceutical counseling of patients  
 Responsible for communication with medical staff in nursing homes  
@@ -82,7 +84,7 @@ Supervision of technical staff and pharmacy students
 
 ***F. Hoffmann-La Roche*** <br> *Basel, Switzerland* [May 2015 -- Oct 2015]{.cvdate}
 
-::: {.no-print}
+
 ## SKILLS
 
 ### Languages
@@ -91,13 +93,11 @@ English: Professional proficiency
 French: Professional proficiency 
 
 ### Technical
-- Programming languages:
+- Programming languages: 
     - {{< fa brands python >}}
     - {{< fa brands r-project >}} : advanced
     - {{< fa brands sql >}}
     - {{< iconify devicon:julia >}}
-
-
 
 ## PUBLICATIONS
 
@@ -119,5 +119,6 @@ Available upon request
 :::
 
 ---
-CV template adapted from huang2023
-
+:::{.cheating}
+CV template adapted from [Cynthia Huang](https://www.cynthiahqy.com/posts/cv-html-pdf)
+:::

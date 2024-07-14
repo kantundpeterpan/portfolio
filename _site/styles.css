@@ -9,3 +9,7 @@
 p {
     text-align: justify;
 }
+
+.sidebar-logo {
+    border-radius: 50%;
+}

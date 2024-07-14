@@ -3,8 +3,8 @@ title: "Datacamp guided projects and code-alongs"
 listing:
   type: grid
   contents:
-    - "datacamp/gender/NLP_gender_reviews/notebook.ipynb"
-    - "embm/*.md"
-    - "ttt/trump_trudeau_tweets.ipynb"
+    - "datacamp_projects/*/*/*/*.ipynb"
 ---
 # Can I give some explanation here ?
+
+[Test](datacamp_projects/workspace/Python/NLP_gender_reviews/notebook.html#project-extension)
