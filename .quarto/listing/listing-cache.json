@@ -2,12 +2,7 @@
   "listingMap": {
     "guided.qmd": [
       "datacamp/gender/NLP_gender_reviews/notebook.ipynb",
-      "embm/embm.md",
-      "embm/embm.org",
-      "embm/todo.org",
-      "embm/todo.html",
       "embm/*.md",
-      "datacamp/gender/NLP_gender_reviews/notebook.md",
       "ttt/trump_trudeau_tweets.ipynb"
     ]
   }
