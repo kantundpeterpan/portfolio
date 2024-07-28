@@ -1,0 +1,10 @@
+---
+title: Data analysis with R
+subtitle: End of course projects, Coursera
+listing:
+  type: table
+  contents:
+    - "stats_with_R/*/*.qmd"
+  fields: [date, image, title]
+  sort: date asc
+---

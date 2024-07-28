@@ -1,3 +1,6 @@
 [submodule "datacamp_projects"]
 	path = datacamp_projects
 	url = git@github.com:kantundpeterpan/datacamp_projects.git
+[submodule "stats_with_R"]
+	path = stats_with_R
+	url = git@github.com:kantundpeterpan/stats_with_R.git

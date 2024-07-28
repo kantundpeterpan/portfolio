@@ -1,9 +1,22 @@
 {
   "listingMap": {
-    "guided.qmd": [
-      "datacamp/gender/NLP_gender_reviews/notebook.ipynb",
-      "embm/*.md",
-      "ttt/trump_trudeau_tweets.ipynb"
+    "duke_stats.qmd": [
+      "stats_with_R/*/*.qmd"
+    ],
+    "datacamp_courses/dc_courses_python.qmd": [
+      "python/*/markdown/chapter1.html"
+    ],
+    "datacamp_site/guided.qmd": [
+      "../datacamp_projects/*/*/*/*.ipynb"
+    ],
+    "datacamp_site/extended.qmd": [
+      "datacamp_projects/workspace/Python/NLP_gender_reviews/notebook.ipynb#project-extension"
+    ],
+    "index.qmd": [
+      "duke_stats.qmd",
+      "cv/cv.qmd",
+      "stats_with_R/*/*.qmd",
+      "uncategorized_projects/*/*.qmd"
     ]
   }
 }

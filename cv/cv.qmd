@@ -67,7 +67,7 @@ Key achievements and skills:
 
 Biological charaterization of putative anti-inflammatory substances, fundamental research on signaling cascades in inflammation using biochemical methods and imaging techniques
 
-## WORK EXPERIENCE{style="page-break-before: always"}
+## WORK EXPERIENCE
 
 ### Pharmacist
 
@@ -93,13 +93,54 @@ English: Professional proficiency
 French: Professional proficiency 
 
 ### Data analysis, programming and software packages
-- Programming languages: 
-    - {{< fa brands python >}}  
-      routine use of *pandas, numpy, matplotlib*  
-      project dependent use of *scikit-learn, bokeh*  
-    - {{< iconify logos:sqlite >}}  
-      basic database setup and queries, joins and grouping operations
-    - {{< fa brands r-project >}}, {{< iconify devicon:julia >}} : notions
+#### **Programming languages**
+
+  - ![](pictos/python.svg){.minion}
+
+    routine use of *pandas, numpy, matplotlib*  
+    project dependent use of *scikit-learn, bokeh*
+
+    :::{.no-print}
+    Certifications by DataCamp (click pictograms for course overview and statement of accomplishement):
+
+    ::::{#fig_dc_certs layout-ncol=2}
+    [![Data Science track](../datacamp_courses/certificates/python_data_science.png){.dc_fig .img-fluid .figure-img}](https://www.datacamp.com/completed/statement-of-accomplishment/track/6101fd1f9bbec843c932fb5fe2d7772dd91bd3a1)
+
+    [![Machine Learning track](../datacamp_courses/certificates/python_machine_learning.png){.dc_fig .img-fluid .figure-img}](https://www.datacamp.com/completed/statement-of-accomplishment/track/19ba66f43b045d5eb726eccacfd6ff49acc5e321)
+    ::::
+    :::
+
+    :::{.print-only}
+    Certifications by DataCamp:
+    - [Data Science](https://www.datacamp.com/completed/statement-of-accomplishment/track/6101fd1f9bbec843c932fb5fe2d7772dd91bd3a1)
+    - [Machine learning](https://www.datacamp.com/completed/statement-of-accomplishment/track/19ba66f43b045d5eb726eccacfd6ff49acc5e321)
+    :::
+
+  - ![](pictos/r.svg){.minion}: data analysis, plotting, basic modeling
+    
+    Specialization *Data Analysis with R* by Duke University on Coursera
+
+    - [Statement of accomplishment](https://www.coursera.org/account/accomplishments/specialization/RHFNY5YM4VXV)
+
+    - Course projects (available at [portfolio page](https://kantundpeterpan.github.io/portofolio/duke_stats.html)):
+
+      :::{.no-print}
+      - [Exploring the BRFSS data](../stats_with_R/1_intro_data/1_intro_data.qmd)
+      - [Statistical inference using GSS data](../stats_with_R/2_inference/2_inference.qmd)
+      - [Modeling and prediction of movie scores](../stats_with_R/3_regression/3_regression.qmd)
+      :::
+
+      :::{.print-only}
+      - [Exploring the BRFSS data](https://kantundpeterpan.github.io/portofolio/stats_with_R/1_intro_data/1_intro_data.html)
+      - [Statistical inference using GSS data](https://kantundpeterpan.github.io/portofolio/stats_with_R/2_inference/2_inference.html)
+      - [Modeling and prediction of movie scores](https://kantundpeterpan.github.io/portofolio/stats_with_R/3_regression/3_regression.html)
+      :::
+
+  - ![](pictos/sqlite.svg){#minion-sql}: basic database setup and queries, joins and grouping operations
+
+    [Projects](../datacamp_site/guided.qmd#category=sql)
+
+  - {{< iconify devicon:julia >}} : notions
 
 ### Technical lab skills
 
@@ -132,6 +173,6 @@ French: Professional proficiency
 
 
 ---
-:::{.cheating}
+:::{.no-print}
 CV template adapted from [Cynthia Huang](https://www.cynthiahqy.com/posts/cv-html-pdf)
 :::

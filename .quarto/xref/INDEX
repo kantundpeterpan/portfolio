@@ -44,6 +44,130 @@
     "cv.tex": "2cfb7ef6"
   },
   "cv/cv.qmd": {
-    "cv.html": "0fff45ce"
+    "cv.html": "0fff45ce",
+    "cv.pdf": "caa027e8"
+  },
+  "datacamp_projects/workspace/Python/NLP_gender_reviews/web_scraping.ipynb": {
+    "web_scraping.html": "cf071092"
+  },
+  "datacamp_projects/workspace/Python/NLP_gender_reviews/notebook-solution.ipynb": {
+    "notebook-solution.html": "fa9afb09"
+  },
+  "datacamp_projects/workspace/Python/NLP_gender_reviews/notebook.ipynb": {
+    "notebook.html": "564b9f3f"
+  },
+  "datacamp_projects/workspace/SQL/ev_charging/notebook.ipynb": {
+    "notebook.html": "954407f7"
+  },
+  "datacamp_projects/workspace/SQL/london_transport/notebook.ipynb": {
+    "notebook.html": "a7d38e5f"
+  },
+  "datacamp_projects/workspace/SQL/student_mental_health/notebook.ipynb": {
+    "notebook.html": "beb9afd9"
+  },
+  "datacamp_projects/workspace/SQL/international_debt/notebook.ipynb": {
+    "notebook.html": "4e6cbe83"
+  },
+  "datacamp_projects/guided/python/trump_trudeau_tweets/trump_trudeau_tweets.ipynb": {
+    "trump_trudeau_tweets.html": "d851b613"
+  },
+  "datacamp_projects/guided/python/nlp_movies_similarity/notebook.ipynb": {
+    "notebook.html": "7bb0e2a3"
+  },
+  "datacamp_projects/guided/python/cosmetic_ingredients/notebook.ipynb": {
+    "notebook.html": "66a20fb5"
+  },
+  "extended.qmd": {
+    "extended.html": "97e7b9c8"
+  },
+  "datacamp_site/guided.qmd": {
+    "guided.html": "68527849"
+  },
+  "datacamp_site/extended.qmd": {
+    "extended.html": "c2d6347a"
+  },
+  "datacamp_site/competitions.qmd": {
+    "competitions.html": "d5bf85a1"
+  },
+  "datacamp_courses/dc_courses.qmd": {
+    "dc_courses.html": "8f0efeb6"
+  },
+  "datacamp_courses/dc_courses_python.qmd": {
+    "dc_courses_python.html": "61bf9988"
+  },
+  "datacamp_courses/python/geospatial_data/markdown/chapter2.md": {
+    "chapter2.html": "16afd251"
+  },
+  "datacamp_courses/python/geospatial_data/markdown/chapter1.md": {
+    "chapter1.html": "f8ece033"
+  },
+  "datacamp_courses/python/geospatial_data/markdown/chapter3.md": {
+    "chapter3.html": "975f0d82"
+  },
+  "datacamp_courses/python/geospatial_data/markdown/chapter4.md": {
+    "chapter4.html": "8a34b919"
+  },
+  "datacamp_projects/guided/r/programming_lang/notebook.ipynb": {
+    "notebook.html": "1c460fa2"
+  },
+  "datacamp_projects/workspace/Python/NLP_gender_reviews/web_scraping/web_scraping.ipynb": {
+    "web_scraping.html": "74835a92"
+  },
+  "datacamp_projects/workspace/Python/NLP_gender_reviews/solution/notebook-solution.ipynb": {
+    "notebook-solution.html": "0fb503bf"
+  },
+  "test.md": {
+    "test.html": "e8494dee"
+  },
+  "test.qmd": {
+    "test.html": "df1afa1a"
+  },
+  "nyc_shooting.qmd": {
+    "nyc_shooting.html": "d20995d4"
+  },
+  "uncategorized_projects/nypd_shooting/nyc_shooting.qmd": {
+    "nyc_shooting.html": "fba74441"
+  },
+  "uncategorized_projects/nypd_shooting/nyc_shooting.md": {
+    "nyc_shooting.html": "5024b5b2"
+  },
+  "duke_stats.qmd": {
+    "duke_stats.html": "0464ecdb"
+  },
+  "stats_with_R/3_regression/3_regression.md": {
+    "3_regression.html": "2c0f2c92"
+  },
+  "stats_with_R/4_bayesian/4_bayesian.md": {
+    "4_bayesian.html": "853e3b00"
+  },
+  "stats_with_R/1_intro_data/1_intro_data.md": {
+    "1_intro_data.html": "aaf80aa1"
+  },
+  "stats_with_R/2_inference/2_inference.md": {
+    "2_inference.html": "26edcb71"
+  },
+  "stats_with_R/1_intro_data/1_intro_data.qmd": {
+    "1_intro_data.html": "c7d485fa"
+  },
+  "uncategorized_projects/breast_cancer_sns/seaborn_eda.ipynb": {
+    "seaborn_eda.html": "d1906850"
+  },
+  "stats_with_R/2_inference/2_inference.qmd": {
+    "2_inference.html": "96ab3e56"
+  },
+  "stats_with_R/2_inference/2_inference_img_links.md": {
+    "2_inference_img_links.html": "6d072c99"
+  },
+  "stats_with_R/2_inferencebla/2_inference.qmd": {
+    "2_inference.html": "13a4cf64"
+  },
+  "stats_with_R/2_inferencebla/2_inference.md": {
+    "2_inference.html": "c0b4b9cf"
+  },
+  "stats_with_R/2_inferencebla/2_inference_img_links.md": {
+    "2_inference_img_links.html": "63cead31"
+  },
+  "stats_with_R/3_regression/3_regression.qmd": {
+    "3_regression.html": "105b763f"
   }
 }

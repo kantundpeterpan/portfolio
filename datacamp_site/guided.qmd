@@ -5,5 +5,7 @@ listing:
   type: grid
   contents:
     - "../datacamp_projects/*/*/*/*.ipynb"
-  fields: [image, date, title, author]
+  filter-ui: true
+  categories: true
+  fields: [image, date, title, author, categories]
 ---

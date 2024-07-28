@@ -1,9 +1,35 @@
 ---
-title: "Heiner Atze, PhD, Pharmacist"
+title: "Bio"
+listing:
+  - id: test1
+    type: grid
+    filter-ui: false
+    sort-ui: false
+    grid-columns: 1
+    max-items: 1
+    contents: 
+      - stats_with_R/*/*.qmd
+      - uncategorized_projects/*/*.qmd
+  - id: test2
+    type: table
+    filter-ui: false
+    sort-ui: false
+    contents:
+      - cv/cv.qmd
+      - duke_stats.qmd
 ---
 
-This is a Quarto website.
+I'm an aspiring data scientist with a keen interest in any application of large-scale computing, 
+machine learning and modeling in biology and chemistry. By training, I am a pharmacist holding the 
+equivalent of Master's degree in medicinal chemistry from [Friedrich-Schiller-University, Jena 
+Germany](https://www.uni-jena.de/en) and a PhD in biochemistry/microbiology from [Sorbonne University, Paris, France](https://www.sorbonne-universite.fr/en).
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
-jdaskölfs
+::: {#test1}
+:::
+
+On this site you will find my [CV](cv/cv.qmd), a list of my [publications](cv/cv.qmd#publications)
+and collection of projects I am working on.
+
+::: {#test2}
+:::

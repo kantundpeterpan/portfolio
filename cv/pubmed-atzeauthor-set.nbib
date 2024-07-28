@@ -1,0 +1,671 @@
+PMID- 35678393
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20220707
+LR  - 20220912
+IS  - 2050-084X (Electronic)
+IS  - 2050-084X (Linking)
+VI  - 11
+DP  - 2022 Jun 9
+TI  - Heavy isotope labeling and mass spectrometry reveal unexpected remodeling of 
+      bacterial cell wall expansion in response to drugs.
+LID - 10.7554/eLife.72863 [doi]
+LID - e72863
+AB  - Antibiotics of the β-lactam (penicillin) family inactivate target enzymes called 
+      D,D-transpeptidases or penicillin-binding proteins (PBPs) that catalyze the last 
+      cross-linking step of peptidoglycan synthesis. The resulting net-like 
+      macromolecule is the essential component of bacterial cell walls that sustains 
+      the osmotic pressure of the cytoplasm. In Escherichia coli, bypass of PBPs by the 
+      YcbB L,D-transpeptidase leads to resistance to these drugs. We developed a new 
+      method based on heavy isotope labeling and mass spectrometry to elucidate PBP- 
+      and YcbB-mediated peptidoglycan polymerization. PBPs and YcbB similarly 
+      participated in single-strand insertion of glycan chains into the expanding 
+      bacterial side wall. This absence of any transpeptidase-specific signature 
+      suggests that the peptidoglycan expansion mode is determined by other components 
+      of polymerization complexes. YcbB did mediate β-lactam resistance by insertion of 
+      multiple strands that were exclusively cross-linked to existing 
+      tripeptide-containing acceptors. We propose that this undocumented mode of 
+      polymerization depends upon accumulation of linear glycan chains due to PBP 
+      inactivation, formation of tripeptides due to cleavage of existing cross-links by 
+      a β-lactam-insensitive endopeptidase, and concerted cross-linking by YcbB.
+CI  - © 2022, Atze et al.
+FAU - Atze, Heiner
+AU  - Atze H
+AUID- ORCID: 0000-0003-1497-6373
+AD  - Centre de Recherche des Cordeliers, INSERM, Sorbonne Université, Université Paris 
+      Cité., Paris, France.
+FAU - Liang, Yucheng
+AU  - Liang Y
+AD  - Centre de Recherche des Cordeliers, INSERM, Sorbonne Université, Université Paris 
+      Cité., Paris, France.
+FAU - Hugonnet, Jean-Emmanuel
+AU  - Hugonnet JE
+AUID- ORCID: 0000-0003-4150-0944
+AD  - Centre de Recherche des Cordeliers, INSERM, Sorbonne Université, Université Paris 
+      Cité., Paris, France.
+FAU - Gutierrez, Arnaud
+AU  - Gutierrez A
+AD  - Robustesse et Evolvabilité de la vie, Institut Cochin, Université de Paris, 
+      INSERM U1016, CNRS UMR 8104, Paris, France.
+FAU - Rusconi, Filippo
+AU  - Rusconi F
+AUID- ORCID: 0000-0003-1822-0397
+AD  - Centre de Recherche des Cordeliers, INSERM, Sorbonne Université, Université Paris 
+      Cité., Paris, France.
+AD  - PAPPSO, Université Paris-Saclay, INRAE, CNRS, Paris, France.
+FAU - Arthur, Michel
+AU  - Arthur M
+AUID- ORCID: 0000-0003-1007-636X
+AD  - Centre de Recherche des Cordeliers, INSERM, Sorbonne Université, Université Paris 
+      Cité., Paris, France.
+LA  - eng
+GR  - R56 AI045626/AI/NIAID NIH HHS/United States
+PT  - Journal Article
+PT  - Research Support, N.I.H., Extramural
+PT  - Research Support, Non-U.S. Gov't
+DEP - 20220609
+PL  - England
+TA  - Elife
+JT  - eLife
+JID - 101579614
+RN  - 0 (Anti-Bacterial Agents)
+RN  - 0 (Bacterial Proteins)
+RN  - 0 (Penicillin-Binding Proteins)
+RN  - 0 (Peptidoglycan)
+RN  - 0 (beta-Lactams)
+RN  - EC 2.3.2.12 (Peptidyl Transferases)
+SB  - IM
+MH  - Anti-Bacterial Agents/metabolism
+MH  - Bacterial Proteins/metabolism
+MH  - Cell Wall/metabolism
+MH  - Escherichia coli/metabolism
+MH  - Isotope Labeling
+MH  - Mass Spectrometry
+MH  - Penicillin-Binding Proteins/metabolism
+MH  - Peptidoglycan/metabolism
+MH  - *Peptidyl Transferases/metabolism
+MH  - beta-Lactams/metabolism
+PMC - PMC9249393
+OTO - NOTNLM
+OT  - E. coli
+OT  - L,D-transpeptidase
+OT  - antibiotics
+OT  - cell wall
+OT  - infectious disease
+OT  - mass spectrometry
+OT  - microbiology
+OT  - peptidoglycan
+OT  - peptidoglycan polymerization
+COIS- HA, YL, JH, AG, FR, MA No competing interests declared
+EDAT- 2022/06/10 06:00
+MHDA- 2022/07/08 06:00
+PMCR- 2022/06/09
+CRDT- 2022/06/09 07:53
+PHST- 2021/08/06 00:00 [received]
+PHST- 2022/06/09 00:00 [accepted]
+PHST- 2022/06/10 06:00 [pubmed]
+PHST- 2022/07/08 06:00 [medline]
+PHST- 2022/06/09 07:53 [entrez]
+PHST- 2022/06/09 00:00 [pmc-release]
+AID - 72863 [pii]
+AID - 10.7554/eLife.72863 [doi]
+PST - epublish
+SO  - Elife. 2022 Jun 9;11:e72863. doi: 10.7554/eLife.72863.
+
+PMID- 34613747
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20211228
+LR  - 20211228
+IS  - 1523-7052 (Electronic)
+IS  - 1523-7052 (Linking)
+VI  - 23
+IP  - 20
+DP  - 2021 Oct 15
+TI  - Traceless Staudinger Ligation To Introduce Chemical Diversity on β-Lactamase 
+      Inhibitors of Second Generation.
+PG  - 7755-7758
+LID - 10.1021/acs.orglett.1c02741 [doi]
+AB  - We explored the traceless Staudinger ligation for the functionalization of the C2 
+      position of second generation β-lactamase inhibitors based on a 
+      diazabicyclooctane (DBO) scaffold. Our strategy is based on the synthesis of 
+      phosphine phenol esters and their ligation to an azido-containing precursor. 
+      Biological evaluation showed that this route provided access to a DBO that proved 
+      to be superior to commercial relebactam for inhibition of two of the five 
+      β-lactamases that were tested.
+FAU - Bouchet, Flavie
+AU  - Bouchet F
+AD  - Université de Paris, UMR CNRS 8601, Laboratoire de Chimie et Biochimie 
+      Pharmacologiques et Toxicologiques, F-75006 Paris, France.
+FAU - Atze, Heiner
+AU  - Atze H
+AD  - INSERM, Sorbonne Université, Université de Paris, Centre de Recherche des 
+      Cordeliers (CRC), F-75006 Paris, France.
+FAU - Arthur, Michel
+AU  - Arthur M
+AD  - INSERM, Sorbonne Université, Université de Paris, Centre de Recherche des 
+      Cordeliers (CRC), F-75006 Paris, France.
+FAU - Ethève-Quelquejeu, Mélanie
+AU  - Ethève-Quelquejeu M
+AD  - Université de Paris, UMR CNRS 8601, Laboratoire de Chimie et Biochimie 
+      Pharmacologiques et Toxicologiques, F-75006 Paris, France.
+FAU - Iannazzo, Laura
+AU  - Iannazzo L
+AUID- ORCID: 0000-0002-2181-4885
+AD  - Université de Paris, UMR CNRS 8601, Laboratoire de Chimie et Biochimie 
+      Pharmacologiques et Toxicologiques, F-75006 Paris, France.
+LA  - eng
+PT  - Journal Article
+PT  - Research Support, Non-U.S. Gov't
+DEP - 20211006
+PL  - United States
+TA  - Org Lett
+JT  - Organic letters
+JID - 100890393
+RN  - 0 (Aza Compounds)
+RN  - 0 (Azides)
+RN  - 0 (Cyclooctanes)
+RN  - 0 (Esters)
+RN  - 0 (Phosphines)
+RN  - 0 (beta-Lactamase Inhibitors)
+RN  - 0 (diazabicyclo(2.2.2)octane)
+RN  - EC 3.5.2.6 (beta-Lactamases)
+RN  - FW6947296I (phosphine)
+SB  - IM
+MH  - Aza Compounds/*chemistry/metabolism
+MH  - Azides/*chemistry
+MH  - Cyclooctanes/*chemistry/metabolism
+MH  - Esters
+MH  - Molecular Structure
+MH  - Phosphines/chemistry
+MH  - beta-Lactamase Inhibitors/chemistry/*pharmacology
+MH  - beta-Lactamases/*chemistry/metabolism
+EDAT- 2021/10/07 06:00
+MHDA- 2021/12/29 06:00
+CRDT- 2021/10/06 17:16
+PHST- 2021/10/07 06:00 [pubmed]
+PHST- 2021/12/29 06:00 [medline]
+PHST- 2021/10/06 17:16 [entrez]
+AID - 10.1021/acs.orglett.1c02741 [doi]
+PST - ppublish
+SO  - Org Lett. 2021 Oct 15;23(20):7755-7758. doi: 10.1021/acs.orglett.1c02741. Epub 
+      2021 Oct 6.
+
+PMID- 32242415
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20201023
+LR  - 20201023
+IS  - 1520-4804 (Electronic)
+IS  - 0022-2623 (Linking)
+VI  - 63
+IP  - 10
+DP  - 2020 May 28
+TI  - Diazabicyclooctane Functionalization for Inhibition of β-Lactamases from 
+      Enterobacteria.
+PG  - 5257-5273
+LID - 10.1021/acs.jmedchem.9b02125 [doi]
+AB  - Second-generation β-lactamase inhibitors containing a diazabicyclooctane (DBO) 
+      scaffold restore the activity of β-lactams against pathogenic bacteria, including 
+      those producing class A, C, and D enzymes that are not susceptible to 
+      first-generation inhibitors containing a β-lactam ring. Here, we report 
+      optimization of a synthetic route to access triazole-containing DBOs and 
+      biological evaluation of a series of 17 compounds for inhibition of five 
+      β-lactamases representative of enzymes found in pathogenic Gram-negative 
+      bacteria. A strong correlation (Spearman coefficient of 0.87; p = 4.7 × 10(-21)) 
+      was observed between the inhibition efficacy of purified β-lactamases and the 
+      potentiation of β-lactam antibacterial activity, indicating that DBO 
+      functionalization did not impair penetration. In comparison to reference DBOs, 
+      avibactam and relebactam, our compounds displayed reduced efficacy, likely due to 
+      the absence of hydrogen bonding with a conserved asparagine residue at position 
+      132. This was partially compensated for by additional interactions involving 
+      certain triazole substituents.
+FAU - Bouchet, Flavie
+AU  - Bouchet F
+AD  - Université de Paris, UMR CNRS 8601, Laboratoire de Chimie et Biochimie 
+      Pharmacologiques et Toxicologiques, 45 rue des Saints-Péres, F-75006 Paris, 
+      France.
+FAU - Atze, Heiner
+AU  - Atze H
+AD  - INSERM, Sorbonne Université, Université de Paris, Centre de Recherche des 
+      Cordeliers (CRC), F-75006 Paris, France.
+FAU - Fonvielle, Matthieu
+AU  - Fonvielle M
+AD  - INSERM, Sorbonne Université, Université de Paris, Centre de Recherche des 
+      Cordeliers (CRC), F-75006 Paris, France.
+FAU - Edoo, Zainab
+AU  - Edoo Z
+AD  - INSERM, Sorbonne Université, Université de Paris, Centre de Recherche des 
+      Cordeliers (CRC), F-75006 Paris, France.
+FAU - Arthur, Michel
+AU  - Arthur M
+AD  - INSERM, Sorbonne Université, Université de Paris, Centre de Recherche des 
+      Cordeliers (CRC), F-75006 Paris, France.
+FAU - Ethève-Quelquejeu, Mélanie
+AU  - Ethève-Quelquejeu M
+AD  - Université de Paris, UMR CNRS 8601, Laboratoire de Chimie et Biochimie 
+      Pharmacologiques et Toxicologiques, 45 rue des Saints-Péres, F-75006 Paris, 
+      France.
+FAU - Iannazzo, Laura
+AU  - Iannazzo L
+AUID- ORCID: 0000-0002-2181-4885
+AD  - Université de Paris, UMR CNRS 8601, Laboratoire de Chimie et Biochimie 
+      Pharmacologiques et Toxicologiques, 45 rue des Saints-Péres, F-75006 Paris, 
+      France.
+LA  - eng
+PT  - Journal Article
+PT  - Research Support, Non-U.S. Gov't
+DEP - 20200514
+PL  - United States
+TA  - J Med Chem
+JT  - Journal of medicinal chemistry
+JID - 9716531
+RN  - 0 (Anti-Bacterial Agents)
+RN  - 0 (Aza Compounds)
+RN  - 0 (Cyclooctanes)
+RN  - 0 (beta-Lactamase Inhibitors)
+RN  - 0 (diazabicyclo(2.2.2)octane)
+RN  - EC 3.5.2.6 (beta-Lactamases)
+SB  - IM
+MH  - Anti-Bacterial Agents/chemistry/*pharmacology
+MH  - Aza Compounds/chemistry/*pharmacology
+MH  - Cyclooctanes/chemistry/*pharmacology
+MH  - Enterobacteriaceae/*drug effects/*metabolism
+MH  - Gram-Negative Bacteria/drug effects/metabolism
+MH  - Microbial Sensitivity Tests/methods
+MH  - beta-Lactamase Inhibitors/chemistry/*pharmacology
+MH  - beta-Lactamases/isolation & purification/*metabolism
+EDAT- 2020/04/04 06:00
+MHDA- 2020/10/24 06:00
+CRDT- 2020/04/04 06:00
+PHST- 2020/04/04 06:00 [pubmed]
+PHST- 2020/10/24 06:00 [medline]
+PHST- 2020/04/04 06:00 [entrez]
+AID - 10.1021/acs.jmedchem.9b02125 [doi]
+PST - ppublish
+SO  - J Med Chem. 2020 May 28;63(10):5257-5273. doi: 10.1021/acs.jmedchem.9b02125. Epub 
+      2020 May 14.
+
+PMID- 31637424
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20210609
+LR  - 20210609
+IS  - 1460-2091 (Electronic)
+IS  - 0305-7453 (Linking)
+VI  - 75
+IP  - 2
+DP  - 2020 Feb 1
+TI  - Impact of relebactam-mediated inhibition of Mycobacterium abscessus BlaMab 
+      β-lactamase on the in vitro and intracellular efficacy of imipenem.
+PG  - 379-383
+LID - 10.1093/jac/dkz433 [doi]
+AB  - OBJECTIVES: Imipenem is one of the recommended β-lactams for the treatment of 
+      Mycobacterium abscessus pulmonary infections in spite of the production of BlaMab 
+      β-lactamase. Avibactam, a second-generation β-lactamase inhibitor, was previously 
+      shown to inactivate BlaMab, but its partner drug, ceftazidime, is devoid of any 
+      antibacterial activity against M. abscessus. Here, we investigate whether 
+      relebactam, a novel second-generation inhibitor developed in combination with 
+      imipenem, improves the activity of this carbapenem against M. abscessus. METHODS: 
+      The impact of BlaMab inhibition by relebactam was evaluated by determining MICs, 
+      time-kill curves and M. abscessus intracellular proliferation in human 
+      macrophages. Kinetic parameters for the inhibition of BlaMab by relebactam were 
+      determined by spectrophotometry using nitrocefin as the substrate. The data were 
+      compared with those obtained with avibactam. RESULTS: Combination of relebactam 
+      (4 mg/L) with β-lactams led to >128- and 2-fold decreases in the MICs of 
+      amoxicillin (from >4096 to 32 mg/L) and imipenem (from 8 to 4 mg/L). In vitro, M. 
+      abscessus was not killed by the imipenem/relebactam combination. In contrast, 
+      relebactam increased the intracellular activity of imipenem, leading to 88% 
+      killing. Relebactam and avibactam similarly potentiated the antibacterial 
+      activities of β-lactams although BlaMab was inactivated 150-fold less effectively 
+      by relebactam than by avibactam. CONCLUSIONS: Inhibition of BlaMab by relebactam 
+      improves the efficacy of imipenem against M. abscessus in macrophages, indicating 
+      that the imipenem/relebactam combination should be clinically considered for the 
+      treatment of infections due to M. abscessus.
+CI  - © The Author(s) 2019. Published by Oxford University Press on behalf of the 
+      British Society for Antimicrobial Chemotherapy. All rights reserved. For 
+      permissions, please email: journals.permissions@oup.com.
+FAU - Le Run, Eva
+AU  - Le Run E
+AD  - Centre de Recherche des Cordeliers, INSERM UMRS1138, Sorbonne Université, 
+      Université de Paris, F-75006, Paris, France.
+FAU - Atze, Heiner
+AU  - Atze H
+AD  - Centre de Recherche des Cordeliers, INSERM UMRS1138, Sorbonne Université, 
+      Université de Paris, F-75006, Paris, France.
+FAU - Arthur, Michel
+AU  - Arthur M
+AD  - Centre de Recherche des Cordeliers, INSERM UMRS1138, Sorbonne Université, 
+      Université de Paris, F-75006, Paris, France.
+FAU - Mainardi, Jean-Luc
+AU  - Mainardi JL
+AD  - Centre de Recherche des Cordeliers, INSERM UMRS1138, Sorbonne Université, 
+      Université de Paris, F-75006, Paris, France.
+AD  - Assistance Publique-Hôpitaux de Paris, Centre-Université de Paris, Service de 
+      Microbiologie, Hôpital Européen Georges Pompidou, Paris, France.
+LA  - eng
+PT  - Journal Article
+PT  - Research Support, Non-U.S. Gov't
+PL  - England
+TA  - J Antimicrob Chemother
+JT  - The Journal of antimicrobial chemotherapy
+JID - 7513617
+RN  - 0 (Anti-Bacterial Agents)
+RN  - 0 (Azabicyclo Compounds)
+RN  - 0 (beta-Lactamase Inhibitors)
+RN  - 71OTZ9ZE0A (Imipenem)
+RN  - EC 3.5.2.6 (beta-Lactamases)
+RN  - Y1MYA2UHFL (relebactam)
+SB  - IM
+MH  - Anti-Bacterial Agents/pharmacology
+MH  - Azabicyclo Compounds/*pharmacology
+MH  - Cells, Cultured
+MH  - Humans
+MH  - *Imipenem/pharmacology
+MH  - Macrophages/microbiology
+MH  - Microbial Sensitivity Tests
+MH  - *Mycobacterium abscessus/drug effects/enzymology
+MH  - beta-Lactamase Inhibitors/pharmacology
+MH  - beta-Lactamases
+EDAT- 2019/10/23 06:00
+MHDA- 2021/06/10 06:00
+CRDT- 2019/10/23 06:00
+PHST- 2019/08/13 00:00 [received]
+PHST- 2019/09/12 00:00 [revised]
+PHST- 2019/09/19 00:00 [accepted]
+PHST- 2019/10/23 06:00 [pubmed]
+PHST- 2021/06/10 06:00 [medline]
+PHST- 2019/10/23 06:00 [entrez]
+AID - 5602193 [pii]
+AID - 10.1093/jac/dkz433 [doi]
+PST - ppublish
+SO  - J Antimicrob Chemother. 2020 Feb 1;75(2):379-383. doi: 10.1093/jac/dkz433.
+
+PMID- 31056908
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20200626
+LR  - 20200626
+IS  - 2373-8227 (Electronic)
+IS  - 2373-8227 (Linking)
+VI  - 5
+IP  - 7
+DP  - 2019 Jul 12
+TI  - Tryptophan Fluorescence Quenching in β-Lactam-Interacting Proteins Is Modulated 
+      by the Structure of Intermediates and Final Products of the Acylation Reaction.
+PG  - 1169-1176
+LID - 10.1021/acsinfecdis.9b00023 [doi]
+AB  - In most bacteria, β-lactam antibiotics inhibit the last cross-linking step of 
+      peptidoglycan synthesis by acylation of the active-site Ser of 
+      d,d-transpeptidases belonging to the penicillin-binding protein (PBP) family. In 
+      mycobacteria, cross-linking is mainly ensured by l,d-transpeptidases (LDTs), 
+      which are promising targets for the development of β-lactam-based therapies for 
+      multidrug-resistant tuberculosis. For this purpose, fluorescence spectroscopy is 
+      used to investigate the efficacy of LDT inactivation by β-lactams but the basis 
+      for fluorescence quenching during enzyme acylation remains unknown. In contrast 
+      to what has been reported for PBPs, we show here using a model l,d-transpeptidase 
+      (Ldt(fm)) that fluorescence quenching of Trp residues does not depend upon direct 
+      hydrophobic interaction between Trp residues and β-lactams. Rather, Trp 
+      fluorescence was quenched by the drug covalently bound to the active-site Cys 
+      residue of Ldt(fm). Fluorescence quenching was not quantitatively determined by 
+      the size of the drug and was not specific of the thioester link connecting the 
+      β-lactam carbonyl to the catalytic Cys as quenching was also observed for 
+      acylation of the active-site Ser of β-lactamase BlaC from M. tuberculosis. 
+      Fluorescence quenching was extensive for reaction intermediates containing an 
+      amine anion and for acylenzymes containing an imine stabilized by mesomeric 
+      effect, but not for acylenzymes containing a protonated β-lactam nitrogen. 
+      Together, these results indicate that the extent of fluorescence quenching is 
+      determined by the status of the β-lactam nitrogen. Thus, fluorescence kinetics 
+      can provide information not only on the efficacy of enzyme inactivation but also 
+      on the structure of the covalent adducts responsible for enzyme inactivation.
+FAU - Triboulet, Sebastien
+AU  - Triboulet S
+AD  - Sorbonne Université, Sorbonne Paris Cité, Université Paris Descartes, Université 
+      Paris Diderot , INSERM , Centre de Recherche des Cordeliers, CRC, 15 rue de 
+      l'Ecole de Médecine , F-75006 Paris , France.
+FAU - Edoo, Zainab
+AU  - Edoo Z
+AD  - Sorbonne Université, Sorbonne Paris Cité, Université Paris Descartes, Université 
+      Paris Diderot , INSERM , Centre de Recherche des Cordeliers, CRC, 15 rue de 
+      l'Ecole de Médecine , F-75006 Paris , France.
+FAU - Compain, Fabrice
+AU  - Compain F
+AD  - Sorbonne Université, Sorbonne Paris Cité, Université Paris Descartes, Université 
+      Paris Diderot , INSERM , Centre de Recherche des Cordeliers, CRC, 15 rue de 
+      l'Ecole de Médecine , F-75006 Paris , France.
+AD  - Service de Microbiologie, Assistance Publique-Hôpitaux de Paris , Hôpital 
+      Européen Georges Pompidou , 20 rue Leblanc , F-75015 Paris , France.
+FAU - Ourghanlian, Clément
+AU  - Ourghanlian C
+AD  - Sorbonne Université, Sorbonne Paris Cité, Université Paris Descartes, Université 
+      Paris Diderot , INSERM , Centre de Recherche des Cordeliers, CRC, 15 rue de 
+      l'Ecole de Médecine , F-75006 Paris , France.
+FAU - Dupuis, Adrian
+AU  - Dupuis A
+AD  - Sorbonne Université, Sorbonne Paris Cité, Université Paris Descartes, Université 
+      Paris Diderot , INSERM , Centre de Recherche des Cordeliers, CRC, 15 rue de 
+      l'Ecole de Médecine , F-75006 Paris , France.
+FAU - Dubée, Vincent
+AU  - Dubée V
+AD  - Sorbonne Université, Sorbonne Paris Cité, Université Paris Descartes, Université 
+      Paris Diderot , INSERM , Centre de Recherche des Cordeliers, CRC, 15 rue de 
+      l'Ecole de Médecine , F-75006 Paris , France.
+FAU - Sutterlin, Laetitia
+AU  - Sutterlin L
+AD  - Sorbonne Université, Sorbonne Paris Cité, Université Paris Descartes, Université 
+      Paris Diderot , INSERM , Centre de Recherche des Cordeliers, CRC, 15 rue de 
+      l'Ecole de Médecine , F-75006 Paris , France.
+FAU - Atze, Heiner
+AU  - Atze H
+AD  - Sorbonne Université, Sorbonne Paris Cité, Université Paris Descartes, Université 
+      Paris Diderot , INSERM , Centre de Recherche des Cordeliers, CRC, 15 rue de 
+      l'Ecole de Médecine , F-75006 Paris , France.
+FAU - Etheve-Quelquejeu, Mélanie
+AU  - Etheve-Quelquejeu M
+AD  - Laboratoire de Chimie et de Biochimie Pharmacologiques et Toxicologiques , 
+      Université Paris Descartes , UMR 8601, Paris , F-75005 France.
+AD  - CNRS UMR 8601 , 45 rue des Saints-Pères , Paris , F-75006 France.
+FAU - Hugonnet, Jean-Emmanuel
+AU  - Hugonnet JE
+AUID- ORCID: 0000-0003-4150-0944
+AD  - Sorbonne Université, Sorbonne Paris Cité, Université Paris Descartes, Université 
+      Paris Diderot , INSERM , Centre de Recherche des Cordeliers, CRC, 15 rue de 
+      l'Ecole de Médecine , F-75006 Paris , France.
+FAU - Arthur, Michel
+AU  - Arthur M
+AD  - Sorbonne Université, Sorbonne Paris Cité, Université Paris Descartes, Université 
+      Paris Diderot , INSERM , Centre de Recherche des Cordeliers, CRC, 15 rue de 
+      l'Ecole de Médecine , F-75006 Paris , France.
+LA  - eng
+PT  - Journal Article
+PT  - Research Support, Non-U.S. Gov't
+DEP - 20190514
+PL  - United States
+TA  - ACS Infect Dis
+JT  - ACS infectious diseases
+JID - 101654580
+RN  - 0 (beta-Lactams)
+RN  - 452VLY9402 (Serine)
+RN  - 8DUH1N11BX (Tryptophan)
+RN  - EC 2.3.2.12 (Peptidyl Transferases)
+RN  - EC 3.5.2.6 (beta-Lactamases)
+SB  - IM
+MH  - Acylation
+MH  - Catalytic Domain
+MH  - Mycobacterium tuberculosis/enzymology
+MH  - Peptidyl Transferases/antagonists & inhibitors/*chemistry/metabolism
+MH  - Serine/chemistry
+MH  - Spectrometry, Fluorescence
+MH  - Tryptophan/*chemistry
+MH  - beta-Lactamases/metabolism
+MH  - beta-Lactams/chemistry/*pharmacology
+OTO - NOTNLM
+OT  - ,-transpeptidase
+OT  - acylenzyme
+OT  - fluorescence quenching
+OT  - tryptophan fluorescence
+OT  - β-lactamase
+EDAT- 2019/05/07 06:00
+MHDA- 2020/06/27 06:00
+CRDT- 2019/05/07 06:00
+PHST- 2019/05/07 06:00 [pubmed]
+PHST- 2020/06/27 06:00 [medline]
+PHST- 2019/05/07 06:00 [entrez]
+AID - 10.1021/acsinfecdis.9b00023 [doi]
+PST - ppublish
+SO  - ACS Infect Dis. 2019 Jul 12;5(7):1169-1176. doi: 10.1021/acsinfecdis.9b00023. 
+      Epub 2019 May 14.
+
+PMID- 28839250
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20190411
+LR  - 20190411
+IS  - 2045-2322 (Electronic)
+IS  - 2045-2322 (Linking)
+VI  - 7
+IP  - 1
+DP  - 2017 Aug 24
+TI  - Pharmacological profile and efficiency in vivo of diflapolin, the first dual 
+      inhibitor of 5-lipoxygenase-activating protein and soluble epoxide hydrolase.
+PG  - 9398
+LID - 10.1038/s41598-017-09795-w [doi]
+LID - 9398
+AB  - Arachidonic acid (AA) is metabolized to diverse bioactive lipid mediators. 
+      Whereas the 5-lipoxygenase-activating protein (FLAP) facilitates AA conversion by 
+      5-lipoxygenase (5-LOX) to pro-inflammatory leukotrienes (LTs), the soluble 
+      epoxide hydrolase (sEH) degrades anti-inflammatory epoxyeicosatrienoic acids 
+      (EETs). Accordingly, dual FLAP/sEH inhibition might be advantageous drugs for 
+      intervention of inflammation. We present the in vivo pharmacological profile and 
+      efficiency of 
+      N-[4-(benzothiazol-2-ylmethoxy)-2-methylphenyl]-N'-(3,4-dichlorophenyl)urea 
+      (diflapolin) that dually targets FLAP and sEH. Diflapolin inhibited 5-LOX product 
+      formation in intact human monocytes and neutrophils with IC(50) = 30 and 170 nM, 
+      respectively, and suppressed the activity of isolated sEH (IC(50) = 20 nM). 
+      Characteristic for FLAP inhibitors, diflapolin (I) failed to inhibit isolated 
+      5-LOX, (II) blocked 5-LOX product formation in HEK cells only when 5-LOX/FLAP was 
+      co-expressed, (III) lost potency in intact cells when exogenous AA was supplied, 
+      and (IV) prevented 5-LOX/FLAP complex assembly in leukocytes. Diflapolin showed 
+      target specificity, as other enzymes related to AA metabolism (i.e., COX1/2, 
+      12/15-LOX, LTA(4)H, LTC(4)S, mPGES(1), and cPLA(2)) were not inhibited. In the 
+      zymosan-induced mouse peritonitis model, diflapolin impaired vascular 
+      permeability, inhibited cysteinyl-LTs and LTB(4) formation, and suppressed 
+      neutrophil infiltration. Diflapolin is a highly active dual FLAP/sEH inhibitor in 
+      vitro and in vivo with target specificity to treat inflammation-related diseases.
+FAU - Garscha, Ulrike
+AU  - Garscha U
+AD  - Chair of Pharmaceutical/Medicinal Chemistry, Institute of Pharmacy, 
+      Friedrich-Schiller-University Jena, Philosophenweg 14, D-07743, Jena, Germany. 
+      ulrike.garscha@uni-jena.de.
+FAU - Romp, Erik
+AU  - Romp E
+AD  - Chair of Pharmaceutical/Medicinal Chemistry, Institute of Pharmacy, 
+      Friedrich-Schiller-University Jena, Philosophenweg 14, D-07743, Jena, Germany.
+FAU - Pace, Simona
+AU  - Pace S
+AD  - Chair of Pharmaceutical/Medicinal Chemistry, Institute of Pharmacy, 
+      Friedrich-Schiller-University Jena, Philosophenweg 14, D-07743, Jena, Germany.
+FAU - Rossi, Antonietta
+AU  - Rossi A
+AD  - Department of Pharmacy, School of Medicine, University of Naples Federico II, 
+      80131, Naples, Italy.
+FAU - Temml, Veronika
+AU  - Temml V
+AD  - Department of Pharmacy / Pharmaceutical Chemistry and Center for Molecular 
+      Biosciences Innsbruck (CMBI), University of Innsbruck, Innrain 80-82, A-6020, 
+      Innsbruck, Austria.
+FAU - Schuster, Daniela
+AU  - Schuster D
+AUID- ORCID: 0000-0002-9933-8938
+AD  - Department of Pharmacy / Pharmaceutical Chemistry and Center for Molecular 
+      Biosciences Innsbruck (CMBI), University of Innsbruck, Innrain 80-82, A-6020, 
+      Innsbruck, Austria.
+FAU - König, Stefanie
+AU  - König S
+AD  - Chair of Pharmaceutical/Medicinal Chemistry, Institute of Pharmacy, 
+      Friedrich-Schiller-University Jena, Philosophenweg 14, D-07743, Jena, Germany.
+FAU - Gerstmeier, Jana
+AU  - Gerstmeier J
+AD  - Chair of Pharmaceutical/Medicinal Chemistry, Institute of Pharmacy, 
+      Friedrich-Schiller-University Jena, Philosophenweg 14, D-07743, Jena, Germany.
+FAU - Liening, Stefanie
+AU  - Liening S
+AD  - Chair of Pharmaceutical/Medicinal Chemistry, Institute of Pharmacy, 
+      Friedrich-Schiller-University Jena, Philosophenweg 14, D-07743, Jena, Germany.
+FAU - Werner, Markus
+AU  - Werner M
+AD  - Chair of Pharmaceutical/Medicinal Chemistry, Institute of Pharmacy, 
+      Friedrich-Schiller-University Jena, Philosophenweg 14, D-07743, Jena, Germany.
+FAU - Atze, Heiner
+AU  - Atze H
+AD  - Chair of Pharmaceutical/Medicinal Chemistry, Institute of Pharmacy, 
+      Friedrich-Schiller-University Jena, Philosophenweg 14, D-07743, Jena, Germany.
+FAU - Wittmann, Sandra
+AU  - Wittmann S
+AD  - Institute of Pharmaceutical Chemistry, Goethe University Frankfurt, 60438, 
+      Frankfurt, Germany.
+FAU - Weinigel, Christina
+AU  - Weinigel C
+AD  - Institute of Transfusion Medicine, University Hospital Jena, 07743, Jena, 
+      Germany.
+FAU - Rummler, Silke
+AU  - Rummler S
+AD  - Institute of Transfusion Medicine, University Hospital Jena, 07743, Jena, 
+      Germany.
+FAU - Scriba, Gerhard K
+AU  - Scriba GK
+AD  - Chair of Pharmaceutical/Medicinal Chemistry, Institute of Pharmacy, 
+      Friedrich-Schiller-University Jena, Philosophenweg 14, D-07743, Jena, Germany.
+FAU - Sautebin, Lidia
+AU  - Sautebin L
+AD  - Department of Pharmacy, School of Medicine, University of Naples Federico II, 
+      80131, Naples, Italy.
+FAU - Werz, Oliver
+AU  - Werz O
+AD  - Chair of Pharmaceutical/Medicinal Chemistry, Institute of Pharmacy, 
+      Friedrich-Schiller-University Jena, Philosophenweg 14, D-07743, Jena, Germany.
+LA  - eng
+PT  - Journal Article
+PT  - Research Support, Non-U.S. Gov't
+DEP - 20170824
+PL  - England
+TA  - Sci Rep
+JT  - Scientific reports
+JID - 101563288
+RN  - 0 (5-Lipoxygenase-Activating Protein Inhibitors)
+RN  - 0 (5-Lipoxygenase-Activating Proteins)
+RN  - 0 (Anti-Inflammatory Agents)
+RN  - 0 (Enzyme Inhibitors)
+RN  - EC 3.3.2.- (Epoxide Hydrolases)
+SB  - IM
+MH  - 5-Lipoxygenase-Activating Protein Inhibitors/chemistry/*pharmacology
+MH  - 5-Lipoxygenase-Activating Proteins/metabolism
+MH  - Animals
+MH  - Anti-Inflammatory Agents/chemistry/pharmacology
+MH  - Capillary Permeability/drug effects
+MH  - Dose-Response Relationship, Drug
+MH  - Enzyme Activation/drug effects
+MH  - Enzyme Inhibitors/chemistry/*pharmacology
+MH  - Epoxide Hydrolases/*antagonists & inhibitors/metabolism
+MH  - Humans
+MH  - Male
+MH  - Mice
+MH  - Molecular Structure
+MH  - Protein Transport
+PMC - PMC5571211
+COIS- The authors declare that they have no competing interests.
+EDAT- 2017/08/26 06:00
+MHDA- 2019/04/12 06:00
+PMCR- 2017/08/24
+CRDT- 2017/08/26 06:00
+PHST- 2017/05/05 00:00 [received]
+PHST- 2017/07/31 00:00 [accepted]
+PHST- 2017/08/26 06:00 [entrez]
+PHST- 2017/08/26 06:00 [pubmed]
+PHST- 2019/04/12 06:00 [medline]
+PHST- 2017/08/24 00:00 [pmc-release]
+AID - 10.1038/s41598-017-09795-w [pii]
+AID - 9795 [pii]
+AID - 10.1038/s41598-017-09795-w [doi]
+PST - epublish
+SO  - Sci Rep. 2017 Aug 24;7(1):9398. doi: 10.1038/s41598-017-09795-w.

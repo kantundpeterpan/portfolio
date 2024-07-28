@@ -1,8 +1,30 @@
 [
   {
+    "listing": "/duke_stats.html",
+    "items": [
+      "/stats_with_R/1_intro_data/1_intro_data.html",
+      "/stats_with_R/2_inference/2_inference.html",
+      "/stats_with_R/3_regression/3_regression.html"
+    ]
+  },
+  {
+    "listing": "/datacamp_site/extended.html",
+    "items": []
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/stats_with_R/1_intro_data/1_intro_data.html",
+      "/stats_with_R/3_regression/3_regression.html",
+      "/stats_with_R/2_inference/2_inference.html",
+      "/uncategorized_projects/nypd_shooting/nyc_shooting.html",
+      "/cv/cv.html",
+      "/duke_stats.html"
+    ]
+  },
+  {
     "listing": "/datacamp_site/guided.html",
     "items": [
-      "/datacamp_projects/workspace/Python/NLP_gender_reviews/notebook-solution.html",
       "/datacamp_projects/workspace/Python/NLP_gender_reviews/notebook.html",
       "/datacamp_projects/guided/python/cosmetic_ingredients/notebook.html",
       "/datacamp_projects/guided/python/nlp_movies_similarity/notebook.html",
@@ -11,11 +33,7 @@
       "/datacamp_projects/workspace/SQL/london_transport/notebook.html",
       "/datacamp_projects/workspace/SQL/student_mental_health/notebook.html",
       "/datacamp_projects/guided/python/trump_trudeau_tweets/trump_trudeau_tweets.html",
-      "/datacamp_projects/workspace/Python/NLP_gender_reviews/web_scraping.html"
+      "/datacamp_projects/guided/r/programming_lang/notebook.html"
     ]
-  },
-  {
-    "listing": "/datacamp_site/extended.html",
-    "items": []
   }
 ]
