@@ -42,6 +42,11 @@ from: https://github.com/quarto-dev/quarto-cli/discussions/2538#discussioncommen
       }
   }
 
+  .center {
+    margin: auto;
+    width: 60%;
+  }
+
   .dc_fig {
     width: 40%;
   }

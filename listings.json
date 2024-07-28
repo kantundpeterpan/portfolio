@@ -14,17 +14,6 @@
     ]
   },
   {
-    "listing": "/index.html",
-    "items": [
-      "/stats_with_R/1_intro_data/1_intro_data.html",
-      "/stats_with_R/3_regression/3_regression.html",
-      "/stats_with_R/2_inference/2_inference.html",
-      "/uncategorized_projects/nypd_shooting/nyc_shooting.html",
-      "/cv/cv.html",
-      "/duke_stats.html"
-    ]
-  },
-  {
     "listing": "/datacamp_courses/dc_courses_python.html",
     "items": []
   },
