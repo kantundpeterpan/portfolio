@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.54">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Heiner Atze">
+<meta name="dcterms.date" content="2020-04-02">
+
+<title>Exploring the BRFSS data – Heiner Atze, PhD</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Projects</li><li class="breadcrumb-item"><a href="../../duke_stats.html"><img src="../../cv/pictos/r.svg" width="15px"> Data Analysis with R</a></li><li class="breadcrumb-item"><a href="../../stats_with_R/1_intro_data/1_intro_data.html">1 Intro Data</a></li><li class="breadcrumb-item"><a href="../../stats_with_R/1_intro_data/1_intro_data.html">Exploring the BRFSS data</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="data:image/jpeg;base64,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" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Heiner Atze, PhD</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/kantundpeterpan" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <a href="https://gitlab.com/kantundpeterpan" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-gitlab"></i></a>
+    <a href="https://scholar.google.com/citations?user=fszIpZAAAAAJ&amp;hl=en" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-book"></i></a>
+    <a href="../../www.linkedin.com/in/heineratze" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link"><i class="bi bi-house" role="img">
+</i> 
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../cv/cv.html" class="sidebar-item-text sidebar-link"><i class="bi bi-file-person" role="img">
+</i> 
+ <span class="menu-text">CV</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true"><i class="bi bi-kanban-fill" role="img">
+</i> 
+ <span class="menu-text">Projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text"><i class="fa-solid fa-dna" aria-label="dna"></i> Bioinformatics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/kantundpeterpan/IsoTool" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">IsoTool [external]</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">Protein sequence embedding</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">Protein pocket comparison</span>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text"><iconify-icon inline="" icon="solar:benzene-ring-bold-duotone" aria-label="Icon benzene-ring-bold-duotone from solar Iconify.design set." title="Icon benzene-ring-bold-duotone from solar Iconify.design set."></iconify-icon> Cheminformatics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+ <span class="menu-text">DUDE conformer generator</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">Pharmacophore modeling</span>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../duke_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><img src="../../cv/pictos/r.svg" width="15px"> Data Analysis with R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">1 Intro Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../stats_with_R/1_intro_data/1_intro_data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Exploring the BRFSS data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">2 Inference</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../stats_with_R/2_inference/2_inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical inference using GSS data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">3 Regression</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../stats_with_R/3_regression/3_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modeling and prediction of movie scores</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false"><i class="bi bi-file-bar-graph-fill" role="img">
+</i> 
+ <span class="menu-text">Data Science</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../uncategorized_projects/nypd_shooting/nyc_shooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NY Gun shootings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../uncategorized_projects/breast_cancer_sns/seaborn_eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EDA with seaborn</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">Paris bike share</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">Media presence of politicians</span>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false"><i class="bi bi-file-bar-graph-fill" role="img">
+</i> 
+ <span class="menu-text">Datacamp</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Courses</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth4 ">  
+          <li class="sidebar-item">
+ <span class="menu-text">Python</span>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Projects</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth4 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datacamp_site/competitions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Competitions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datacamp_site/extended.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Extended</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../datacamp_site/guided.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guided</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">Unguided</span>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a>
+  <ul class="collapse">
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">Load packages</a></li>
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load data</a></li>
+  </ul></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  </ul></li>
+  <li><a href="#formulating-research-questions" id="toc-formulating-research-questions" class="nav-link" data-scroll-target="#formulating-research-questions">Formulating research questions</a></li>
+  <li><a href="#exploratory-data-analysis-for-variables-associated-with-the-research-questions" id="toc-exploratory-data-analysis-for-variables-associated-with-the-research-questions" class="nav-link" data-scroll-target="#exploratory-data-analysis-for-variables-associated-with-the-research-questions">Exploratory data analysis for variables associated with the research questions</a>
+  <ul class="collapse">
+  <li><a href="#visual-eda" id="toc-visual-eda" class="nav-link" data-scroll-target="#visual-eda">Visual EDA</a></li>
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics">Summary statistics</a>
+  <ul class="collapse">
+  <li><a href="#gender" id="toc-gender" class="nav-link" data-scroll-target="#gender"><strong>Gender</strong></a></li>
+  <li><a href="#income-level" id="toc-income-level" class="nav-link" data-scroll-target="#income-level"><strong>Income Level</strong></a></li>
+  <li><a href="#health-status" id="toc-health-status" class="nav-link" data-scroll-target="#health-status"><strong>Health Status</strong></a></li>
+  <li><a href="#ethnicity" id="toc-ethnicity" class="nav-link" data-scroll-target="#ethnicity"><strong>Ethnicity</strong></a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#exploring-research-questions" id="toc-exploring-research-questions" class="nav-link" data-scroll-target="#exploring-research-questions">Exploring research questions</a>
+  <ul class="collapse">
+  <li><a href="#is-there-an-association-between-gender-and-income-level" id="toc-is-there-an-association-between-gender-and-income-level" class="nav-link" data-scroll-target="#is-there-an-association-between-gender-and-income-level"><strong>Is there an association between gender and income level?</strong></a>
+  <ul class="collapse">
+  <li><a href="#intro-and-objective" id="toc-intro-and-objective" class="nav-link" data-scroll-target="#intro-and-objective">Intro and objective</a></li>
+  <li><a href="#interpretation-and-conclusions" id="toc-interpretation-and-conclusions" class="nav-link" data-scroll-target="#interpretation-and-conclusions">Interpretation and conclusions</a></li>
+  </ul></li>
+  <li><a href="#is-there-an-association-between-gender-income-level-and-general-health-status" id="toc-is-there-an-association-between-gender-income-level-and-general-health-status" class="nav-link" data-scroll-target="#is-there-an-association-between-gender-income-level-and-general-health-status"><strong>Is there an association between gender, income level and general health status?</strong></a>
+  <ul class="collapse">
+  <li><a href="#intro-and-objective-1" id="toc-intro-and-objective-1" class="nav-link" data-scroll-target="#intro-and-objective-1">Intro and objective</a></li>
+  <li><a href="#interpretation-and-conclusions-1" id="toc-interpretation-and-conclusions-1" class="nav-link" data-scroll-target="#interpretation-and-conclusions-1">Interpretation and conclusions</a></li>
+  </ul></li>
+  <li><a href="#is-there-and-association-between-race-white-black-or-african-american-asian-income-level-and-general-health-status" id="toc-is-there-and-association-between-race-white-black-or-african-american-asian-income-level-and-general-health-status" class="nav-link" data-scroll-target="#is-there-and-association-between-race-white-black-or-african-american-asian-income-level-and-general-health-status"><strong>Is there and association between race (White, Black or African American, Asian), income level and general health status?</strong></a>
+  <ul class="collapse">
+  <li><a href="#intro-and-objective-2" id="toc-intro-and-objective-2" class="nav-link" data-scroll-target="#intro-and-objective-2">Intro and objective</a></li>
+  <li><a href="#interpretation-and-conclusions-2" id="toc-interpretation-and-conclusions-2" class="nav-link" data-scroll-target="#interpretation-and-conclusions-2">Interpretation and conclusions</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Projects</li><li class="breadcrumb-item"><a href="../../duke_stats.html"><img src="../../cv/pictos/r.svg" width="15px"> Data Analysis with R</a></li><li class="breadcrumb-item"><a href="../../stats_with_R/1_intro_data/1_intro_data.html">1 Intro Data</a></li><li class="breadcrumb-item"><a href="../../stats_with_R/1_intro_data/1_intro_data.html">Exploring the BRFSS data</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Exploring the BRFSS data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Heiner Atze </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 2, 2020</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    Final project for the first course in the <em>Statistics with R</em> specialization offered by Duke university on Coursera.
+  </div>
+</div>
+
+
+</header>
+
+
+<section id="setup" class="level1">
+<h1>Setup</h1>
+<section id="load-packages" class="level2">
+<h2 class="anchored" data-anchor-id="load-packages">Load packages</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="load-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-data">Load data</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"brfss2013.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="data" class="level1">
+<h1>Data</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>The <a href="https://www.cdc.gov/brfss/index.html">Behavioral Risk Factor Surveillance System (BRFSS)</a> is a US nationwide survey regarding health-related risk behaviors, chronic health conditions, and use of preventive services which is conducted annually since 1984. The data for this survey is collected via telephone interviews over landline or mobile phones on a randomly chosen sample. The BRFSS is an observational study (as no treatment is either given or withheld), therefore no causal inference concerning the collected data can be draw. However, it is a means to screen for associations between the sampled variables, which in turn might be the foundation for further investigations in randomized experiments.</p>
+<p><strong>Sampling strategy and generalizability of findings</strong> Sampling for landline and mobile surveys differed (see <a href="https://www.cdc.gov/brfss/annual_data/2013/pdf/Overview_2013.pdf">BRFSS 2013 Overview</a> p.6). While stratified sampling was applied to obtain landline numbers, mobile phone numbers were obtained by dividing the complete set of mobile phone numbers into a number of clusters equivalent to the desired sample size, and subsequent sampling of one number from each cluster.</p>
+<p><strong><em>Non-response bias</em></strong> While both methods sample phone numbers randomly, great caution has to be taken, when generalizing findings to the population at large due to the fact that non-responder rates are high (50.4% and 62.2% for landline and mobile surveys, respectively, see <a href="https://www.cdc.gov/brfss/annual_data/2013/pdf/2013_DQR.pdf">BRFSS 2013 Quality Report</a>, p.4).</p>
+<p><strong><em>Convenience sample</em></strong> Additionaly, the sample might be biased towards people that can be reached by phone. Parts of the population that do not have (or want) acces to a phone or are less likely to answer (low income, illegal immigrants, children) might be missed during sampling.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/7b1d87b3a2380854a20009f390c9d830252bea9a.png" class="img-fluid figure-img"></p>
+<figcaption>Lecture Slides - Week 1, Random Sample Assignment</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+</section>
+<section id="formulating-research-questions" class="level1">
+<h1>Formulating research questions</h1>
+<p><strong>Research quesion 1:</strong> Is there an association between gender and income level?</p>
+<p><strong>Research quesion 2:</strong> Is there an association between gender, income level and general health status?</p>
+<p><strong>Research quesion 3:</strong> Is there and association between enthnicity (White, Black or African American, Asian), income level and general health status?</p>
+<hr>
+</section>
+<section id="exploratory-data-analysis-for-variables-associated-with-the-research-questions" class="level1">
+<h1>Exploratory data analysis for variables associated with the research questions</h1>
+<section id="visual-eda" class="level2">
+<h2 class="anchored" data-anchor-id="visual-eda">Visual EDA</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plots for each variable</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>eda_p1 <span class="ot">&lt;-</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>(brfss2013[,<span class="fu">c</span>(<span class="st">'income2'</span>,<span class="st">'sex'</span>)]) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>sex, <span class="at">y =</span> n, <span class="at">fill=</span>sex)) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">'identity'</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>eda_p2 <span class="ot">&lt;-</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>(brfss2013[,<span class="fu">c</span>(<span class="st">'income2'</span>,<span class="st">'sex'</span>)]) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(income2) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>income2, <span class="at">y =</span> n, <span class="at">fill=</span>income2)) <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">'identity'</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>eda_p3 <span class="ot">&lt;-</span> </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>(brfss2013[,<span class="fu">c</span>(<span class="st">'sex'</span>,<span class="st">'genhlth'</span>)]) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(genhlth) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>genhlth, <span class="at">y =</span> n, <span class="at">fill=</span>genhlth)) <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">'identity'</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>eda_p4 <span class="ot">&lt;-</span> </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>(brfss2013[,<span class="fu">c</span>(<span class="st">'sex'</span>,<span class="st">'X_mrace1'</span>)]) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(X_mrace1) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(X_mrace1 <span class="sc">==</span> <span class="st">'White'</span> <span class="sc">|</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>           X_mrace1 <span class="sc">==</span> <span class="st">'Black or African American'</span> <span class="sc">|</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>           X_mrace1 <span class="sc">==</span> <span class="st">'Asian'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>X_mrace1, <span class="at">y =</span> n, <span class="at">fill=</span>X_mrace1)) <span class="sc">+</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">'identity'</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#arranging plots in a grid</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  eda_p1 <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Gender distribution"</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>),</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  eda_p2 <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Income distribution"</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="sc">+</span> <span class="fu">scale_x_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">'&lt;$10k'</span>, <span class="st">'&lt;$15k'</span>, <span class="st">'&lt;$20k'</span>, <span class="st">'&lt;$25k'</span>,<span class="st">'&lt;$35k'</span>, <span class="st">'&lt;$50k'</span>, <span class="st">'&lt;$75k'</span>, <span class="st">'&gt;$75k'</span>)) </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'none'</span>, <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust=</span><span class="dv">1</span>)) </span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">""</span>),</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  eda_p3 <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Dist. of Health status"</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>),</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  eda_p4 <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Dist.  of ethnicity"</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>         <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">scale_x_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">'White'</span>, <span class="st">'Black'</span>, <span class="st">'Asian'</span>)),</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">2</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/b4a3e80f5bc46576560cf332cd3fcb6acb0c9631.png" id="fig-eda" class="preview-image img-fluid" style="width:100.0%"> All distributions of variables that will be used in the subsequent analysis are skewed.</p>
+</section>
+<section id="summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="summary-statistics">Summary statistics</h2>
+<p><strong>Note on chosen summary statistics</strong> As all variables used to address the research questions are categorical, summary statistics will be counts and proportions calculated for each variable.</p>
+<hr>
+<section id="gender" class="level3">
+<h3 class="anchored" data-anchor-id="gender"><strong>Gender</strong></h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">na.omit</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      brfss2013[,<span class="fu">c</span>(<span class="st">'income2'</span>,<span class="st">'sex'</span>)]) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">count</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span>n<span class="sc">/</span><span class="fu">sum</span>(n),<span class="dv">2</span>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">'Sex'</span>, <span class="st">'count'</span>, <span class="st">'%'</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">format=</span><span class="st">'html'</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">table.attr =</span> <span class="st">"class=</span><span class="sc">\"</span><span class="st">table table-condensed</span><span class="sc">\"</span><span class="st"> width=50%"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Sex</th>
+<th style="text-align: right;">count</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Male</td>
+<td style="text-align: right;">178186</td>
+<td style="text-align: right;">42.39</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Female</td>
+<td style="text-align: right;">242162</td>
+<td style="text-align: right;">57.61</td>
+</tr>
+</tbody>
+</table>
+<p>Women make up a total of 57.61% of participants, while they made up about only 50.94% of the <a href="https://www.statista.com/statistics/737923/us-population-by-gender/">US population in 2013</a>. In the 2013 BRFSS, there were 1.36 times more female than male participants.</p>
+<hr>
+</section>
+<section id="income-level" class="level3">
+<h3 class="anchored" data-anchor-id="income-level"><strong>Income Level</strong></h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    brfss2013[,<span class="fu">c</span>(<span class="st">'income2'</span>,<span class="st">'sex'</span>)]) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">count</span>(income2) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">round</span>((n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Income"</span>, <span class="st">"count"</span>, <span class="st">"%"</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">format=</span><span class="st">'html'</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">table.attr =</span> <span class="st">"class=</span><span class="sc">\"</span><span class="st">table table-condensed</span><span class="sc">\"</span><span class="st"> width=50%"</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Income</th>
+<th style="text-align: right;">count</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Less than $10,000</td>
+<td style="text-align: right;">25441</td>
+<td style="text-align: right;">6.05</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Less than $15,000</td>
+<td style="text-align: right;">26793</td>
+<td style="text-align: right;">6.37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Less than $20,000</td>
+<td style="text-align: right;">34873</td>
+<td style="text-align: right;">8.30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Less than $25,000</td>
+<td style="text-align: right;">41732</td>
+<td style="text-align: right;">9.93</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Less than $35,000</td>
+<td style="text-align: right;">48867</td>
+<td style="text-align: right;">11.63</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Less than $50,000</td>
+<td style="text-align: right;">61509</td>
+<td style="text-align: right;">14.63</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Less than $75,000</td>
+<td style="text-align: right;">65231</td>
+<td style="text-align: right;">15.52</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$75,000 or more</td>
+<td style="text-align: right;">115902</td>
+<td style="text-align: right;">27.57</td>
+</tr>
+</tbody>
+</table>
+<p>27.6% of participants earn more are in the highest income group, that is approx. the same proportion as within the 4 lowest income groups taken together.</p>
+<hr>
+</section>
+<section id="health-status" class="level3">
+<h3 class="anchored" data-anchor-id="health-status"><strong>Health Status</strong></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">na.omit</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>   brfss2013[,<span class="fu">c</span>(<span class="st">'sex'</span>,<span class="st">'genhlth'</span>)]) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>   dplyr<span class="sc">::</span><span class="fu">count</span>(genhlth) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>   dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">round</span>((n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">'Gen. Health'</span>, <span class="st">'count'</span>, <span class="st">'%'</span>),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">format=</span><span class="st">'html'</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">table.attr =</span> <span class="st">"class=</span><span class="sc">\"</span><span class="st">table table-condensed</span><span class="sc">\"</span><span class="st"> width=50%"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Gen.&nbsp;Health</th>
+<th style="text-align: right;">count</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Excellent</td>
+<td style="text-align: right;">85481</td>
+<td style="text-align: right;">17.45</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Very good</td>
+<td style="text-align: right;">159075</td>
+<td style="text-align: right;">32.48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Good</td>
+<td style="text-align: right;">150555</td>
+<td style="text-align: right;">30.74</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: right;">66726</td>
+<td style="text-align: right;">13.62</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Poor</td>
+<td style="text-align: right;">27951</td>
+<td style="text-align: right;">5.71</td>
+</tr>
+</tbody>
+</table>
+<p>Pariticipants with Good or Very Good general health status make up over 60% of all responders.</p>
+<hr>
+</section>
+<section id="ethnicity" class="level3">
+<h3 class="anchored" data-anchor-id="ethnicity"><strong>Ethnicity</strong></h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>(brfss2013[,<span class="fu">c</span>(<span class="st">'sex'</span>,<span class="st">'X_mrace1'</span>)]) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(X_mrace1 <span class="sc">==</span> <span class="st">'White'</span> <span class="sc">|</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>         X_mrace1 <span class="sc">==</span> <span class="st">'Black or African American'</span> <span class="sc">|</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>         X_mrace1 <span class="sc">==</span> <span class="st">'Asian'</span>) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">count</span>(X_mrace1) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">round</span>((n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">'Ethnicity'</span>, <span class="st">'count'</span>, <span class="st">'%'</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">format=</span><span class="st">'html'</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">table.attr =</span> <span class="st">"class=</span><span class="sc">\"</span><span class="st">table table-condensed</span><span class="sc">\"</span><span class="st"> width=50%"</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Ethnicity</th>
+<th style="text-align: right;">count</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">400421</td>
+<td style="text-align: right;">88.69</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black or African American</td>
+<td style="text-align: right;">41221</td>
+<td style="text-align: right;">9.13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Asian</td>
+<td style="text-align: right;">9850</td>
+<td style="text-align: right;">2.18</td>
+</tr>
+</tbody>
+</table>
+<p>In a subsample only considering White, Black/African American and Asian ethinicity, the vast majority (88.7%) of the participants belongs to the White ethnicity.</p>
+<hr>
+<p><strong>Conclusion</strong> EDA of chosen variables revealed, that all of them are skewed, i.e.&nbsp;are not uniformly distributed across factor levels. While this might actually reflect the true distribution in the population, care has to be taken, when conclusions based from these data are generalized without any further checks, as it is possible that this sample is biased (this has been discussed in <a href="#part-1-data">Part 1: Data</a>)</p>
+<hr>
+<hr>
+<p><strong>Comment on the significance of observed differences</strong> All research questions seek to investigate putative associations between variables. Assuming no association, we would expect roughly equal distributions for the factors of the response variable regardles of the chosen explanatory variable. Any difference that might befound, reflects first and foremost the difference within the given sample. Whether findings can be generalized to the population at large is largely dependent on the sampling strategy, as discussed above. In order to judge the significance of any observed difference, tools of statistical inference are required, which will not be used in this project. Therefore, I tried to draw rather reluctant conclusions on the three research questions. And still, all of them should be taken with a grain of salt and/or a more thorough analysis.</p>
+<hr>
+<hr>
+</section>
+</section>
+</section>
+<section id="exploring-research-questions" class="level1">
+<h1>Exploring research questions</h1>
+<section id="is-there-an-association-between-gender-and-income-level" class="level2">
+<h2 class="anchored" data-anchor-id="is-there-an-association-between-gender-and-income-level"><strong>Is there an association between gender and income level?</strong></h2>
+<section id="intro-and-objective" class="level3">
+<h3 class="anchored" data-anchor-id="intro-and-objective">Intro and objective</h3>
+<p><strong>Why would this be an interesting question?</strong></p>
+<p>Gender equality is of great concern and a major topic in public discussion. One of the major questions deals with justice when it comes to salaries. Therefore exploring a putative association between gender and income level is of particular interest.</p>
+<p><strong><em>Table - Difference (%) between genders in income levels</em></strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#extract income and sex variables</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>inc_gender <span class="ot">&lt;-</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>(brfss2013[,<span class="fu">c</span>(<span class="st">'income2'</span>,<span class="st">'sex'</span>)])</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#remap factor labels for easier plotting</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>inc_gender<span class="sc">$</span>income2 <span class="ot">=</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mapvalues</span>(inc_gender<span class="sc">$</span>income2,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">from=</span><span class="fu">levels</span>(inc_gender<span class="sc">$</span>income2),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">to =</span> <span class="fu">c</span>(<span class="st">'&lt;$10k'</span>, <span class="st">'&lt;$15k'</span>, <span class="st">'&lt;$20k'</span>, <span class="st">'&lt;$25k'</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'&lt;$35k'</span>, <span class="st">'&lt;$50k'</span>, <span class="st">'&lt;$75k'</span>, <span class="st">'&gt;$75k'</span>))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate proportions of income levels conditioned by gender</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>perc <span class="ot">=</span> inc_gender <span class="sc">%&gt;%</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(income2) <span class="sc">%&gt;%</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Freq =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>diff <span class="ot">=</span> <span class="fu">data.frame</span>(perc[perc<span class="sc">$</span>sex<span class="sc">==</span><span class="st">'Male'</span>,]<span class="sc">$</span>Freq <span class="sc">-</span> perc[perc<span class="sc">$</span>sex<span class="sc">==</span><span class="st">'Female'</span>,]<span class="sc">$</span>Freq)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(diff) <span class="ot">&lt;-</span> <span class="st">'Difference (%)'</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>diff <span class="ot">=</span> <span class="fu">t</span>(diff)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(diff) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"&lt;$10k"</span>, <span class="st">"&lt;$15k"</span>, <span class="st">"&lt;$20k"</span>, <span class="st">"&lt;$25k"</span>, <span class="st">"&lt;$35k"</span>, <span class="st">"&lt;$50k"</span>, <span class="st">"&lt;$75k"</span>, <span class="st">"&gt;$75k"</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">round</span>(diff,<span class="dv">2</span>),<span class="at">format =</span> <span class="st">'markdown'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">&lt;$10k</th>
+<th style="text-align: right;">&lt;$15k</th>
+<th style="text-align: right;">&lt;$20k</th>
+<th style="text-align: right;">&lt;$25k</th>
+<th style="text-align: right;">&lt;$35k</th>
+<th style="text-align: right;">&lt;$50k</th>
+<th style="text-align: right;">&lt;$75k</th>
+<th style="text-align: right;">&gt;$75k</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Difference (%)</td>
+<td style="text-align: right;">-2.42</td>
+<td style="text-align: right;">-2.1</td>
+<td style="text-align: right;">-2.16</td>
+<td style="text-align: right;">-1.91</td>
+<td style="text-align: right;">-1.06</td>
+<td style="text-align: right;">0.72</td>
+<td style="text-align: right;">1.71</td>
+<td style="text-align: right;">7.21</td>
+</tr>
+</tbody>
+</table>
+<p>This table shows the percentage of male participants minus the percentage of female participants for each income level. Therefore, a negative value indicates more women within a given group. The gap decreases with increasing income and is actually inversed for incomes greater than $50,000 (positive value indicates more men than women). For addtiional interpretation see below.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#general plot layout</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>p_p <span class="ot">&lt;-</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  perc <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>sex, <span class="at">y =</span> Freq, <span class="at">fill=</span>sex)) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">'identity'</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>income2)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#plot fine tuning</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>p_p <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Gender distribution within income levels"</span>) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#xlab("Income level") +</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Percentage"</span>) <span class="sc">+</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/f4920a586eef74cc95d2062750b02ea9980776dc.png" class="img-fluid" width="960"></p>
+</section>
+<section id="interpretation-and-conclusions" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-and-conclusions">Interpretation and conclusions</h3>
+<p><strong>Interpretation</strong> The plot shows the percentage of participants in each income group, conditioned by gender. Women seem to be overrepresented in income groups &lt;35,000$. A striking difference is found in the highest income group (&gt;75,000$), where we find 7.21% more men than women (see table above). If there was no association between income level and gender, we would expect numbers for men in women in each group to be roughly equal. This might be the case for all groups except &gt;$75k, where the difference appears more obvious.</p>
+<p><strong>CAVEAT</strong> In order to draw any substantial conclusion on the observed differences, more research is needed, as well as tools from statistical inference, which is out the scope of this project. The causal conclusion, that women are paid less solely because of their gender, would be invalid, if based only on this analysis, as there was no control for confounding variables. Please refer to additional sources on <a href="https://en.wikipedia.org/wiki/Gender_pay_gap">Gender Pay Gap</a>.</p>
+<p><strong>Conclusion Question 1</strong> The trends inferred from the plot indicate an association between gender and income level within this sample.</p>
+<p><strong>Reminder on generalizability of the findings</strong> As discussed above, findings from the analysis of this sample cannot be generalized to the population and therefore can (if at all) only be indicative with respect to the overall population. In order to draw any inference on the relationship of these variables further research is needed.</p>
+<hr>
+</section>
+</section>
+<section id="is-there-an-association-between-gender-income-level-and-general-health-status" class="level2">
+<h2 class="anchored" data-anchor-id="is-there-an-association-between-gender-income-level-and-general-health-status"><strong>Is there an association between gender, income level and general health status?</strong></h2>
+<section id="intro-and-objective-1" class="level3">
+<h3 class="anchored" data-anchor-id="intro-and-objective-1">Intro and objective</h3>
+<p><strong>Why would this be an interesting question?</strong></p>
+<p>As an addon to question no. 1, this questions seeks to explore putative associations between gender, income and general health.</p>
+<p><strong><em>Plot 1</em></strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#extract income, sex and genhlth variables</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>inc_health_gender <span class="ot">&lt;-</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>(brfss2013[,<span class="fu">c</span>(<span class="st">'income2'</span>,<span class="st">'sex'</span>, <span class="st">'genhlth'</span>)])</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#remap factor labels for easier plotting</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>inc_health_gender<span class="sc">$</span>income2 <span class="ot">&lt;-</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mapvalues</span>(inc_health_gender<span class="sc">$</span>income2,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">from=</span><span class="fu">levels</span>(inc_health_gender<span class="sc">$</span>income2),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">to =</span> <span class="fu">c</span>(<span class="st">'&lt;$10,000'</span>, <span class="st">'&lt;$15,000'</span>, <span class="st">'&lt;$20,000'</span>, <span class="st">'&lt;$25,000'</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'&lt;$35,000'</span>, <span class="st">'&lt;$50,000'</span>, <span class="st">'&lt;$75,000'</span>, <span class="st">'&gt;$75,000'</span>))</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate proportions of gender in each health status group</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>perc_2 <span class="ot">=</span> inc_health_gender <span class="sc">%&gt;%</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(genhlth) <span class="sc">%&gt;%</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Freq =</span> n<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span><span class="fu">sum</span>(n))</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">#general plot layout</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>p_p <span class="ot">&lt;-</span> </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  perc_2 <span class="sc">%&gt;%</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>sex, <span class="at">y =</span> Freq, <span class="at">fill=</span>sex)) <span class="sc">+</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">'identity'</span>) <span class="sc">+</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>genhlth)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>p_p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/e7354d4148dde6c6b075a168fc28f381d3a18dae.png" class="img-fluid" width="960"></p>
+</section>
+<section id="interpretation-and-conclusions-1" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-and-conclusions-1">Interpretation and conclusions</h3>
+<p><strong>Interpretation</strong> A first analysis of the gender health status distributions, reveals equal proportions between men and women for the <em>Excellent</em> and <em>Very good</em> factor values. The difference is a little more pronounced in the remaining groups, with women being underrepresented in the <em>Good</em> group, while the remainder is divided between the <em>Fair</em> and the <em>Poor</em> group. Taken together, within this sample women are more likely to have a <em>Fair</em> or <em>Poor</em> health status.</p>
+<p><strong>CAVEAT</strong> As pointed out above, women were more likely to respond to this survey. This might provide an explanation for women being overrepresented in the groups with general health status: <em>If</em> people with lower general health status have a lower probability to respond to this survey, sampling more subjects could possibly include more subjects with less likely attributes. For this reason, there might be more women with lower general health status in the survey than men.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate proportions of health status in income levels conditioned by gender</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>perc_2 <span class="ot">=</span> inc_health_gender <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sex,income2) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(genhlth) <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Freq =</span> n<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span><span class="fu">sum</span>(n))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#general plot layout</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>p_p2 <span class="ot">&lt;-</span> </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  perc_2 <span class="sc">%&gt;%</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>sex, <span class="at">y =</span> Freq, <span class="at">fill=</span>genhlth)) <span class="sc">+</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">'identity'</span>) <span class="sc">+</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>income2)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#plot fine tuning</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>p_p2 <span class="sc">+</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of health status within income level conditioned by gender"</span>) <span class="sc">+</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Cumulative percentage"</span>) <span class="sc">+</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name=</span><span class="st">'Health status'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/c08a83a24e152288804a5b5823f6ad46282dbd57.png" class="img-fluid" width="960"></p>
+<p><strong>Interpretation</strong> An overall trend is easily visible, higher income means better general health status for both men and women. This can be inferred from the rising proportion of people with <em>Excellent</em> or <em>Good</em> health status in higher income groups or the decreasing proportions of people with health status <em>Poor</em>. When taking into account the distribution of health status within income groups, it can be found that for income levels &gt;$20,000 women seem to be more likely to be in good health (<em>Good</em> + <em>Very good</em> + <em>Excellent</em>). For the &lt;$15,000 group, distributions of health status are roughly equal between men and women, while at very low incomes the effect seen in the higher income groups is inversed.</p>
+<p><strong>Conclusion Question 2</strong> With the trends visible in Plot 2, gender, general health status and income level seem to be associated within this sample. Notably, the extent to which income level impacts health status seems to be different for men and women.</p>
+<p><strong>Reminder on generalizability of the findings</strong> Same as for question 1</p>
+<hr>
+</section>
+</section>
+<section id="is-there-and-association-between-race-white-black-or-african-american-asian-income-level-and-general-health-status" class="level2">
+<h2 class="anchored" data-anchor-id="is-there-and-association-between-race-white-black-or-african-american-asian-income-level-and-general-health-status"><strong>Is there and association between race (White, Black or African American, Asian), income level and general health status?</strong></h2>
+<section id="intro-and-objective-2" class="level3">
+<h3 class="anchored" data-anchor-id="intro-and-objective-2">Intro and objective</h3>
+<p><strong>Why would this be an interesting question?</strong></p>
+<p>Race has been described to possbily have an impact on <a href="https://www.payscale.com/data/racial-wage-gap-for-men">income</a> and <a href="https://www.ncbi.nlm.nih.gov/books/NBK425844/#sec_000047">health</a>.</p>
+<p><strong><em>Plot</em></strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#extract income and sex variables, filter for specific races</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>inc_health_eth <span class="ot">&lt;-</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>(brfss2013[,<span class="fu">c</span>(<span class="st">'income2'</span>,<span class="st">'X_mrace1'</span>, <span class="st">'genhlth'</span>)]) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(X_mrace1 <span class="sc">==</span> <span class="st">'White'</span> <span class="sc">|</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>           X_mrace1 <span class="sc">==</span> <span class="st">'Black or African American'</span> <span class="sc">|</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>           X_mrace1 <span class="sc">==</span> <span class="st">'Asian'</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#remap factor labels for easier plotting</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>inc_health_eth<span class="sc">$</span>income2 <span class="ot">=</span> <span class="fu">mapvalues</span>(inc_health_eth<span class="sc">$</span>income2,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">from=</span><span class="fu">levels</span>(inc_health_eth<span class="sc">$</span>income2),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">to =</span> <span class="fu">c</span>(<span class="st">'&lt;$10,000'</span>, <span class="st">'&lt;$15,000'</span>, <span class="st">'&lt;$20,000'</span>, <span class="st">'&lt;$25,000'</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">'&lt;$35,000'</span>, <span class="st">'&lt;$50,000'</span>, <span class="st">'&lt;$75,000'</span>, <span class="st">'&gt;$75,000'</span>))</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate proportions of income levels conditioned by ethnicity</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>perc_3 <span class="ot">=</span> inc_health_eth <span class="sc">%&gt;%</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(X_mrace1,income2) <span class="sc">%&gt;%</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(genhlth) <span class="sc">%&gt;%</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Freq =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co">#general plot layout</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>p_p3 <span class="ot">&lt;-</span>perc_3 <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>X_mrace1, <span class="at">y =</span> Freq, <span class="at">fill=</span>genhlth)) <span class="sc">+</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">'identity'</span>) <span class="sc">+</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>income2)</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="co">#plot fine tuning</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>p_p3 <span class="sc">+</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of general health status within income levels conditioned by ethnicity"</span>) <span class="sc">+</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Ethnicity"</span>) <span class="sc">+</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Percentage"</span>) <span class="sc">+</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name=</span><span class="st">'Health status'</span>) <span class="sc">+</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">50</span>,<span class="dv">75</span>), <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">alpha=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/89a16bc308564fbe0083ef601e49b96439122ec7.png" class="img-fluid" width="960"></p>
+</section>
+<section id="interpretation-and-conclusions-2" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-and-conclusions-2">Interpretation and conclusions</h3>
+<p><strong>Interpretation</strong> The overall trend of general health status is the same across income classes when conditioned for ethnicity: Higher income - better overall health. Two interesting observations can be made: 1) Asians seem to have a better general health status compared to Whites and Black/African Americans especially in the lower income levels. 2) While general health status of Whites and Black/African Americans are comparable within the low income levels, Black/African Americans seem to profit less from their higher income when it comes to their overall health (smaller percentage with excellent health and higher percentage of <em>Fair</em> + <em>Poor</em> health status compared to Whites and Asians).</p>
+<p><strong>Conclusion Question 3</strong> With the trends visible in the plot above, ethnicity, general health status and income level seem to be associated within this sample. As we have seen for gender, race may influence the impact of income level on general health status.</p>
+<p><strong>Reminder on generalizability of the findings</strong> Same as for question 1</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/kantundpeterpan\.github\.io\/portfolio\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

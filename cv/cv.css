@@ -13,6 +13,10 @@
   /*color: aquamarine;*/
 }
 
+.minion {
+  width: 20px;
+}
+
 /* adapt stylesheet for print
 from: https://github.com/quarto-dev/quarto-cli/discussions/2538#discussioncomment-4081842 */
 
@@ -25,6 +29,10 @@ from: https://github.com/quarto-dev/quarto-cli/discussions/2538#discussioncommen
   display: none;
 }
 
+#minion-sql {
+  width: 12%;
+}
+
 @media print {
   @page {
       size: a4 portrait;
@@ -32,6 +40,14 @@ from: https://github.com/quarto-dev/quarto-cli/discussions/2538#discussioncommen
       @bottom-center {
         content: counter(page)
       }
+  }
+
+  .dc_fig {
+    width: 40%;
+  }
+
+  .minion {
+    width: 20px;
   }
 
   .cheating {
