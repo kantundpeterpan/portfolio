@@ -1,0 +1,3828 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.54">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Heiner Atze">
+
+<title>Functions for manipulating data in POSTGRESQL – Heiner Atze, PhD</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+<link rel="stylesheet" href="../../dc_course.css">
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview-of-common-data-types" id="toc-overview-of-common-data-types" class="nav-link active" data-scroll-target="#overview-of-common-data-types">Overview of Common Data Types</a>
+  <ul class="collapse">
+  <li><a href="#getting-information-about-your-database" id="toc-getting-information-about-your-database" class="nav-link" data-scroll-target="#getting-information-about-your-database">Getting information about your database</a>
+  <ul class="collapse">
+  <li><a href="#table-information" id="toc-table-information" class="nav-link" data-scroll-target="#table-information">Table information</a></li>
+  <li><a href="#column-information" id="toc-column-information" class="nav-link" data-scroll-target="#column-information">Column information</a></li>
+  <li><a href="#determining-data-types" id="toc-determining-data-types" class="nav-link" data-scroll-target="#determining-data-types">Determining data types</a></li>
+  </ul></li>
+  <li><a href="#date-and-time-data-types" id="toc-date-and-time-data-types" class="nav-link" data-scroll-target="#date-and-time-data-types">Date and time data types</a>
+  <ul class="collapse">
+  <li><a href="#timestamp" id="toc-timestamp" class="nav-link" data-scroll-target="#timestamp">TIMESTAMP</a></li>
+  <li><a href="#date-and-time" id="toc-date-and-time" class="nav-link" data-scroll-target="#date-and-time">DATE and TIME</a></li>
+  <li><a href="#interval" id="toc-interval" class="nav-link" data-scroll-target="#interval">INTERVAL</a></li>
+  <li><a href="#time-zones" id="toc-time-zones" class="nav-link" data-scroll-target="#time-zones">Time Zones</a></li>
+  <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key Points</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  </ul></li>
+  <li><a href="#postgresql-arrays" id="toc-postgresql-arrays" class="nav-link" data-scroll-target="#postgresql-arrays">PostgreSQL ARRAYs</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-arrays" id="toc-introduction-to-arrays" class="nav-link" data-scroll-target="#introduction-to-arrays">Introduction to ARRAYs</a></li>
+  <li><a href="#creating-tables-with-arrays" id="toc-creating-tables-with-arrays" class="nav-link" data-scroll-target="#creating-tables-with-arrays">Creating Tables with ARRAYs</a></li>
+  <li><a href="#inserting-data-into-array-columns" id="toc-inserting-data-into-array-columns" class="nav-link" data-scroll-target="#inserting-data-into-array-columns">Inserting Data into ARRAY Columns</a></li>
+  <li><a href="#accessing-arrays" id="toc-accessing-arrays" class="nav-link" data-scroll-target="#accessing-arrays">Accessing ARRAYs</a></li>
+  <li><a href="#searching-arrays" id="toc-searching-arrays" class="nav-link" data-scroll-target="#searching-arrays">Searching ARRAYs</a></li>
+  <li><a href="#array-functions-and-operators" id="toc-array-functions-and-operators" class="nav-link" data-scroll-target="#array-functions-and-operators">ARRAY Functions and Operators</a></li>
+  <li><a href="#key-points-1" id="toc-key-points-1" class="nav-link" data-scroll-target="#key-points-1">Key Points</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further Reading</a></li>
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">Exercises</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#working-with-datetime-functions-and-operators" id="toc-working-with-datetime-functions-and-operators" class="nav-link" data-scroll-target="#working-with-datetime-functions-and-operators">Working with DATE/TIME Functions and Operators</a>
+  <ul class="collapse">
+  <li><a href="#postgresql-date-and-time-manipulation" id="toc-postgresql-date-and-time-manipulation" class="nav-link" data-scroll-target="#postgresql-date-and-time-manipulation">PostgreSQL Date and Time Manipulation</a>
+  <ul class="collapse">
+  <li><a href="#basic-arithmetic-operations" id="toc-basic-arithmetic-operations" class="nav-link" data-scroll-target="#basic-arithmetic-operations">Basic Arithmetic Operations</a></li>
+  <li><a href="#age-function" id="toc-age-function" class="nav-link" data-scroll-target="#age-function">AGE Function</a></li>
+  <li><a href="#interval-usage" id="toc-interval-usage" class="nav-link" data-scroll-target="#interval-usage">INTERVAL Usage</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
+  <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2">Exercises</a></li>
+  </ul></li>
+  <li><a href="#retrieving-current-date-and-time" id="toc-retrieving-current-date-and-time" class="nav-link" data-scroll-target="#retrieving-current-date-and-time">Retrieving Current date and time</a>
+  <ul class="collapse">
+  <li><a href="#now-function" id="toc-now-function" class="nav-link" data-scroll-target="#now-function">NOW() Function</a></li>
+  <li><a href="#casting-timestamp-without-timezone" id="toc-casting-timestamp-without-timezone" class="nav-link" data-scroll-target="#casting-timestamp-without-timezone">Casting Timestamp without Timezone</a></li>
+  <li><a href="#current_timestamp-function" id="toc-current_timestamp-function" class="nav-link" data-scroll-target="#current_timestamp-function">CURRENT_TIMESTAMP Function</a></li>
+  </ul></li>
+  <li><a href="#current-date-and-time" id="toc-current-date-and-time" class="nav-link" data-scroll-target="#current-date-and-time">Current Date and Time</a>
+  <ul class="collapse">
+  <li><a href="#current_date-function" id="toc-current_date-function" class="nav-link" data-scroll-target="#current_date-function">CURRENT_DATE Function</a></li>
+  <li><a href="#current_time-function" id="toc-current_time-function" class="nav-link" data-scroll-target="#current_time-function">CURRENT_TIME Function</a></li>
+  <li><a href="#additional-notes" id="toc-additional-notes" class="nav-link" data-scroll-target="#additional-notes">Additional Notes</a></li>
+  <li><a href="#references-1" id="toc-references-1" class="nav-link" data-scroll-target="#references-1">References</a></li>
+  <li><a href="#exercises-3" id="toc-exercises-3" class="nav-link" data-scroll-target="#exercises-3">Exercises</a></li>
+  </ul></li>
+  <li><a href="#extracting-and-tranformingi-datetime-data" id="toc-extracting-and-tranformingi-datetime-data" class="nav-link" data-scroll-target="#extracting-and-tranformingi-datetime-data">Extracting and tranformingi Date/Time data</a>
+  <ul class="collapse">
+  <li><a href="#extract-and-date_part" id="toc-extract-and-date_part" class="nav-link" data-scroll-target="#extract-and-date_part">EXTRACT and DATE_PART</a></li>
+  <li><a href="#date_trunc" id="toc-date_trunc" class="nav-link" data-scroll-target="#date_trunc">DATE_TRUNC</a></li>
+  <li><a href="#key-points-2" id="toc-key-points-2" class="nav-link" data-scroll-target="#key-points-2">Key Points</a></li>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">Use Cases</a></li>
+  </ul></li>
+  <li><a href="#references-2" id="toc-references-2" class="nav-link" data-scroll-target="#references-2">References</a>
+  <ul class="collapse">
+  <li><a href="#exercises-4" id="toc-exercises-4" class="nav-link" data-scroll-target="#exercises-4">Exercises</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#reformatting-string-and-character-data" id="toc-reformatting-string-and-character-data" class="nav-link" data-scroll-target="#reformatting-string-and-character-data">Reformatting string and character data</a>
+  <ul class="collapse">
+  <li><a href="#postgresql-string-manipulation" id="toc-postgresql-string-manipulation" class="nav-link" data-scroll-target="#postgresql-string-manipulation">PostgreSQL String Manipulation</a>
+  <ul class="collapse">
+  <li><a href="#string-concatenation" id="toc-string-concatenation" class="nav-link" data-scroll-target="#string-concatenation">String Concatenation</a></li>
+  <li><a href="#changing-string-case" id="toc-changing-string-case" class="nav-link" data-scroll-target="#changing-string-case">Changing String Case</a></li>
+  <li><a href="#replacing-characters" id="toc-replacing-characters" class="nav-link" data-scroll-target="#replacing-characters">Replacing Characters</a></li>
+  <li><a href="#reversing-strings" id="toc-reversing-strings" class="nav-link" data-scroll-target="#reversing-strings">Reversing Strings</a></li>
+  <li><a href="#key-takeaways-1" id="toc-key-takeaways-1" class="nav-link" data-scroll-target="#key-takeaways-1">Key Takeaways</a></li>
+  <li><a href="#exercises-5" id="toc-exercises-5" class="nav-link" data-scroll-target="#exercises-5">Exercises</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Functions for manipulating data in POSTGRESQL</h1>
+<p class="subtitle lead">Course notebook</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Heiner Atze </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    Resulting tables might trimmed for clarity
+  </div>
+</div>
+
+
+</header>
+
+
+<section id="overview-of-common-data-types" class="level1 page-columns page-full">
+<h1>Overview of Common Data Types</h1>
+<section id="getting-information-about-your-database" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="getting-information-about-your-database">Getting information about your database</h2>
+<section id="table-information" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="table-information">Table information</h3>
+<div>
+<p>
+As we saw in the video, PostgreSQL has a system database called <code>INFORMATION_SCHEMA</code> that allows us to extract information about objects, including tables, in our database.
+</p>
+<p>
+In this exercise we will look at how to query the <code>tables</code> table of the <code>INFORMATION_SCHEMA</code> database to discover information about tables in the DVD Rentals database including the name, type, schema, and catalog of all tables and views and then how to use the results to get additional information about columns in our tables.
+</p>
+</div>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Select all columns from the <code>INFORMATION_SCHEMA.TABLES</code> system database. Limit results that have a public <code>table_schema</code>.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co">-- Select all columns from the TABLES system database</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="kw">SELECT</span> <span class="op">*</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">FROM</span> information_schema.<span class="kw">tables</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="co">-- Filter by schema</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">'public'</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> table_name <span class="op">=</span> <span class="st">'actor'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="columns column-page-right" style="overflow: auto">
+<table class="table table-condensed table-bordered table-hover table-striped"><thead><tr><th>table_catalog</th><th>table_schema</th><th>table_name</th><th>table_type</th><th>self_referencing_column_name</th><th>reference_generation</th><th>user_defined_type_catalog</th><th>user_defined_type_schema</th><th>user_defined_type_name</th><th>is_insertable_into</th><th>is_typed</th><th>commit_action</th></tr></thead><tbody><tr><td>pgdata</td><td>public</td><td>actor</td><td>BASE TABLE</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>YES</td><td>NO</td><td>null</td></tr><tr><td>pgdata</td><td>public</td><td>category</td><td>BASE TABLE</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>YES</td><td>NO</td><td>null</td></tr><tr><td>pgdata</td><td>public</td><td>film_actor</td><td>BASE TABLE</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>YES</td><td>NO</td><td>null</td></tr><tr><td>pgdata</td><td>public</td><td>film_category</td><td>BASE TABLE</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>YES</td><td>NO</td><td>null</td></tr><tr><td>pgdata</td><td>public</td><td>address</td><td>BASE TABLE</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>YES</td><td>NO</td><td>null</td></tr><tr><td>pgdata</td><td>public</td><td>city</td><td>BASE TABLE</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>YES</td><td>NO</td><td>null</td></tr><tr><td>pgdata</td><td>public</td><td>country</td><td>BASE TABLE</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>YES</td><td>NO</td><td>null</td></tr></tbody></table>
+</div>
+<hr>
+</section>
+<section id="column-information" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="column-information">Column information</h3>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Select all columns from the <code>INFORMATION_SCHEMA.COLUMNS</code> system database. Limit by <code>table_name</code> to <code>actor</code></li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> <span class="co">-- Select all columns from the COLUMNS system database</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> <span class="kw">SELECT</span> <span class="op">*</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">FROM</span> information_schema.<span class="kw">columns</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_name <span class="op">=</span> <span class="st">'actor'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="columns column-page-right" style="overflow: auto">
+<table class="table table-condensed table-bordered table-hover table-striped"><thead><tr><th>table_catalog</th><th>table_schema</th><th>table_name</th><th>column_name</th><th>ordinal_position</th><th>column_default</th><th>is_nullable</th><th>data_type</th><th>character_maximum_length</th><th>character_octet_length</th><th>numeric_precision</th><th>numeric_precision_radix</th><th>numeric_scale</th><th>datetime_precision</th><th>interval_type</th><th>interval_precision</th><th>character_set_catalog</th><th>character_set_schema</th><th>character_set_name</th><th>collation_catalog</th><th>collation_schema</th><th>collation_name</th><th>domain_catalog</th><th>domain_schema</th><th>domain_name</th><th>udt_catalog</th><th>udt_schema</th><th>udt_name</th><th>scope_catalog</th><th>scope_schema</th><th>scope_name</th><th>maximum_cardinality</th><th>dtd_identifier</th><th>is_self_referencing</th><th>is_identity</th><th>identity_generation</th><th>identity_start</th><th>identity_increment</th><th>identity_maximum</th><th>identity_minimum</th><th>identity_cycle</th><th>is_generated</th><th>generation_expression</th><th>is_updatable</th></tr></thead><tbody><tr><td>pgdata</td><td>public</td><td>actor</td><td>actor_id</td><td>1</td><td>null</td><td>YES</td><td>smallint</td><td>null</td><td>null</td><td>16</td><td>2</td><td>0</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>pgdata</td><td>pg_catalog</td><td>int2</td><td>null</td><td>null</td><td>null</td><td>null</td><td>1</td><td>NO</td><td>NO</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>NO</td><td>NEVER</td><td>null</td><td>YES</td></tr><tr><td>pgdata</td><td>public</td><td>actor</td><td>last_update</td><td>4</td><td>null</td><td>YES</td><td>timestamp without time zone</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>6</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>pgdata</td><td>pg_catalog</td><td>timestamp</td><td>null</td><td>null</td><td>null</td><td>null</td><td>4</td><td>NO</td><td>NO</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>NO</td><td>NEVER</td><td>null</td><td>YES</td></tr><tr><td>pgdata</td><td>public</td><td>actor</td><td>first_name</td><td>2</td><td>null</td><td>YES</td><td>character varying</td><td>45</td><td>180</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>pgdata</td><td>pg_catalog</td><td>varchar</td><td>null</td><td>null</td><td>null</td><td>null</td><td>2</td><td>NO</td><td>NO</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>NO</td><td>NEVER</td><td>null</td><td>YES</td></tr><tr><td>pgdata</td><td>public</td><td>actor</td><td>last_name</td><td>3</td><td>null</td><td>YES</td><td>character varying</td><td>45</td><td>180</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>pgdata</td><td>pg_catalog</td><td>varchar</td><td>null</td><td>null</td><td>null</td><td>null</td><td>3</td><td>NO</td><td>NO</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td><td>NO</td><td>NEVER</td><td>null</td><td>YES</td></tr></tbody></table>
+</div>
+<hr>
+</section>
+<section id="determining-data-types" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="determining-data-types">Determining data types</h3>
+<div>
+<p>
+The <code>columns</code> table of the <code>INFORMATION_SCHEMA</code> database also allows us to extract information about the data types of columns in a table. We can extract information like the character or string length of a <code>CHAR</code> or <code>VARCHAR</code> column or the precision of a <code>DECIMAL</code> or <code>NUMERIC</code> floating point type.
+</p>
+<p>
+Using the techniques you learned in the lesson, let’s explore the <code>customer</code> table of our DVD Rental database.
+</p>
+</div>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>
+Select the column name and data type from the <code>INFORMATION_SCHEMA.COLUMNS</code> system database.
+</li>
+<li>
+Limit results to only include the <code>customer</code> table.
+</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Get the column name and data type</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    column_name, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  data_type</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- From the system database information schema</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> information_schema.<span class="kw">COLUMNS</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- For the customer table</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> table_name <span class="op">=</span> <span class="st">'customer'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+column_name
+</th>
+<th>
+data_type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+active
+</td>
+<td>
+integer
+</td>
+</tr>
+<tr>
+<td>
+store_id
+</td>
+<td>
+smallint
+</td>
+</tr>
+<tr>
+<td>
+create_date
+</td>
+<td>
+date
+</td>
+</tr>
+<tr>
+<td>
+last_update
+</td>
+<td>
+timestamp without time zone
+</td>
+</tr>
+<tr>
+<td>
+customer_id
+</td>
+<td>
+smallint
+</td>
+</tr>
+<tr>
+<td>
+address_id
+</td>
+<td>
+smallint
+</td>
+</tr>
+<tr>
+<td>
+activebool
+</td>
+<td>
+boolean
+</td>
+</tr>
+<tr>
+<td>
+first_name
+</td>
+<td>
+character varying
+</td>
+</tr>
+<tr>
+<td>
+last_name
+</td>
+<td>
+character varying
+</td>
+</tr>
+<tr>
+<td>
+email
+</td>
+<td>
+character varying
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="date-and-time-data-types" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="date-and-time-data-types">Date and time data types</h2>
+<section id="timestamp" class="level3">
+<h3 class="anchored" data-anchor-id="timestamp">TIMESTAMP</h3>
+<ul>
+<li><p>Contains both date and time values</p></li>
+<li><p>Microsecond precision</p></li>
+<li><p>ISO 8601 format: YYYY-MM-DD HH:MM:SS.mmmmmm</p></li>
+<li><p>Example from Sakila database (payment table):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> payment_date <span class="kw">FROM</span> payment <span class="kw">LIMIT</span> <span class="dv">1</span>;</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- Output: 2005-05-24 22:53:30</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="date-and-time" class="level3">
+<h3 class="anchored" data-anchor-id="date-and-time">DATE and TIME</h3>
+<ul>
+<li><p>DATE: Stores only date (no time)</p></li>
+<li><p>TIME: Stores only time (no date)</p></li>
+<li><p>Examples:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> create_date <span class="kw">FROM</span> customer <span class="kw">LIMIT</span> <span class="dv">1</span>;</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- Output: 2006-02-14</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> CURRENT_TIME;</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Output: 14:30:00.123456</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="interval" class="level3">
+<h3 class="anchored" data-anchor-id="interval">INTERVAL</h3>
+<ul>
+<li><p>Stores a period of time (years, months, days, hours, seconds, etc.)</p></li>
+<li><p>Useful for date/time arithmetic</p></li>
+<li><p>Example:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> rental_date, rental_date <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">'3 days'</span> <span class="kw">AS</span> expected_return_date</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> rental</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">1</span>;</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Output:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- rental_date | expected_return_date</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- 2005-05-24 22:53:30 | 2005-05-27 22:53:30</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="time-zones" class="level3">
+<h3 class="anchored" data-anchor-id="time-zones">Time Zones</h3>
+<ul>
+<li><p>PostgreSQL supports TIMESTAMP and TIME with or without time zone</p></li>
+<li><p>Default is without time zone</p></li>
+<li><p>Check column type:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> data_type</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> information_schema.<span class="kw">columns</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> table_name <span class="op">=</span> <span class="st">'rental'</span> <span class="kw">AND</span> column_name <span class="op">=</span> <span class="st">'rental_date'</span>;</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Output: timestamp without time zone</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="key-points" class="level3">
+<h3 class="anchored" data-anchor-id="key-points">Key Points</h3>
+<ul>
+<li>TIMESTAMP: Most common for exact point in time</li>
+<li>DATE: When only date is needed</li>
+<li>TIME: When only time is needed</li>
+<li>INTERVAL: For date/time calculations</li>
+<li>Use INFORMATION_SCHEMA to check column data types</li>
+</ul>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<ul>
+<li><a href="https://www.postgresql.org/docs/current/datatype-datetime.html">PostgreSQL Date/Time Types</a></li>
+<li><a href="https://www.postgresqltutorial.com/postgresql-date/">Working with Dates and Times in PostgreSQL</a></li>
+</ul>
+</section>
+<section id="exercises" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="exercises">Exercises</h3>
+<section id="interval-data-types" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="interval-data-types">Interval data types</h4>
+<p>
+<code>INTERVAL</code> data types provide you with a very useful tool for performing arithmetic on date and time data types. For example, let’s say our rental policy requires a DVD to be returned within 3 days. We can calculate the <code>expected_return_date</code> for a given DVD rental by adding an <code>INTERVAL</code> of 3 days to the <code>rental_date</code> from the <code>rental</code> table. We can then compare this result to the actual <code>return_date</code> to determine if the DVD was returned late.
+</p>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>
+Select the rental date and return date from the <code>rental</code> table.
+</li>
+<li>
+Add an <code>INTERVAL</code> of 3 days to the <code>rental_date</code> to calculate the expected return date`.
+</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Select the rental and return dates</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    rental_date,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    return_date,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Calculate the expected_return_date</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    rental_date <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">'3 DAYS'</span> <span class="kw">AS</span> expected_return_date</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> rental;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+rental_date
+</th>
+<th>
+return_date
+</th>
+<th>
+expected_return_date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+2005-05-24 22:53:30
+</td>
+<td>
+2005-05-26 22:04:30
+</td>
+<td>
+2005-05-27 22:53:30
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 22:54:33
+</td>
+<td>
+2005-05-28 19:40:33
+</td>
+<td>
+2005-05-27 22:54:33
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 23:03:39
+</td>
+<td>
+2005-06-01 22:12:39
+</td>
+<td>
+2005-05-27 23:03:39
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 23:04:41
+</td>
+<td>
+2005-06-03 01:43:41
+</td>
+<td>
+2005-05-27 23:04:41
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 23:05:21
+</td>
+<td>
+2005-06-02 04:33:21
+</td>
+<td>
+2005-05-27 23:05:21
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 23:08:07
+</td>
+<td>
+2005-05-27 01:32:07
+</td>
+<td>
+2005-05-27 23:08:07
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 23:11:53
+</td>
+<td>
+2005-05-29 20:34:53
+</td>
+<td>
+2005-05-27 23:11:53
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 23:31:46
+</td>
+<td>
+2005-05-27 23:33:46
+</td>
+<td>
+2005-05-27 23:31:46
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 00:00:40
+</td>
+<td>
+2005-05-28 00:22:40
+</td>
+<td>
+2005-05-28 00:00:40
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 00:02:21
+</td>
+<td>
+2005-05-31 22:44:21
+</td>
+<td>
+2005-05-28 00:02:21
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 00:09:02
+</td>
+<td>
+2005-06-02 20:56:02
+</td>
+<td>
+2005-05-28 00:09:02
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 00:19:27
+</td>
+<td>
+2005-05-30 05:44:27
+</td>
+<td>
+2005-05-28 00:19:27
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 00:22:55
+</td>
+<td>
+2005-05-30 04:28:55
+</td>
+<td>
+2005-05-28 00:22:55
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 00:31:15
+</td>
+<td>
+2005-05-26 02:56:15
+</td>
+<td>
+2005-05-28 00:31:15
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 00:39:22
+</td>
+<td>
+2005-06-03 03:30:22
+</td>
+<td>
+2005-05-28 00:39:22
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 00:43:11
+</td>
+<td>
+2005-05-26 04:42:11
+</td>
+<td>
+2005-05-28 00:43:11
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 01:06:36
+</td>
+<td>
+2005-05-27 00:43:36
+</td>
+<td>
+2005-05-28 01:06:36
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 01:10:47
+</td>
+<td>
+2005-05-31 06:35:47
+</td>
+<td>
+2005-05-28 01:10:47
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 01:17:24
+</td>
+<td>
+2005-05-31 06:00:24
+</td>
+<td>
+2005-05-28 01:17:24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+<section id="postgresql-arrays" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="postgresql-arrays">PostgreSQL ARRAYs</h2>
+<section id="introduction-to-arrays" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-to-arrays">Introduction to ARRAYs</h3>
+<ul>
+<li>ARRAYs in PostgreSQL are similar to arrays in programming languages</li>
+<li>Can create multi-dimensional arrays of varying lengths for any native data type</li>
+</ul>
+</section>
+<section id="creating-tables-with-arrays" class="level3">
+<h3 class="anchored" data-anchor-id="creating-tables-with-arrays">Creating Tables with ARRAYs</h3>
+<ul>
+<li>Use square brackets <code>[]</code> after the data type to define an ARRAY column</li>
+<li>Example:</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> student_scores (</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    student_id SERIAL <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    email TEXT[][],</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    test_scores <span class="dt">INTEGER</span>[]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="inserting-data-into-array-columns" class="level3">
+<h3 class="anchored" data-anchor-id="inserting-data-into-array-columns">Inserting Data into ARRAY Columns</h3>
+<ul>
+<li>Use curly braces <code>{}</code> to represent arrays in INSERT statements</li>
+<li>Example:</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> student_scores (email, test_scores)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span> (</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'{{"work", "work@example.com"}, {"home", "home@example.com"}}'</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'{85, 92, 78}'</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="accessing-arrays" class="level3">
+<h3 class="anchored" data-anchor-id="accessing-arrays">Accessing ARRAYs</h3>
+<ul>
+<li>Use array notation with index values (starting from 1)</li>
+<li>Example:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> email[<span class="dv">1</span>][<span class="dv">2</span>] <span class="kw">FROM</span> student_scores;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="searching-arrays" class="level3">
+<h3 class="anchored" data-anchor-id="searching-arrays">Searching ARRAYs</h3>
+<ul>
+<li>Use array notation in WHERE clauses</li>
+<li>Example:</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> student_scores <span class="kw">WHERE</span> email[<span class="dv">1</span>][<span class="dv">1</span>] <span class="op">=</span> <span class="st">'work'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="array-functions-and-operators" class="level3">
+<h3 class="anchored" data-anchor-id="array-functions-and-operators">ARRAY Functions and Operators</h3>
+<ol type="1">
+<li>ANY function:
+<ul>
+<li>Searches an array for a value</li>
+<li>Example:</li>
+</ul></li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> student_scores</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="st">'other'</span> <span class="op">=</span> <span class="kw">ANY</span>(email[<span class="dv">1</span>]);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Contains operator:
+<ul>
+<li>Alternative to ANY function</li>
+<li>Example:</li>
+</ul></li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> student_scores</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> email[<span class="dv">1</span>] @<span class="op">&gt;</span> <span class="dt">ARRAY</span>[<span class="st">'other'</span>];</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="key-points-1" class="level3">
+<h3 class="anchored" data-anchor-id="key-points-1">Key Points</h3>
+<ul>
+<li>PostgreSQL array indexes start at 1, not 0</li>
+<li>Null values appear for non-existent array elements</li>
+<li>ARRAYs provide flexibility for storing multiple values in a single column</li>
+</ul>
+</section>
+<section id="further-reading" class="level3">
+<h3 class="anchored" data-anchor-id="further-reading">Further Reading</h3>
+<ul>
+<li><a href="https://www.postgresql.org/docs/current/functions-array.html">PostgreSQL Array Functions and Operators</a></li>
+<li><a href="https://www.postgresql.org/docs/current/datatype.html">PostgreSQL Data Types</a></li>
+</ul>
+</section>
+<section id="exercises-1" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="exercises-1">Exercises</h3>
+<strong>Accessing data in an ARRAY</strong>
+<div>
+<p>
+In our DVD Rentals database, the film table contains an ARRAY for <code>special_features</code> which has a type of <code>TEXT[]</code>. Much like any <code>ARRAY</code> data type in PostgreSQL, a <code>TEXT[]</code> array can store an array of <code>TEXT</code> values. This comes in handy when you want to store things like phone numbers or email addresses as we saw in the lesson.
+</p>
+<p>
+Let’s take a look at the <code>special_features</code> column and also practice accessing data in the ARRAY.
+</p>
+</div>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Select the title and special features from the <code>film</code> table and compare the results between the two columns.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Select the title and special features column </span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  title, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  special_features</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> film;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-body-outset-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+title
+</th>
+<th>
+special_features
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+BEACH HEARTBREAKERS
+</td>
+<td>
+Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BEAST HUNCHBACK
+</td>
+<td>
+Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BEDAZZLED MARRIED
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BEHAVIOR RUNAWAY
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BETRAYED REAR
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BILKO ANONYMOUS
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BIRDCAGE CASPER
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BLUES INSTINCT
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BORROWERS BEDAZZLED
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BUBBLE GROSSE
+</td>
+<td>
+Trailers,Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CAMELOT VACATION
+</td>
+<td>
+Trailers,Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CANDIDATE PERDITION
+</td>
+<td>
+Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CASABLANCA SUPER
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CAUSE DATE
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CELEBRITY HORN
+</td>
+<td>
+Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CHAINSAW UPTOWN
+</td>
+<td>
+Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CHANCE RESURRECTION
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CHARADE DUFFEL
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CHARIOTS CONSPIRACY
+</td>
+<td>
+Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CHICAGO NORTH
+</td>
+<td>
+Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CHICKEN HELLFIGHTERS
+</td>
+<td>
+Trailers,Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Select all films that have a special feature <code>Trailers</code> by filtering on the first index of the <code>special_features</code> ARRAY.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Select the title and special features column </span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  title, </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  special_features </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> film</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- Use the array index of the special_features column</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> special_features[<span class="dv">1</span>] <span class="op">=</span> <span class="st">'Trailers'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+title
+</th>
+<th>
+special_features
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+BEDAZZLED MARRIED
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BEHAVIOR RUNAWAY
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BLUES INSTINCT
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BUBBLE GROSSE
+</td>
+<td>
+Trailers,Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CAMELOT VACATION
+</td>
+<td>
+Trailers,Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CASABLANCA SUPER
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CHARADE DUFFEL
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CHICKEN HELLFIGHTERS
+</td>
+<td>
+Trailers,Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CIRCUS YOUTH
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CLEOPATRA DEVIL
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Now let’s select all films that have <code>Deleted Scenes</code> in the second index of the <code>special_features</code> ARRAY.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb17"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Select the title and special features column </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  title, </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  special_features </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> film</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- Use the array index of the special_features column</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> special_features[<span class="dv">2</span>] <span class="op">=</span> <span class="st">'Deleted Scenes'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+title
+</th>
+<th>
+special_features
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+BEDAZZLED MARRIED
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BEHAVIOR RUNAWAY
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BETRAYED REAR
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BILKO ANONYMOUS
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BIRDCAGE CASPER
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BLUES INSTINCT
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BORROWERS BEDAZZLED
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CASABLANCA SUPER
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CAUSE DATE
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CHANCE RESURRECTION
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="searching-an-array-with-any" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="searching-an-array-with-any"><strong>Searching an ARRAY with ANY</strong></h4>
+<div>
+<p>
+As we saw in the video, PostgreSQL also provides the ability to filter results by searching for values in an ARRAY. The <code>ANY</code> function allows you to search for a value in any index position of an ARRAY. Here’s an example.
+</p>
+<pre><code>WHERE 'search text' = ANY(array_name)
+</code></pre>
+<p>
+When using the <code>ANY</code> function, the value you are filtering on appears on the left side of the equation with the name of the ARRAY column as the parameter in the <code>ANY</code> function.
+</p>
+</div>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>
+Match <code>‘Trailers’</code> in any index of the <code>special_features</code> ARRAY regardless of position.
+</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb18"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  title, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  special_features </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> film </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Modify the query to use the ANY function </span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="st">'Trailers'</span> <span class="op">=</span> <span class="kw">ANY</span> (special_features);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+title
+</th>
+<th>
+special_features
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+BEDAZZLED MARRIED
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BEHAVIOR RUNAWAY
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BLUES INSTINCT
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BUBBLE GROSSE
+</td>
+<td>
+Trailers,Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CAMELOT VACATION
+</td>
+<td>
+Trailers,Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CASABLANCA SUPER
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CHARADE DUFFEL
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CHICKEN HELLFIGHTERS
+</td>
+<td>
+Trailers,Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CIRCUS YOUTH
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+CLEOPATRA DEVIL
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="searching-an-array-with" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="searching-an-array-with"><strong>Searching an ARRAY with @&gt;</strong></h4>
+<div>
+<p>
+The contains operator <code>@&gt;</code> operator is alternative syntax to the <code>ANY</code> function and matches data in an ARRAY using the following syntax.
+</p>
+<pre><code>WHERE array_name @&gt; ARRAY['search text'] :: type[]
+</code></pre>
+<p>
+So let’s practice using this operator in the exercise.
+</p>
+</div>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>
+Use the contains operator to match the text <code>Deleted Scenes</code> in the <code>special_features</code> column.
+</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb19"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  title, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  special_features </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> film </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Filter where special_features contains 'Deleted Scenes'</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> special_features @<span class="op">&gt;</span> <span class="dt">ARRAY</span>[<span class="st">'Deleted Scenes'</span>];</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+title
+</th>
+<th>
+special_features
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+BEACH HEARTBREAKERS
+</td>
+<td>
+Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BEAST HUNCHBACK
+</td>
+<td>
+Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BEDAZZLED MARRIED
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BEHAVIOR RUNAWAY
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BETRAYED REAR
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BILKO ANONYMOUS
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BIRDCAGE CASPER
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BLUES INSTINCT
+</td>
+<td>
+Trailers,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BORROWERS BEDAZZLED
+</td>
+<td>
+Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+<tr>
+<td>
+BUBBLE GROSSE
+</td>
+<td>
+Trailers,Commentaries,Deleted Scenes,Behind the Scenes
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="working-with-datetime-functions-and-operators" class="level1 page-columns page-full">
+<h1>Working with DATE/TIME Functions and Operators</h1>
+<section id="postgresql-date-and-time-manipulation" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="postgresql-date-and-time-manipulation">PostgreSQL Date and Time Manipulation</h2>
+<section id="basic-arithmetic-operations" class="level3">
+<h3 class="anchored" data-anchor-id="basic-arithmetic-operations">Basic Arithmetic Operations</h3>
+<ul>
+<li>Subtracting dates returns an integer (days)</li>
+<li>Adding integers to dates adds days</li>
+<li>Operations on timestamps return INTERVALS</li>
+</ul>
+<p>Examples:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Adding days to a date</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="dt">DATE</span> <span class="st">'2023-09-23'</span> <span class="op">+</span> <span class="dv">3</span>;</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Subtracting timestamps</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="dt">TIMESTAMP</span> <span class="st">'2023-09-23 10:00:00'</span> <span class="op">-</span> <span class="dt">TIMESTAMP</span> <span class="st">'2023-09-20 08:00:00'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="age-function" class="level3">
+<h3 class="anchored" data-anchor-id="age-function">AGE Function</h3>
+<p>Calculates the difference between two timestamps, returning an INTERVAL.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> AGE(<span class="dt">TIMESTAMP</span> <span class="st">'2023-09-23 10:00:00'</span>, <span class="dt">TIMESTAMP</span> <span class="st">'2023-09-20 08:00:00'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="interval-usage" class="level3">
+<h3 class="anchored" data-anchor-id="interval-usage">INTERVAL Usage</h3>
+<p>Useful for relative date and time calculations.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Adding 3 days to rental_date</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> rental_date <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">'3 days'</span> <span class="kw">AS</span> expected_return</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> rentals;</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Adding 21 days to a timestamp</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="dt">TIMESTAMP</span> <span class="st">'2023-09-23 10:00:00'</span> <span class="op">+</span> (<span class="dt">INTERVAL</span> <span class="st">'1 day'</span> <span class="op">*</span> <span class="dv">21</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="key-takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h3>
+<ul>
+<li>Understanding return types for different date/time operations is crucial</li>
+<li>AGE function is useful for calculating time differences</li>
+<li>INTERVALs provide flexibility in date/time arithmetic</li>
+<li>Practice these operations to master date and time manipulation in PostgreSQL</li>
+</ul>
+</section>
+<section id="additional-resources" class="level3">
+<h3 class="anchored" data-anchor-id="additional-resources">Additional Resources</h3>
+<ul>
+<li><a href="https://www.postgresql.org/docs/current/functions-datetime.html">PostgreSQL Date/Time Functions and Operators</a></li>
+<li><a href="https://dev.mysql.com/doc/sakila/en/">Sakila Sample Database</a> (Note: Originally for MySQL, but adapted for PostgreSQL)</li>
+</ul>
+</section>
+<section id="exercises-2" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="exercises-2">Exercises</h3>
+<section id="adding-and-subtracting-date-and-time-values" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="adding-and-subtracting-date-and-time-values">Adding and subtracting date and time values</h4>
+<div>
+<p>
+In this exercise, you will calculate the actual number of days rented as well as the true <code>expected_return_date</code> by using the <code>rental_duration</code> column from the <code>film</code> table along with the familiar <code>rental_date</code> from the <code>rental</code> table.
+</p>
+<p>
+This will require that you dust off the skills you learned from prior courses on how to join two or more tables together. To select columns from both the <code>film</code> and <code>rental</code> tables in a single query, we’ll need to use the <code>inventory</code> table to join these two tables together since there is no explicit relationship between them. Let’s give it a try!
+</p>
+</div>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>
+Subtract the <code>rental_date</code> from the <code>return_date</code> to calculate the number of <code>days_rented</code>.
+</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb23"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> f.title, f.rental_duration,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Calculate the number of days rented</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    r.return_date <span class="op">-</span> r.rental_date <span class="kw">AS</span> days_rented</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> film <span class="kw">AS</span> f</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>     <span class="kw">INNER</span> <span class="kw">JOIN</span> inventory <span class="kw">AS</span> i <span class="kw">ON</span> f.film_id <span class="op">=</span> i.film_id</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>     <span class="kw">INNER</span> <span class="kw">JOIN</span> rental <span class="kw">AS</span> r <span class="kw">ON</span> i.inventory_id <span class="op">=</span> r.inventory_id</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> f.title;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>
+Now use the <code>AGE()</code> function to calculate the <code>days_rented</code>.
+</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb24"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> f.title, f.rental_duration,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Calculate the number of days rented</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    AGE(r.return_date, r.rental_date) <span class="kw">AS</span> days_rented</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> film <span class="kw">AS</span> f</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">INNER</span> <span class="kw">JOIN</span> inventory <span class="kw">AS</span> i <span class="kw">ON</span> f.film_id <span class="op">=</span> i.film_id</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">INNER</span> <span class="kw">JOIN</span> rental <span class="kw">AS</span> r <span class="kw">ON</span> i.inventory_id <span class="op">=</span> r.inventory_id</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> f.title;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+title
+</th>
+<th>
+rental_duration
+</th>
+<th>
+days_rented
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+3
+</td>
+<td>
+1 day, 2:09:00
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+3
+</td>
+<td>
+6 days, 19:30:00
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+3
+</td>
+<td>
+null
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+3
+</td>
+<td>
+8 days, 0:02:00
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+3
+</td>
+<td>
+3 days, 1:12:00
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+3
+</td>
+<td>
+8 days, 0:08:00
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+3
+</td>
+<td>
+6 days, 21:32:00
+</td>
+</tr>
+<tr>
+<td>
+ADAPTATION HOLES
+</td>
+<td>
+7
+</td>
+<td>
+5 days, 23:34:00
+</td>
+</tr>
+<tr>
+<td>
+ADAPTATION HOLES
+</td>
+<td>
+7
+</td>
+<td>
+2 days, 19:12:00
+</td>
+</tr>
+<tr>
+<td>
+ADAPTATION HOLES
+</td>
+<td>
+7
+</td>
+<td>
+1 day, 21:03:00
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="interval-arithmetic" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="interval-arithmetic">Interval arithmetic</h4>
+<div>
+<p>
+If you were running a real DVD Rental store, there would be times when you would need to determine what film titles were currently out for rental with customers. In the previous exercise, we saw that some of the records in the results had a <code>NULL</code> value for the <code>return_date</code>. This is because the rental was still outstanding.
+</p>
+<p>
+Each rental in the <code>film</code> table has an associated <code>rental_duration</code> column which represents the number of days that a DVD can be rented by a customer before it is considered late. In this example, you will exclude films that have a <code>NULL</code> value for the <code>return_date</code> and also convert the <code>rental_duration</code> to an <code>INTERVAL</code> type. Here’s a reminder of one method for performing this conversion.
+</p>
+<pre><code>SELECT INTERVAL '1' day * timestamp '2019-04-10 12:34:56'
+</code></pre>
+</div>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>
+Convert <code>rental_duration</code> by multiplying it with a 1 day <code>INTERVAL</code>
+</li>
+<li>
+Subtract the <code>rental_date</code> from the <code>return_date</code> to calculate the number of <code>days_rented</code>.
+</li>
+<li>
+Exclude rentals with a <code>NULL</code> value for <code>return_date</code>.
+</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb25"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    f.title,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Convert the rental_duration to an interval</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">INTERVAL</span> <span class="st">'1'</span> <span class="dt">DAY</span> <span class="op">*</span> f.rental_duration,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Calculate the days rented as we did previously</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    r.return_date <span class="op">-</span> r.rental_date <span class="kw">AS</span> days_rented</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> film <span class="kw">AS</span> f</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">INNER</span> <span class="kw">JOIN</span> inventory <span class="kw">AS</span> i <span class="kw">ON</span> f.film_id <span class="op">=</span> i.film_id</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">INNER</span> <span class="kw">JOIN</span> rental <span class="kw">AS</span> r <span class="kw">ON</span> i.inventory_id <span class="op">=</span> r.inventory_id</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Filter the query to exclude outstanding rentals</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> r.return_date <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> f.title;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+title
+</th>
+<th>
+?column?
+</th>
+<th>
+days_rented
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+3 days, 0:00:00
+</td>
+<td>
+6 days, 19:30:00
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+3 days, 0:00:00
+</td>
+<td>
+6 days, 21:32:00
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+3 days, 0:00:00
+</td>
+<td>
+8 days, 0:02:00
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+3 days, 0:00:00
+</td>
+<td>
+1 day, 2:09:00
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+3 days, 0:00:00
+</td>
+<td>
+3 days, 1:12:00
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+3 days, 0:00:00
+</td>
+<td>
+8 days, 0:08:00
+</td>
+</tr>
+<tr>
+<td>
+ADAPTATION HOLES
+</td>
+<td>
+7 days, 0:00:00
+</td>
+<td>
+5 days, 23:34:00
+</td>
+</tr>
+<tr>
+<td>
+ADAPTATION HOLESs
+</td>
+<td>
+7 days, 0:00:00
+</td>
+<td>
+2 days, 19:12:00
+</td>
+</tr>
+<tr>
+<td>
+ADAPTATION HOLES
+</td>
+<td>
+7 days, 0:00:00
+</td>
+<td>
+1 day, 21:03:00
+</td>
+</tr>
+<tr>
+<td>
+ADAPTATION HOLES
+</td>
+<td>
+7 days, 0:00:00
+</td>
+<td>
+21:30:00
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="calculate-the-expected-return-date" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="calculate-the-expected-return-date">Calculate the expected return date</h4>
+<div>
+<p>
+So now that you’ve practiced how to add and subtract timestamps and perform relative calculations using intervals, let’s use those new skills to calculate the actual expected return date of a specific rental. As you’ve seen in previous exercises, the <code>rental_duration</code> is the number of days allowed for a rental before it’s considered late. To calculate the <code>expected_return_date</code> you will want to use the <code>rental_duration</code> and add it to the <code>rental_date</code>.
+</p>
+</div>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>
+Convert <code>rental_duration</code> by multiplying it with a 1-day <code>INTERVAL</code>.
+</li>
+<li>
+Add it to the rental date.
+</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb26"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    f.title,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    r.rental_date,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    f.rental_duration,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Add the rental duration to the rental date</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">INTERVAL</span> <span class="st">'1'</span> <span class="dt">day</span> <span class="op">*</span> f.rental_duration <span class="op">+</span> r.rental_date <span class="kw">AS</span> expected_return_date,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    r.return_date</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> film <span class="kw">AS</span> f</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">INNER</span> <span class="kw">JOIN</span> inventory <span class="kw">AS</span> i <span class="kw">ON</span> f.film_id <span class="op">=</span> i.film_id</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">INNER</span> <span class="kw">JOIN</span> rental <span class="kw">AS</span> r <span class="kw">ON</span> i.inventory_id <span class="op">=</span> r.inventory_id</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> f.title;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+title
+</th>
+<th>
+rental_date
+</th>
+<th>
+rental_duration
+</th>
+<th>
+expected_return_date
+</th>
+<th>
+return_date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+2005-07-07 19:46:51
+</td>
+<td>
+3
+</td>
+<td>
+2005-07-10 19:46:51
+</td>
+<td>
+2005-07-08 21:55:51
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+2005-08-17 09:33:02
+</td>
+<td>
+3
+</td>
+<td>
+2005-08-20 09:33:02
+</td>
+<td>
+2005-08-24 05:03:02
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+2006-02-14 15:16:03
+</td>
+<td>
+3
+</td>
+<td>
+2006-02-17 15:16:03
+</td>
+<td>
+null
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+2005-08-22 16:59:05
+</td>
+<td>
+3
+</td>
+<td>
+2005-08-25 16:59:05
+</td>
+<td>
+2005-08-30 17:01:05
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+2005-08-01 04:24:47
+</td>
+<td>
+3
+</td>
+<td>
+2005-08-04 04:24:47
+</td>
+<td>
+2005-08-04 05:36:47
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+2005-07-28 05:04:47
+</td>
+<td>
+3
+</td>
+<td>
+2005-07-31 05:04:47
+</td>
+<td>
+2005-08-05 05:12:47
+</td>
+</tr>
+<tr>
+<td>
+ACE GOLDFINGER
+</td>
+<td>
+2005-08-02 04:41:17
+</td>
+<td>
+3
+</td>
+<td>
+2005-08-05 04:41:17
+</td>
+<td>
+2005-08-09 02:13:17
+</td>
+</tr>
+<tr>
+<td>
+ADAPTATION HOLES
+</td>
+<td>
+2005-07-06 22:01:51
+</td>
+<td>
+7
+</td>
+<td>
+2005-07-13 22:01:51
+</td>
+<td>
+2005-07-12 21:35:51
+</td>
+</tr>
+<tr>
+<td>
+ADAPTATION HOLES
+</td>
+<td>
+2005-07-27 01:21:19
+</td>
+<td>
+7
+</td>
+<td>
+2005-08-03 01:21:19
+</td>
+<td>
+2005-07-29 20:33:19
+</td>
+</tr>
+<tr>
+<td>
+ADAPTATION HOLES
+</td>
+<td>
+2005-05-31 04:50:07
+</td>
+<td>
+7
+</td>
+<td>
+2005-06-07 04:50:07
+</td>
+<td>
+2005-06-02 01:53:07
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+<section id="retrieving-current-date-and-time" class="level2">
+<h2 class="anchored" data-anchor-id="retrieving-current-date-and-time">Retrieving Current date and time</h2>
+<section id="now-function" class="level3">
+<h3 class="anchored" data-anchor-id="now-function">NOW() Function</h3>
+<ul>
+<li><p>Returns current timestamp with microsecond precision and timezone</p></li>
+<li><p>Example:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> NOW();</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="casting-timestamp-without-timezone" class="level3">
+<h3 class="anchored" data-anchor-id="casting-timestamp-without-timezone">Casting Timestamp without Timezone</h3>
+<ul>
+<li><p>PostgreSQL-specific casting:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> NOW():<span class="ch">:timestamp</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>SQL standard casting:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">CAST</span>(NOW() <span class="kw">AS</span> <span class="dt">timestamp</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="current_timestamp-function" class="level3">
+<h3 class="anchored" data-anchor-id="current_timestamp-function">CURRENT_TIMESTAMP Function</h3>
+<ul>
+<li><p>Alternative to NOW()</p></li>
+<li><p>Allows precision specification:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">CURRENT_TIMESTAMP</span>(<span class="dv">2</span>); <span class="co">-- Rounds to 2 decimal places</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+</section>
+<section id="current-date-and-time" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="current-date-and-time">Current Date and Time</h2>
+<section id="current_date-function" class="level3">
+<h3 class="anchored" data-anchor-id="current_date-function">CURRENT_DATE Function</h3>
+<ul>
+<li><p>Returns current date without time</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">CURRENT_DATE</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="current_time-function" class="level3">
+<h3 class="anchored" data-anchor-id="current_time-function">CURRENT_TIME Function</h3>
+<ul>
+<li><p>Returns current time with timezone, without date</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> CURRENT_TIME;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="additional-notes" class="level3">
+<h3 class="anchored" data-anchor-id="additional-notes">Additional Notes</h3>
+<ul>
+<li>Casting allows conversion between data types</li>
+<li>NOW() and CURRENT_TIMESTAMP are interchangeable in most cases</li>
+<li>Use appropriate function based on required precision and format</li>
+</ul>
+</section>
+<section id="references-1" class="level3">
+<h3 class="anchored" data-anchor-id="references-1">References</h3>
+<ul>
+<li>PostgreSQL Documentation: <a href="https://www.postgresql.org/docs/current/functions-datetime.html">Date/Time Functions and Operators</a></li>
+</ul>
+</section>
+<section id="exercises-3" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="exercises-3">Exercises</h3>
+<section id="working-with-the-current-date-and-time" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="working-with-the-current-date-and-time">Working with the current date and time</h4>
+<div>
+<p>
+Because the Sakila database is a bit dated and most of the date and time values are from 2005 or 2006, you are going to practice using the current date and time in our queries without using Sakila. You’ll get back into working with this database in the next video and throughout the remainder of the course. For now, let’s practice the techniques you learned about so far in this chapter to work with the current date and time.
+</p>
+<p>
+As you learned in the video, <code>NOW()</code> and <code>CURRENT_TIMESTAMP</code> can be used interchangeably.
+</p>
+</div>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Use <code>NOW()</code> to select the current timestamp with timezone.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb33"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> NOW();</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+now
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+2024-09-23 19:07:13.212014+02:00
+</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Select the current date without any time value.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb34"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Select the current date</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">CURRENT_DATE</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+current_date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+2024-09-23
+</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Now, let’s use the <code>CAST()</code> function to eliminate the timezone from the current timestamp.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb35"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">--Select the current timestamp without a timezone</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">CAST</span>( NOW() <span class="kw">AS</span> <span class="dt">timestamp</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+now
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+2024-09-23 19:09:13.543835
+</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>
+Finally, let’s select the current date.
+</li>
+<li>
+Use <code>CAST()</code> to retrieve the same result from the <code>NOW()</code> function.
+</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb36"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Select the current date</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">current_date</span>,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- CAST the result of the NOW() function to a date</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">CAST</span>( NOW() <span class="kw">AS</span> <span class="dt">date</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+current_date
+</th>
+<th>
+now
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+2024-09-23
+</td>
+<td>
+2024-09-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="manipulating-current-date-and-time" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="manipulating-current-date-and-time">Manipulating current date and time</h4>
+<div>
+<p>
+Most of the time when you work with the current date and time, you will want to transform, manipulate, or perform operations on the value in your queries. In this exercise, you will practice adding an <code>INTERVAL</code> to the current timestamp as well as perform some more advanced calculations.
+</p>
+<p>
+Let’s practice retrieving the current timestamp. For this exercise, please use <code>CURRENT_TIMESTAMP</code> instead of the <code>NOW()</code> function and if you need to convert a date or time value to a timestamp data type, please use the PostgreSQL specific casting rather than the <code>CAST()</code> function.
+</p>
+</div>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Select the current timestamp without timezone and alias it as <code>right_now</code>.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb37"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">--Select the current timestamp without timezone</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">current_timestamp</span>:<span class="ch">:timestamp</span> <span class="kw">AS</span> right_now;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+right_now
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+2024-09-23 19:13:45.219552
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Now select a timestamp five days from now and alias it as <code>five_days_from_now</code>.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb38"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">CURRENT_TIMESTAMP</span>:<span class="ch">:timestamp</span> <span class="kw">AS</span> right_now,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">INTERVAL</span> <span class="st">'5 days'</span> <span class="op">+</span> <span class="fu">CURRENT_TIMESTAMP</span> <span class="kw">AS</span> five_days_from_now;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+right_now
+</th>
+<th>
+five_days_from_now
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+2024-09-23 19:16:09.010164
+</td>
+<td>
+2024-09-28 19:16:09.010164+02:00
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Finally, let’s use a second-level precision with no fractional digits for both the <code>right_now</code> and <code>five_days_from_now</code> fields.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb39"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>p<span class="op">&gt;</span>Finally, let<span class="st">'s use a second-level precision with no fractional digits for both the &lt;code&gt;right_now&lt;/code&gt; and &lt;code&gt;five_days_from_now&lt;/code&gt; fields.&lt;/p&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+right_now
+</th>
+<th>
+five_days_from_now
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+2024-09-23 19:18:26
+</td>
+<td>
+2024-09-28 19:18:26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+<section id="extracting-and-tranformingi-datetime-data" class="level2">
+<h2 class="anchored" data-anchor-id="extracting-and-tranformingi-datetime-data">Extracting and tranformingi Date/Time data</h2>
+<section id="extract-and-date_part" class="level3">
+<h3 class="anchored" data-anchor-id="extract-and-date_part">EXTRACT and DATE_PART</h3>
+<p>Extract sub-fields from timestamp, time, or interval data types.</p>
+<p>Syntax:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">EXTRACT</span>(field <span class="kw">FROM</span> <span class="kw">source</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>DATE_PART(<span class="st">'field'</span>, <span class="kw">source</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Common field identifiers: - year - month - quarter - day - dow (day of week)</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">EXTRACT</span>(QUARTER <span class="kw">FROM</span> payment_date) <span class="kw">AS</span> quarter,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">EXTRACT</span>(<span class="dt">YEAR</span> <span class="kw">FROM</span> payment_date) <span class="kw">AS</span> <span class="dt">year</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(amount) <span class="kw">AS</span> revenue</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>, <span class="dv">2</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> revenue <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="date_trunc" class="level3">
+<h3 class="anchored" data-anchor-id="date_trunc">DATE_TRUNC</h3>
+<p>Truncate timestamp or interval to a specified precision.</p>
+<p>Syntax:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>DATE_TRUNC(<span class="st">'precision'</span>, <span class="kw">source</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Common precision values: - year - month - day</p>
+<p>Examples:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> DATE_TRUNC(<span class="st">'year'</span>, <span class="dt">TIMESTAMP</span> <span class="st">'2023-03-15 14:30:00'</span>);</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- Result: 2023-01-01 00:00:00</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> DATE_TRUNC(<span class="st">'month'</span>, <span class="dt">TIMESTAMP</span> <span class="st">'2023-03-15 14:30:00'</span>);</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Result: 2023-03-01 00:00:00</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="key-points-2" class="level3">
+<h3 class="anchored" data-anchor-id="key-points-2">Key Points</h3>
+<ul>
+<li>EXTRACT and DATE_PART produce identical results and can be used interchangeably</li>
+<li>DATE_TRUNC returns a timestamp or interval, not a numeric value</li>
+<li>These functions are useful for data aggregation, reporting, and trend analysis</li>
+<li>In GROUP BY clauses, you can reference SELECT columns by their position number</li>
+</ul>
+</section>
+<section id="use-cases" class="level3">
+<h3 class="anchored" data-anchor-id="use-cases">Use Cases</h3>
+<ul>
+<li>Aggregating data by year, quarter, or month</li>
+<li>Identifying trends over time</li>
+<li>Preparing data for machine learning models</li>
+<li>Simplifying complex timestamp data for analysis</li>
+</ul>
+</section>
+</section>
+<section id="references-2" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="references-2">References</h2>
+<ul>
+<li><a href="https://www.postgresql.org/docs/current/functions-datetime.html">PostgreSQL Date/Time Functions</a></li>
+<li><a href="https://www.postgresql.org/docs/current/functions-datetime.html#FUNCTIONS-DATETIME-EXTRACT">PostgreSQL EXTRACT Function</a></li>
+<li><a href="https://www.postgresql.org/docs/current/functions-datetime.html#FUNCTIONS-DATETIME-TRUNC">PostgreSQL DATE_TRUNC Function</a></li>
+</ul>
+<section id="exercises-4" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="exercises-4">Exercises</h3>
+<section id="using-extract" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="using-extract">Using EXTRACT</h4>
+<div>
+<p>
+You can use <code>EXTRACT()</code> and <code>DATE_PART()</code> to easily create new fields in your queries by extracting sub-fields from a source timestamp field.
+</p>
+<p>
+Now suppose you want to produce a predictive model that will help forecast DVD rental activity by day of the week. You could use the <code>EXTRACT()</code> function with the <code>dow</code> field identifier in our query to create a new field called <code>dayofweek</code> as a sub-field of the <code>rental_date</code> column from the <code>rental</code> table.
+</p>
+<p>
+You can <code>COUNT()</code> the number of records in the rental table for a given date range and aggregate by the newly created <code>dayofweek</code> column.
+</p>
+</div>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>
+Get the day of the week from the <code>rental_date</code> column.
+</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb44"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Extract day of week from rental_date</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">EXTRACT</span>(dow <span class="kw">from</span> rental_date) <span class="kw">AS</span> dayofweek </span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> rental </span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">100</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>
+Count the total number of rentals by day of the week.
+</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb45"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Extract day of week from rental_date</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">EXTRACT</span>(dow <span class="kw">FROM</span> rental_date) <span class="kw">AS</span> dayofweek, </span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Count the number of rentals</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">as</span> rentals </span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> rental </span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="column-page-right">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+dayofweek
+</th>
+<th>
+rentals
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+0
+</td>
+<td>
+2320
+</td>
+</tr>
+<tr>
+<td>
+6
+</td>
+<td>
+2311
+</td>
+</tr>
+<tr>
+<td>
+1
+</td>
+<td>
+2247
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+2463
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+2231
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+2272
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+2200
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="using-date_trunc" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="using-date_trunc">Using <code>DATE_TRUNC</code></h4>
+<div>
+<p>
+The <code>DATE_TRUNC()</code> function will truncate timestamp or interval data types to return a timestamp or interval at a specified precision. The precision values are a subset of the field identifiers that can be used with the <code>EXTRACT()</code> and <code>DATE_PART()</code> functions. <code>DATE_TRUNC()</code> will return an interval or timestamp rather than a number. For example
+</p>
+<pre><code>SELECT DATE_TRUNC('month', TIMESTAMP '2005-05-21 15:30:30');
+</code></pre>
+<p>
+<strong>Result: 2005-05-01 00;00:00</strong>
+</p>
+<p>
+Now, let’s experiment with different precisions and ultimately modify the queries from the previous exercises to aggregate rental activity.
+</p>
+</div>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Truncate the <code>rental_date</code> field by <code>year</code>.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb46"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Truncate rental_date by year</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> DATE_TRUNC(<span class="st">'year'</span>, rental_date) <span class="kw">AS</span> rental_year</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> rental;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="{div}">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+rental_year
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+2005-01-01 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-01-01 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-01-01 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-01-01 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-01-01 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-01-01 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-01-01 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-01-01 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-01-01 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-01-01 00:00:00
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Now modify the previous query to truncate the <code>rental_date</code> by <code>month</code>.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb47"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Truncate rental_date by month</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> DATE_TRUNC(<span class="st">'month'</span>, rental_date) <span class="kw">AS</span> rental_month</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> rental;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="{div}">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+rental_month
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+2005-05-01 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-01 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-01 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-01 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-01 00:00:00
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Let’s see what happens when we truncate by day of the month.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb48"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Truncate rental_date by day of the month </span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> DATE_TRUNC(<span class="st">'day'</span>, rental_date) <span class="kw">AS</span> rental_day </span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> rental;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="{div}">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+rental_day
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+2005-05-24 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-24 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 00:00:00
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 00:00:00
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>Finally, count the total number of rentals by <code>rental_day</code> and alias it as <code>rentals</code>.</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb49"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  DATE_TRUNC(<span class="st">'day'</span>, rental_date) <span class="kw">AS</span> rental_day,</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Count total number of rentals </span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> rentals</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> rental</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="{div}">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+rental_day
+</th>
+<th>
+rentals
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+2005-05-28 00:00:00
+</td>
+<td>
+196
+</td>
+</tr>
+<tr>
+<td>
+2005-05-25 00:00:00
+</td>
+<td>
+137
+</td>
+</tr>
+<tr>
+<td>
+2005-05-29 00:00:00
+</td>
+<td>
+154
+</td>
+</tr>
+<tr>
+<td>
+2005-08-16 00:00:00
+</td>
+<td>
+23
+</td>
+</tr>
+<tr>
+<td>
+2005-05-31 00:00:00
+</td>
+<td>
+163
+</td>
+</tr>
+<tr>
+<td>
+2005-07-11 00:00:00
+</td>
+<td>
+461
+</td>
+</tr>
+<tr>
+<td>
+2005-07-10 00:00:00
+</td>
+<td>
+480
+</td>
+</tr>
+<tr>
+<td>
+2005-06-18 00:00:00
+</td>
+<td>
+344
+</td>
+</tr>
+<tr>
+<td>
+2005-07-31 00:00:00
+</td>
+<td>
+679
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="putting-it-all-together" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="putting-it-all-together">Putting it all together</h4>
+<div>
+<p>
+Many of the techniques you’ve learned in this course will be useful when building queries to extract data for model training. Now let’s use some date/time functions to extract and manipulate some DVD rentals data from our fictional DVD rental store.
+</p>
+<p>
+In this exercise, you are going to extract a list of customers and their rental history over 90 days. You will be using the <code>EXTRACT()</code>, <code>DATE_TRUNC()</code>, and <code>AGE()</code> functions that you learned about during this chapter along with some general SQL skills from the prerequisites to extract a data set that could be used to determine what day of the week customers are most likely to rent a DVD and the likelihood that they will return the DVD late.
+</p>
+</div>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>
+Extract the day of the week from the <code>rental_date</code> column using the alias <code>dayofweek</code>.
+</li>
+<li>
+Use an <code>INTERVAL</code> in the <code>WHERE</code> clause to select records for the 90 day period starting on 5/1/2005.
+</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb50"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Extract the day of week date part from the rental_date</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">EXTRACT</span>(dow <span class="kw">from</span> rental_date) <span class="kw">AS</span> dayofweek,</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  AGE(return_date, rental_date) <span class="kw">AS</span> rental_days</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> rental <span class="kw">AS</span> r </span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> </span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Use an INTERVAL for the upper bound of the rental_date </span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  rental_date <span class="kw">BETWEEN</span> <span class="fu">CAST</span>(<span class="st">'2005-05-01'</span> <span class="kw">AS</span> <span class="dt">date</span>)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> <span class="fu">CAST</span>(<span class="st">'2005-05-01'</span> <span class="kw">AS</span> <span class="dt">date</span>) <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">'90 day'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="{div}">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+dayofweek
+</th>
+<th>
+rental_days
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+2
+</td>
+<td>
+1 day, 23:11:00
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+3 days, 20:46:00
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+7 days, 23:09:00
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+9 days, 2:39:00
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+8 days, 5:28:00
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+2 days, 2:24:00
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+4 days, 21:23:00
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+3 days, 0:02:00
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+3 days, 0:22:00
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<div class="columns column-page-right">
+<div class="instrcol column">
+<ul>
+<li>
+Finally, use a <code>CASE</code> statement and <code>DATE_TRUNC()</code> to create a new column called <code>past_due</code> which will be <code>TRUE</code> if the <code>rental_days</code> is greater than the <code>rental_duration</code> otherwise, it will be <code>FALSE</code>.
+</li>
+</ul>
+</div><div class="sepcol column">
+
+</div><div class="column codecol">
+<div class="sourceCode" id="cb51"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  c.first_name <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> c.last_name <span class="kw">AS</span> customer_name,</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  f.title,</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  r.rental_date,</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Extract the day of week date part from the rental_date</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">EXTRACT</span>(dow <span class="kw">FROM</span> r.rental_date) <span class="kw">AS</span> dayofweek,</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  AGE(r.return_date, r.rental_date) <span class="kw">AS</span> rental_days,</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Use DATE_TRUNC to get days from the AGE function</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">CASE</span> <span class="cf">WHEN</span> DATE_TRUNC(<span class="st">'day'</span>, AGE(r.return_date, r.rental_date)) <span class="op">&gt;</span> </span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Calculate number of d</span></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>    f.rental_duration <span class="op">*</span> <span class="dt">INTERVAL</span> <span class="st">'1'</span> <span class="dt">day</span> </span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">THEN</span> <span class="kw">TRUE</span> </span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">ELSE</span> <span class="kw">FALSE</span> <span class="cf">END</span> <span class="kw">AS</span> past_due </span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> </span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>  film <span class="kw">AS</span> f </span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">INNER</span> <span class="kw">JOIN</span> inventory <span class="kw">AS</span> i </span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ON</span> f.film_id <span class="op">=</span> i.film_id </span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">INNER</span> <span class="kw">JOIN</span> rental <span class="kw">AS</span> r </span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ON</span> i.inventory_id <span class="op">=</span> r.inventory_id </span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">INNER</span> <span class="kw">JOIN</span> customer <span class="kw">AS</span> c </span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ON</span> c.customer_id <span class="op">=</span> r.customer_id </span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> </span>
+<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Use an INTERVAL for the upper bound of the rental_date </span></span>
+<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>  r.rental_date <span class="kw">BETWEEN</span> <span class="fu">CAST</span>(<span class="st">'2005-05-01'</span> <span class="kw">AS</span> <span class="dt">DATE</span>) </span>
+<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> <span class="fu">CAST</span>(<span class="st">'2005-05-01'</span> <span class="kw">AS</span> <span class="dt">DATE</span>) <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">'90 day'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="{div}">
+<table class="table table-condensed table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th>
+customer_name
+</th>
+<th>
+title
+</th>
+<th>
+rental_date
+</th>
+<th>
+dayofweek
+</th>
+<th>
+rental_days
+</th>
+<th>
+past_due
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+CHARLOTTE HUNTER
+</td>
+<td>
+BLANKET BEVERLY
+</td>
+<td>
+2005-05-24 22:53:30
+</td>
+<td>
+2
+</td>
+<td>
+1 day, 23:11:00
+</td>
+<td>
+false
+</td>
+</tr>
+<tr>
+<td>
+TOMMY COLLAZO
+</td>
+<td>
+FREAKY POCUS
+</td>
+<td>
+2005-05-24 22:54:33
+</td>
+<td>
+2
+</td>
+<td>
+3 days, 20:46:00
+</td>
+<td>
+false
+</td>
+</tr>
+<tr>
+<td>
+MANUEL MURRELL
+</td>
+<td>
+GRADUATE LORD
+</td>
+<td>
+2005-05-24 23:03:39
+</td>
+<td>
+2
+</td>
+<td>
+7 days, 23:09:00
+</td>
+<td>
+false
+</td>
+</tr>
+<tr>
+<td>
+ANDREW PURDY
+</td>
+<td>
+LOVE SUICIDES
+</td>
+<td>
+2005-05-24 23:04:41
+</td>
+<td>
+2
+</td>
+<td>
+9 days, 2:39:00
+</td>
+<td>
+true
+</td>
+</tr>
+<tr>
+<td>
+DELORES HANSEN
+</td>
+<td>
+IDOLS SNATCHERS
+</td>
+<td>
+2005-05-24 23:05:21
+</td>
+<td>
+2
+</td>
+<td>
+8 days, 5:28:00
+</td>
+<td>
+true
+</td>
+</tr>
+<tr>
+<td>
+NELSON CHRISTENSON
+</td>
+<td>
+MYSTIC TRUMAN
+</td>
+<td>
+2005-05-24 23:08:07
+</td>
+<td>
+2
+</td>
+<td>
+2 days, 2:24:00
+</td>
+<td>
+false
+</td>
+</tr>
+<tr>
+<td>
+CASSANDRA WALTERS
+</td>
+<td>
+SWARM GOLD
+</td>
+<td>
+2005-05-24 23:11:53
+</td>
+<td>
+2
+</td>
+<td>
+4 days, 21:23:00
+</td>
+<td>
+false
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="reformatting-string-and-character-data" class="level1">
+<h1>Reformatting string and character data</h1>
+<section id="postgresql-string-manipulation" class="level2">
+<h2 class="anchored" data-anchor-id="postgresql-string-manipulation">PostgreSQL String Manipulation</h2>
+<section id="string-concatenation" class="level3">
+<h3 class="anchored" data-anchor-id="string-concatenation">String Concatenation</h3>
+<ul>
+<li>Use <code>||</code> operator or <code>CONCAT()</code> function</li>
+<li>Combine multiple strings or columns</li>
+</ul>
+<div class="sourceCode" id="cb52"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Using || operator</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> first_name <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> last_name <span class="kw">AS</span> full_name</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> customer;</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Using CONCAT() function</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">CONCAT</span>(first_name, <span class="st">' '</span>, last_name) <span class="kw">AS</span> full_name</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> customer;</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- Concatenating with non-string data</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">CONCAT</span>(customer_id, <span class="st">': '</span>, first_name, <span class="st">' '</span>, last_name) <span class="kw">AS</span> customer_info</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> customer;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="changing-string-case" class="level3">
+<h3 class="anchored" data-anchor-id="changing-string-case">Changing String Case</h3>
+<ul>
+<li><code>UPPER()</code>: Convert to uppercase</li>
+<li><code>LOWER()</code>: Convert to lowercase</li>
+<li><code>INITCAP()</code>: Convert to title case</li>
+</ul>
+<div class="sourceCode" id="cb53"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">UPPER</span>(title) <span class="kw">AS</span> uppercase_title,</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">LOWER</span>(title) <span class="kw">AS</span> lowercase_title,</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">INITCAP</span>(title) <span class="kw">AS</span> titlecase_title</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> film;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="replacing-characters" class="level3">
+<h3 class="anchored" data-anchor-id="replacing-characters">Replacing Characters</h3>
+<p>Use <code>REPLACE()</code> function to find and replace substrings</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">REPLACE</span>(title, <span class="st">'A Astounding'</span>, <span class="st">'An Astounding'</span>) <span class="kw">AS</span> corrected_title</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> film</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> title <span class="kw">LIKE</span> <span class="st">'A Astounding%'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="reversing-strings" class="level3">
+<h3 class="anchored" data-anchor-id="reversing-strings">Reversing Strings</h3>
+<p>Use <code>REVERSE()</code> function to reverse the order of characters in a string</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">REVERSE</span>(title) <span class="kw">AS</span> reversed_title</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> film;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="key-takeaways-1" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways-1">Key Takeaways</h3>
+<ol type="1">
+<li>String manipulation is crucial for data cleansing and standardization</li>
+<li>PostgreSQL offers various functions for string transformation</li>
+<li>Concatenation can be performed with both string and non-string data</li>
+<li>Case conversion functions help in normalizing data</li>
+<li>REPLACE() is useful for correcting or standardizing text</li>
+<li>REVERSE() can be used for specialized string manipulations</li>
+</ol>
+<p><strong>Note</strong>: These functions are essential for data preprocessing and analysis tasks in PostgreSQL.</p>
+</section>
+<section id="exercises-5" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-5">Exercises</h3>
+<section id="section" class="level4">
+<h4 class="anchored" data-anchor-id="section"></h4>
+
+
+</section>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

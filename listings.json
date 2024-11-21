@@ -1,11 +1,24 @@
 [
   {
+    "listing": "/datacamp_site/extended.html",
+    "items": []
+  },
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/blog/lin_alg_hasselt.html"
+    ]
+  },
+  {
     "listing": "/datacamp_site/guided.html",
     "items": [
       "/datacamp_projects/workspace/Python/NLP_gender_reviews/notebook.html",
+      "/datacamp_projects/guided/python/books_darwin/notebook.html",
       "/datacamp_projects/guided/python/cosmetic_ingredients/notebook.html",
       "/datacamp_projects/guided/python/nlp_movies_similarity/notebook.html",
+      "/datacamp_projects/workspace/SQL/unicorn_companies/notebook.html",
       "/datacamp_projects/workspace/SQL/ev_charging/notebook.html",
+      "/datacamp_projects/workspace/SQL/eval_manufacturing/notebook.html",
       "/datacamp_projects/workspace/SQL/international_debt/notebook.html",
       "/datacamp_projects/workspace/SQL/london_transport/notebook.html",
       "/datacamp_projects/workspace/SQL/student_mental_health/notebook.html",
@@ -14,19 +27,11 @@
     ]
   },
   {
-    "listing": "/datacamp_courses/dc_courses_python.html",
-    "items": []
-  },
-  {
     "listing": "/duke_stats.html",
     "items": [
       "/stats_with_R/1_intro_data/1_intro_data.html",
       "/stats_with_R/2_inference/2_inference.html",
       "/stats_with_R/3_regression/3_regression.html"
     ]
-  },
-  {
-    "listing": "/datacamp_site/extended.html",
-    "items": []
   }
 ]

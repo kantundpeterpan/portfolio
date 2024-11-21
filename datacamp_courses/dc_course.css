@@ -1,0 +1,36 @@
+.instrcol {
+    width: 29% !important;
+    text-align: justify;
+}
+
+.sepcol {
+    width: 3% !important;
+}
+
+.codecol {
+    width: 68% !important; 
+}
+
+div.codecol .sourceCode {
+    margin: 0 !important;
+}
+
+div table th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+div:has(table){
+    overflow: auto;
+    max-height: 200px;
+}
+
+th {    
+    background-color: aliceblue !important;
+}
+
+table {
+    font-size: small;
+}

@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.54">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>untitled1 – Heiner Atze, PhD</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+
+<div id="f679e08e-527b-4907-b4e1-d9c20d17c4ba" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow_probability <span class="im">as</span> tfp</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>tfd <span class="op">=</span> tfp.distributions</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the random seed for reproducibility</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>seed <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>np.random.seed(seed)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>tf.random.set_seed(seed)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>categories <span class="op">=</span> <span class="dv">4</span>  <span class="co"># Number of categories</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>data_size <span class="op">=</span> <span class="dv">100</span>  <span class="co"># Number of data points</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated data from a Dirichlet-Multinomial distribution</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>true_p <span class="op">=</span> np.array([<span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>])  <span class="co"># True probabilities for each category</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate sample data</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>observed_data <span class="op">=</span> np.random.multinomial(<span class="dv">1</span>, true_p, size<span class="op">=</span>data_size)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>observed_counts <span class="op">=</span> np.<span class="bu">sum</span>(observed_data, axis<span class="op">=</span><span class="dv">0</span>)  <span class="co"># Sum counts across all samples</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the model using JointDistributionNamed and Sample</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> model():</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tfd.JointDistributionNamed({</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">'p'</span>: tfd.Dirichlet(concentration<span class="op">=</span>tf.ones(categories),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>                          force_probs_to_zero_outside_support <span class="op">=</span> <span class="va">True</span>),</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">'obs'</span>: <span class="kw">lambda</span> p: tfd.Sample(</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            tfd.Multinomial(total_count <span class="op">=</span> <span class="dv">1</span>, probs<span class="op">=</span>p),</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            sample_shape<span class="op">=</span>data_size</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the model</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>joint_distribution <span class="op">=</span> model()</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the target log probability function</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> target_log_prob(p):</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> joint_distribution.log_prob({<span class="st">'p'</span>: p, <span class="st">'obs'</span>: observed_data})</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Hamiltonian Monte Carlo settings</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>num_results <span class="op">=</span> <span class="dv">50000</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>num_burnin_steps <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>step_size <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>num_leapfrog_steps <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup the Hamiltonian Monte Carlo</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>hmc_kernel <span class="op">=</span> tfp.mcmc.HamiltonianMonteCarlo(</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    target_log_prob_fn<span class="op">=</span>target_log_prob,</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    step_size<span class="op">=</span>step_size,</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    num_leapfrog_steps<span class="op">=</span>num_leapfrog_steps</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Add adaptive step size</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>adaptive_hmc_kernel <span class="op">=</span> tfp.mcmc.SimpleStepSizeAdaptation(</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    inner_kernel<span class="op">=</span>hmc_kernel,</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    num_adaptation_steps<span class="op">=</span><span class="bu">int</span>(num_burnin_steps <span class="op">*</span> <span class="fl">0.8</span>)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Running the chain</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="at">@tf.function</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_chain():</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tfp.mcmc.sample_chain(</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>        num_results<span class="op">=</span>num_results,</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        num_burnin_steps<span class="op">=</span>num_burnin_steps,</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>        current_state<span class="op">=</span>tf.ones(categories) <span class="op">/</span> categories,</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>        kernel<span class="op">=</span>adaptive_hmc_kernel,</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>        trace_fn<span class="op">=</span><span class="kw">lambda</span> _, pkr: pkr.inner_results.is_accepted</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="d7f0e65a-c6c2-4aed-a07a-566b505272b5" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Execute the chain</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>samples, is_accepted <span class="op">=</span> run_chain()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="efc546fb-00c7-4c64-a124-63cb570da9b0" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze the samples</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>samples_mean <span class="op">=</span> tf.reduce_mean(samples, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'True probabilities: </span><span class="sc">{</span>true_p<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Estimated probabilities: </span><span class="sc">{</span>samples_mean<span class="sc">.</span>numpy()<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Acceptance rate: </span><span class="sc">{</span>np<span class="sc">.</span>mean(is_accepted)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True probabilities: [0.2  0.3  0.25 0.25]
+Estimated probabilities: [0.24991325 0.2501887  0.25034222 0.24955799]
+Acceptance rate: 0.0401</code></pre>
+</div>
+</div>
+<div id="ad5d7399-1ea9-418e-abe8-ceaf3e91b47c" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the result</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(categories):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    sns.kdeplot(samples[:, i], label<span class="op">=</span><span class="ss">f'Category </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.axvline(true_p[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'True probabilities'</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.axvline(true_p[<span class="dv">1</span>], color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.axvline(true_p[<span class="dv">2</span>], color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.axvline(true_p[<span class="dv">3</span>], color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Probability'</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Density'</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Posterior Distribution of Probabilities'</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Trace plots</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(categories):</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    plt.subplot(categories, <span class="dv">1</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    plt.plot(samples[:, i])</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    plt.axhline(true_p[i], color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'Trace for Category </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Iteration'</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Probability'</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[3], line 73</span>
+<span class="ansi-green-fg ansi-bold">     64</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> tfp<span style="color:rgb(98,98,98)">.</span>mcmc<span style="color:rgb(98,98,98)">.</span>sample_chain(
+<span class="ansi-green-fg ansi-bold">     65</span>         num_results<span style="color:rgb(98,98,98)">=</span>num_results,
+<span class="ansi-green-fg ansi-bold">     66</span>         num_burnin_steps<span style="color:rgb(98,98,98)">=</span>num_burnin_steps,
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-fg ansi-bold">     69</span>         trace_fn<span style="color:rgb(98,98,98)">=</span><span style="font-weight:bold;color:rgb(0,135,0)">lambda</span> _, pkr: pkr<span style="color:rgb(98,98,98)">.</span>inner_results<span style="color:rgb(98,98,98)">.</span>is_accepted
+<span class="ansi-green-fg ansi-bold">     70</span>     )
+<span class="ansi-green-fg ansi-bold">     72</span> <span style="font-style:italic;color:rgb(95,135,135)"># Execute the chain</span>
+<span class="ansi-green-fg">---&gt; 73</span> samples, is_accepted <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">run_chain</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">     75</span> <span style="font-style:italic;color:rgb(95,135,135)"># Analyze the samples</span>
+<span class="ansi-green-fg ansi-bold">     76</span> samples_mean <span style="color:rgb(98,98,98)">=</span> tf<span style="color:rgb(98,98,98)">.</span>reduce_mean(samples, axis<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">0</span>)
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow/python/util/traceback_utils.py:153</span>, in <span class="ansi-cyan-fg">filter_traceback.&lt;locals&gt;.error_handler</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-fg ansi-bold">    151</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">Exception</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> e:
+<span class="ansi-green-fg ansi-bold">    152</span>   filtered_tb <span style="color:rgb(98,98,98)">=</span> _process_traceback_frames(e<span style="color:rgb(98,98,98)">.</span>__traceback__)
+<span class="ansi-green-fg">--&gt; 153</span>   <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> e<span style="color:rgb(98,98,98)">.</span>with_traceback(filtered_tb) <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>
+<span class="ansi-green-fg ansi-bold">    154</span> <span style="font-weight:bold;color:rgb(0,135,0)">finally</span>:
+<span class="ansi-green-fg ansi-bold">    155</span>   <span style="font-weight:bold;color:rgb(0,135,0)">del</span> filtered_tb
+
+File <span class="ansi-green-fg">/tmp/__autograph_generated_filebz1u_be6.py:12</span>, in <span class="ansi-cyan-fg">outer_factory.&lt;locals&gt;.inner_factory.&lt;locals&gt;.tf__run_chain</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg ansi-bold">     10</span> <span style="font-weight:bold;color:rgb(0,135,0)">try</span>:
+<span class="ansi-green-fg ansi-bold">     11</span>     do_return <span style="color:rgb(98,98,98)">=</span> <span style="font-weight:bold;color:rgb(0,135,0)">True</span>
+<span class="ansi-green-fg">---&gt; 12</span>     retval_ <span style="color:rgb(98,98,98)">=</span> ag__<span style="color:rgb(98,98,98)">.</span>converted_call(ag__<span style="color:rgb(98,98,98)">.</span>ld(tfp)<span style="color:rgb(98,98,98)">.</span>mcmc<span style="color:rgb(98,98,98)">.</span>sample_chain, (), <span style="color:rgb(0,135,0)">dict</span>(num_results<span style="color:rgb(98,98,98)">=</span>ag__<span style="color:rgb(98,98,98)">.</span>ld(num_results), num_burnin_steps<span style="color:rgb(98,98,98)">=</span>ag__<span style="color:rgb(98,98,98)">.</span>ld(num_burnin_steps), current_state<span style="color:rgb(98,98,98)">=</span>ag__<span style="color:rgb(98,98,98)">.</span>converted_call(ag__<span style="color:rgb(98,98,98)">.</span>ld(tf)<span style="color:rgb(98,98,98)">.</span>ones, (ag__<span style="color:rgb(98,98,98)">.</span>ld(categories),), <span style="font-weight:bold;color:rgb(0,135,0)">None</span>, fscope) <span style="color:rgb(98,98,98)">/</span> ag__<span style="color:rgb(98,98,98)">.</span>ld(categories), kernel<span style="color:rgb(98,98,98)">=</span>ag__<span style="color:rgb(98,98,98)">.</span>ld(adaptive_hmc_kernel), trace_fn<span style="color:rgb(98,98,98)">=</span>ag__<span style="color:rgb(98,98,98)">.</span>autograph_artifact(<span style="font-weight:bold;color:rgb(0,135,0)">lambda</span> _, pkr: ag__<span style="color:rgb(98,98,98)">.</span>ld(pkr)<span style="color:rgb(98,98,98)">.</span>inner_results<span style="color:rgb(98,98,98)">.</span>is_accepted)), fscope)
+<span class="ansi-green-fg ansi-bold">     13</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span>:
+<span class="ansi-green-fg ansi-bold">     14</span>     do_return <span style="color:rgb(98,98,98)">=</span> <span style="font-weight:bold;color:rgb(0,135,0)">False</span>
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/sample.py:330</span>, in <span class="ansi-cyan-fg">sample_chain</span><span class="ansi-blue-fg">(num_results, current_state, previous_kernel_results, kernel, num_burnin_steps, num_steps_between_results, trace_fn, return_final_kernel_results, parallel_iterations, seed, name)</span>
+<span class="ansi-green-fg ansi-bold">    326</span> current_state <span style="color:rgb(98,98,98)">=</span> tf<span style="color:rgb(98,98,98)">.</span>nest<span style="color:rgb(98,98,98)">.</span>map_structure(
+<span class="ansi-green-fg ansi-bold">    327</span>     <span style="font-weight:bold;color:rgb(0,135,0)">lambda</span> x: tf<span style="color:rgb(98,98,98)">.</span>convert_to_tensor(x, name<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">current_state</span><span style="color:rgb(175,0,0)">'</span>),
+<span class="ansi-green-fg ansi-bold">    328</span>     current_state)
+<span class="ansi-green-fg ansi-bold">    329</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> previous_kernel_results <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>:
+<span class="ansi-green-fg">--&gt; 330</span>   previous_kernel_results <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">kernel</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">bootstrap_results</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">current_state</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">    332</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> trace_fn <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>:
+<span class="ansi-green-fg ansi-bold">    333</span>   <span style="font-style:italic;color:rgb(95,135,135)"># It simplifies the logic to use a dummy function here.</span>
+<span class="ansi-green-fg ansi-bold">    334</span>   trace_fn <span style="color:rgb(98,98,98)">=</span> <span style="font-weight:bold;color:rgb(0,135,0)">lambda</span> <span style="color:rgb(98,98,98)">*</span>args: ()
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/simple_step_size_adaptation.py:443</span>, in <span class="ansi-cyan-fg">SimpleStepSizeAdaptation.bootstrap_results</span><span class="ansi-blue-fg">(self, init_state)</span>
+<span class="ansi-green-fg ansi-bold">    440</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">bootstrap_results</span>(<span style="color:rgb(0,135,0)">self</span>, init_state):
+<span class="ansi-green-fg ansi-bold">    441</span>   <span style="font-weight:bold;color:rgb(0,135,0)">with</span> tf<span style="color:rgb(98,98,98)">.</span>name_scope(mcmc_util<span style="color:rgb(98,98,98)">.</span>make_name(
+<span class="ansi-green-fg ansi-bold">    442</span>       <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>name, <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">simple_step_size_adaptation</span><span style="color:rgb(175,0,0)">'</span>, <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">bootstrap_results</span><span style="color:rgb(175,0,0)">'</span>)):
+<span class="ansi-green-fg">--&gt; 443</span>     inner_results <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">inner_kernel</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">bootstrap_results</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">init_state</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">    444</span>     step_size <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>step_size_getter_fn(inner_results)
+<span class="ansi-green-fg ansi-bold">    445</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> SimpleStepSizeAdaptationResults(
+<span class="ansi-green-fg ansi-bold">    446</span>         inner_results<span style="color:rgb(98,98,98)">=</span>inner_results,
+<span class="ansi-green-fg ansi-bold">    447</span>         step<span style="color:rgb(98,98,98)">=</span>tf<span style="color:rgb(98,98,98)">.</span>constant(<span style="color:rgb(98,98,98)">0</span>, dtype<span style="color:rgb(98,98,98)">=</span>tf<span style="color:rgb(98,98,98)">.</span>int32),
+<span class="ansi-green-fg ansi-bold">    448</span>         target_accept_prob<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>parameters[<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">target_accept_prob</span><span style="color:rgb(175,0,0)">'</span>],
+<span class="ansi-green-fg ansi-bold">    449</span>         adaptation_rate<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>parameters[<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">adaptation_rate</span><span style="color:rgb(175,0,0)">'</span>],
+<span class="ansi-green-fg ansi-bold">    450</span>         new_step_size<span style="color:rgb(98,98,98)">=</span>step_size)
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/hmc.py:533</span>, in <span class="ansi-cyan-fg">HamiltonianMonteCarlo.bootstrap_results</span><span class="ansi-blue-fg">(self, init_state)</span>
+<span class="ansi-green-fg ansi-bold">    531</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">bootstrap_results</span>(<span style="color:rgb(0,135,0)">self</span>, init_state):
+<span class="ansi-green-fg ansi-bold">    532</span> <span style="color:rgb(188,188,188)">  </span><span style="font-style:italic;color:rgb(175,0,0)">"""Creates initial `previous_kernel_results` using a supplied `state`."""</span>
+<span class="ansi-green-fg">--&gt; 533</span>   <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_impl</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">bootstrap_results</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">init_state</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/metropolis_hastings.py:273</span>, in <span class="ansi-cyan-fg">MetropolisHastings.bootstrap_results</span><span class="ansi-blue-fg">(self, init_state)</span>
+<span class="ansi-green-fg ansi-bold">    257</span> <span style="font-style:italic;color:rgb(175,0,0)">"""Returns an object with the same type as returned by `one_step`.</span>
+<span class="ansi-green-fg ansi-bold">    258</span> 
+<span class="ansi-green-fg ansi-bold">    259</span> <span style="font-style:italic;color:rgb(175,0,0)">Args:</span>
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-fg ansi-bold">    269</span> <span style="font-style:italic;color:rgb(175,0,0)">    "target_log_prob".</span>
+<span class="ansi-green-fg ansi-bold">    270</span> <span style="font-style:italic;color:rgb(175,0,0)">"""</span>
+<span class="ansi-green-fg ansi-bold">    271</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> tf<span style="color:rgb(98,98,98)">.</span>name_scope(mcmc_util<span style="color:rgb(98,98,98)">.</span>make_name(
+<span class="ansi-green-fg ansi-bold">    272</span>     <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>name, <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">mh</span><span style="color:rgb(175,0,0)">'</span>, <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">bootstrap_results</span><span style="color:rgb(175,0,0)">'</span>)):
+<span class="ansi-green-fg">--&gt; 273</span>   pkr <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">inner_kernel</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">bootstrap_results</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">init_state</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">    274</span>   <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> has_target_log_prob(pkr):
+<span class="ansi-green-fg ansi-bold">    275</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">ValueError</span>(
+<span class="ansi-green-fg ansi-bold">    276</span>         <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">target_log_prob</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)"> must be a member of `inner_kernel` results.</span><span style="color:rgb(175,0,0)">'</span>)
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/hmc.py:741</span>, in <span class="ansi-cyan-fg">UncalibratedHamiltonianMonteCarlo.bootstrap_results</span><span class="ansi-blue-fg">(self, init_state)</span>
+<span class="ansi-green-fg ansi-bold">    736</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>state_gradients_are_stopped:
+<span class="ansi-green-fg ansi-bold">    737</span>   init_state <span style="color:rgb(98,98,98)">=</span> [tf<span style="color:rgb(98,98,98)">.</span>stop_gradient(x) <span style="font-weight:bold;color:rgb(0,135,0)">for</span> x <span style="font-weight:bold;color:rgb(175,0,255)">in</span> init_state]
+<span class="ansi-green-fg ansi-bold">    738</span> [
+<span class="ansi-green-fg ansi-bold">    739</span>     init_target_log_prob,
+<span class="ansi-green-fg ansi-bold">    740</span>     init_grads_target_log_prob,
+<span class="ansi-green-fg">--&gt; 741</span> ] <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">mcmc_util</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">maybe_call_fn_and_grads</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">target_log_prob_fn</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">init_state</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">    742</span> result <span style="color:rgb(98,98,98)">=</span> UncalibratedHamiltonianMonteCarloKernelResults(
+<span class="ansi-green-fg ansi-bold">    743</span>     log_acceptance_correction<span style="color:rgb(98,98,98)">=</span>tf<span style="color:rgb(98,98,98)">.</span>zeros_like(init_target_log_prob),
+<span class="ansi-green-fg ansi-bold">    744</span>     target_log_prob<span style="color:rgb(98,98,98)">=</span>init_target_log_prob,
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-fg ansi-bold">    750</span>     <span style="font-style:italic;color:rgb(95,135,135)"># Allow room for one_step's seed.</span>
+<span class="ansi-green-fg ansi-bold">    751</span>     seed<span style="color:rgb(98,98,98)">=</span>samplers<span style="color:rgb(98,98,98)">.</span>zeros_seed())
+<span class="ansi-green-fg ansi-bold">    752</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_store_parameters_in_results:
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/internal/util.py:297</span>, in <span class="ansi-cyan-fg">maybe_call_fn_and_grads</span><span class="ansi-blue-fg">(fn, fn_arg_list, result, grads, check_non_none_grads, name)</span>
+<span class="ansi-green-fg ansi-bold">    294</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> tf<span style="color:rgb(98,98,98)">.</span>name_scope(name <span style="font-weight:bold;color:rgb(175,0,255)">or</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">maybe_call_fn_and_grads</span><span style="color:rgb(175,0,0)">'</span>):
+<span class="ansi-green-fg ansi-bold">    295</span>   fn_arg_list <span style="color:rgb(98,98,98)">=</span> (<span style="color:rgb(0,135,0)">list</span>(fn_arg_list) <span style="font-weight:bold;color:rgb(0,135,0)">if</span> is_list_like(fn_arg_list)
+<span class="ansi-green-fg ansi-bold">    296</span>                  <span style="font-weight:bold;color:rgb(0,135,0)">else</span> [fn_arg_list])
+<span class="ansi-green-fg">--&gt; 297</span>   result, grads <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">_value_and_gradients</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">fn</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">fn_arg_list</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">result</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">grads</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">    298</span>   <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="color:rgb(0,135,0)">all</span>(dtype_util<span style="color:rgb(98,98,98)">.</span>is_floating(r<span style="color:rgb(98,98,98)">.</span>dtype)
+<span class="ansi-green-fg ansi-bold">    299</span>              <span style="font-weight:bold;color:rgb(0,135,0)">for</span> r <span style="font-weight:bold;color:rgb(175,0,255)">in</span> (result <span style="font-weight:bold;color:rgb(0,135,0)">if</span> is_list_like(result) <span style="font-weight:bold;color:rgb(0,135,0)">else</span> [result])):  <span style="font-style:italic;color:rgb(95,135,135)"># pylint: disable=superfluous-parens</span>
+<span class="ansi-green-fg ansi-bold">    300</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">TypeError</span>(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">Function result must be a `Tensor` with `float` </span><span style="color:rgb(175,0,0)">'</span>
+<span class="ansi-green-fg ansi-bold">    301</span>                     <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">`dtype`.</span><span style="color:rgb(175,0,0)">'</span>)
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/internal/util.py:265</span>, in <span class="ansi-cyan-fg">_value_and_gradients</span><span class="ansi-blue-fg">(fn, fn_arg_list, result, grads, name)</span>
+<span class="ansi-green-fg ansi-bold">    258</span> fn_arg_list <span style="color:rgb(98,98,98)">=</span> _convert_to_tensor(fn_arg_list, <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">fn_arg</span><span style="color:rgb(175,0,0)">'</span>)
+<span class="ansi-green-fg ansi-bold">    260</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> result <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span> <span style="font-weight:bold;color:rgb(175,0,255)">and</span> grads <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span> <span style="font-weight:bold;color:rgb(175,0,255)">and</span> (JAX_MODE <span style="font-weight:bold;color:rgb(175,0,255)">or</span>
+<span class="ansi-green-fg ansi-bold">    261</span>                                          <span style="font-weight:bold;color:rgb(175,0,255)">not</span> tf<span style="color:rgb(98,98,98)">.</span>executing_eagerly()):
+<span class="ansi-green-fg ansi-bold">    262</span>   <span style="font-style:italic;color:rgb(95,135,135)"># Currently, computing gradient is not working well with caching in</span>
+<span class="ansi-green-fg ansi-bold">    263</span>   <span style="font-style:italic;color:rgb(95,135,135)"># tensorflow eager mode (see below), so we will handle that case</span>
+<span class="ansi-green-fg ansi-bold">    264</span>   <span style="font-style:italic;color:rgb(95,135,135)"># separately.</span>
+<span class="ansi-green-fg">--&gt; 265</span>   <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">tfp_math_value_and_gradients</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">fn</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">fn_arg_list</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">    267</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> result <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>:
+<span class="ansi-green-fg ansi-bold">    268</span>   result <span style="color:rgb(98,98,98)">=</span> fn(<span style="color:rgb(98,98,98)">*</span>fn_arg_list)
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/math/gradient.py:108</span>, in <span class="ansi-cyan-fg">value_and_gradient</span><span class="ansi-blue-fg">(f, output_gradients, use_gradient_tape, auto_unpack_single_arg, has_aux, name, *args, **kwargs)</span>
+<span class="ansi-green-fg ansi-bold">     36</span> <span style="font-style:italic;color:rgb(175,0,0)">"""Computes `f(*args, **kwargs)` and its gradients wrt to `args`, `kwargs`.</span>
+<span class="ansi-green-fg ansi-bold">     37</span> 
+<span class="ansi-green-fg ansi-bold">     38</span> <span style="font-style:italic;color:rgb(175,0,0)">The function `f` is invoked according to one of the following rules:</span>
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-fg ansi-bold">    105</span> <span style="font-style:italic;color:rgb(175,0,0)">    are the gradients of `y` with respect to each of `args` and `kwargs`.</span>
+<span class="ansi-green-fg ansi-bold">    106</span> <span style="font-style:italic;color:rgb(175,0,0)">"""</span>
+<span class="ansi-green-fg ansi-bold">    107</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> tf<span style="color:rgb(98,98,98)">.</span>name_scope(name <span style="font-weight:bold;color:rgb(175,0,255)">or</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">value_and_gradient</span><span style="color:rgb(175,0,0)">'</span>):
+<span class="ansi-green-fg">--&gt; 108</span>   <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">_value_and_grad_impl</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg ansi-bold">    109</span> <span class="ansi-yellow-bg">      </span><span class="ansi-yellow-bg">f</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    110</span> <span class="ansi-yellow-bg">      </span><span class="ansi-yellow-bg">_gradient_new</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">if</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">tf</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">executing_eagerly</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(175,0,255)" class="ansi-yellow-bg">or</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">use_gradient_tape</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">else</span>
+<span class="ansi-green-fg ansi-bold">    111</span> <span class="ansi-yellow-bg">      </span><span class="ansi-yellow-bg">_gradient_old</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    112</span> <span class="ansi-yellow-bg">      </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    113</span> <span class="ansi-yellow-bg">      </span><span class="ansi-yellow-bg">output_gradients</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">output_gradients</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    114</span> <span class="ansi-yellow-bg">      </span><span class="ansi-yellow-bg">auto_unpack_single_arg</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">auto_unpack_single_arg</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    115</span> <span class="ansi-yellow-bg">      </span><span class="ansi-yellow-bg">expand_tf_modules_as_trainable_vars</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">False</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    116</span> <span class="ansi-yellow-bg">      </span><span class="ansi-yellow-bg">has_aux</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">has_aux</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    117</span> <span class="ansi-yellow-bg">      </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/math/gradient.py:378</span>, in <span class="ansi-cyan-fg">_value_and_grad_impl</span><span class="ansi-blue-fg">(f, grad_fn, output_gradients, auto_unpack_single_arg, expand_tf_modules_as_trainable_vars, has_aux, *args, **kwargs)</span>
+<span class="ansi-green-fg ansi-bold">    374</span>   real_f <span style="color:rgb(98,98,98)">=</span> f
+<span class="ansi-green-fg ansi-bold">    375</span>   f <span style="color:rgb(98,98,98)">=</span> <span style="font-weight:bold;color:rgb(0,135,0)">lambda</span> <span style="color:rgb(98,98,98)">*</span>args, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>kwargs: (real_f(<span style="color:rgb(98,98,98)">*</span>args, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>kwargs)  <span style="font-style:italic;color:rgb(95,135,135)"># pylint: disable=g-long-lambda</span>
+<span class="ansi-green-fg ansi-bold">    376</span>                                <span style="font-weight:bold;color:rgb(0,135,0)">if</span> _has_args(real_f) <span style="font-weight:bold;color:rgb(0,135,0)">else</span> real_f(), ())
+<span class="ansi-green-fg">--&gt; 378</span> y, dydx, aux <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">grad_fn</span><span class="ansi-yellow-bg">(</span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">lambda</span><span class="ansi-yellow-bg">:</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">f</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">if</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">_has_args</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">f</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">else</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">f</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    379</span> <span class="ansi-yellow-bg">                       </span><span class="ansi-yellow-bg">tf</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">nest</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">flatten</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">expand_args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">expand_kwargs</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    380</span> <span class="ansi-yellow-bg">                       </span><span class="ansi-yellow-bg">output_gradients</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">    381</span> dydx_args, dydx_kwargs <span style="color:rgb(98,98,98)">=</span> tf<span style="color:rgb(98,98,98)">.</span>nest<span style="color:rgb(98,98,98)">.</span>pack_sequence_as(
+<span class="ansi-green-fg ansi-bold">    382</span>     [expand_args, expand_kwargs], dydx)
+<span class="ansi-green-fg ansi-bold">    383</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">len</span>(args) <span style="color:rgb(98,98,98)">==</span> <span style="color:rgb(98,98,98)">1</span> <span style="font-weight:bold;color:rgb(175,0,255)">and</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> do_unpack:
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/math/gradient.py:330</span>, in <span class="ansi-cyan-fg">_gradient_old</span><span class="ansi-blue-fg">(f, xs, grad_ys)</span>
+<span class="ansi-green-fg ansi-bold">    328</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">_gradient_old</span>(f, xs, grad_ys):
+<span class="ansi-green-fg ansi-bold">    329</span>   <span style="font-weight:bold;color:rgb(0,135,0)">assert</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> tf<span style="color:rgb(98,98,98)">.</span>executing_eagerly()
+<span class="ansi-green-fg">--&gt; 330</span>   y, aux <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">f</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">    331</span>   <span style="font-weight:bold;color:rgb(0,135,0)">return</span> y, tf<span style="color:rgb(98,98,98)">.</span>gradients(y, xs, grad_ys<span style="color:rgb(98,98,98)">=</span>grad_ys), aux
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/math/gradient.py:378</span>, in <span class="ansi-cyan-fg">_value_and_grad_impl.&lt;locals&gt;.&lt;lambda&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg ansi-bold">    374</span>   real_f <span style="color:rgb(98,98,98)">=</span> f
+<span class="ansi-green-fg ansi-bold">    375</span>   f <span style="color:rgb(98,98,98)">=</span> <span style="font-weight:bold;color:rgb(0,135,0)">lambda</span> <span style="color:rgb(98,98,98)">*</span>args, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>kwargs: (real_f(<span style="color:rgb(98,98,98)">*</span>args, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>kwargs)  <span style="font-style:italic;color:rgb(95,135,135)"># pylint: disable=g-long-lambda</span>
+<span class="ansi-green-fg ansi-bold">    376</span>                                <span style="font-weight:bold;color:rgb(0,135,0)">if</span> _has_args(real_f) <span style="font-weight:bold;color:rgb(0,135,0)">else</span> real_f(), ())
+<span class="ansi-green-fg">--&gt; 378</span> y, dydx, aux <span style="color:rgb(98,98,98)">=</span> grad_fn(<span style="font-weight:bold;color:rgb(0,135,0)">lambda</span>: <span class="ansi-yellow-bg">f</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> _has_args(f) <span style="font-weight:bold;color:rgb(0,135,0)">else</span> f(),
+<span class="ansi-green-fg ansi-bold">    379</span>                        tf<span style="color:rgb(98,98,98)">.</span>nest<span style="color:rgb(98,98,98)">.</span>flatten([expand_args, expand_kwargs]),
+<span class="ansi-green-fg ansi-bold">    380</span>                        output_gradients)
+<span class="ansi-green-fg ansi-bold">    381</span> dydx_args, dydx_kwargs <span style="color:rgb(98,98,98)">=</span> tf<span style="color:rgb(98,98,98)">.</span>nest<span style="color:rgb(98,98,98)">.</span>pack_sequence_as(
+<span class="ansi-green-fg ansi-bold">    382</span>     [expand_args, expand_kwargs], dydx)
+<span class="ansi-green-fg ansi-bold">    383</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">len</span>(args) <span style="color:rgb(98,98,98)">==</span> <span style="color:rgb(98,98,98)">1</span> <span style="font-weight:bold;color:rgb(175,0,255)">and</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> do_unpack:
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/math/gradient.py:375</span>, in <span class="ansi-cyan-fg">_value_and_grad_impl.&lt;locals&gt;.&lt;lambda&gt;</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-fg ansi-bold">    373</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> has_aux:
+<span class="ansi-green-fg ansi-bold">    374</span>   real_f <span style="color:rgb(98,98,98)">=</span> f
+<span class="ansi-green-fg">--&gt; 375</span>   f <span style="color:rgb(98,98,98)">=</span> <span style="font-weight:bold;color:rgb(0,135,0)">lambda</span> <span style="color:rgb(98,98,98)">*</span>args, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>kwargs: (<span class="ansi-yellow-bg">real_f</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>  <span style="font-style:italic;color:rgb(95,135,135)"># pylint: disable=g-long-lambda</span>
+<span class="ansi-green-fg ansi-bold">    376</span>                                <span style="font-weight:bold;color:rgb(0,135,0)">if</span> _has_args(real_f) <span style="font-weight:bold;color:rgb(0,135,0)">else</span> real_f(), ())
+<span class="ansi-green-fg ansi-bold">    378</span> y, dydx, aux <span style="color:rgb(98,98,98)">=</span> grad_fn(<span style="font-weight:bold;color:rgb(0,135,0)">lambda</span>: f(<span style="color:rgb(98,98,98)">*</span>args, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>kwargs) <span style="font-weight:bold;color:rgb(0,135,0)">if</span> _has_args(f) <span style="font-weight:bold;color:rgb(0,135,0)">else</span> f(),
+<span class="ansi-green-fg ansi-bold">    379</span>                        tf<span style="color:rgb(98,98,98)">.</span>nest<span style="color:rgb(98,98,98)">.</span>flatten([expand_args, expand_kwargs]),
+<span class="ansi-green-fg ansi-bold">    380</span>                        output_gradients)
+<span class="ansi-green-fg ansi-bold">    381</span> dydx_args, dydx_kwargs <span style="color:rgb(98,98,98)">=</span> tf<span style="color:rgb(98,98,98)">.</span>nest<span style="color:rgb(98,98,98)">.</span>pack_sequence_as(
+<span class="ansi-green-fg ansi-bold">    382</span>     [expand_args, expand_kwargs], dydx)
+
+Cell <span class="ansi-green-fg">In[3], line 40</span>, in <span class="ansi-cyan-fg">target_log_prob</span><span class="ansi-blue-fg">(p)</span>
+<span class="ansi-green-fg ansi-bold">     39</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">target_log_prob</span>(p):
+<span class="ansi-green-fg">---&gt; 40</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">joint_distribution</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">log_prob</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">{</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">p</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">:</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">p</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">obs</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">:</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">tf</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">cast</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">observed_data</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">tf</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">int32</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">}</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py:899</span>, in <span class="ansi-cyan-fg">JointDistribution.log_prob</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
+<span class="ansi-green-fg ansi-bold">    890</span> <span style="font-style:italic;color:rgb(175,0,0)">"""Log probability density/mass function.</span>
+<span class="ansi-green-fg ansi-bold">    891</span> 
+<span class="ansi-green-fg ansi-bold">    892</span> <span style="font-style:italic;color:rgb(175,0,0)">${calling_convention_description}</span>
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-fg ansi-bold">    896</span> <span style="font-style:italic;color:rgb(175,0,0)">    values of type `self.dtype`.</span>
+<span class="ansi-green-fg ansi-bold">    897</span> <span style="font-style:italic;color:rgb(175,0,0)">"""</span>
+<span class="ansi-green-fg ansi-bold">    898</span> name <span style="color:rgb(98,98,98)">=</span> kwargs<span style="color:rgb(98,98,98)">.</span>pop(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">name</span><span style="color:rgb(175,0,0)">'</span>, <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">log_prob</span><span style="color:rgb(175,0,0)">'</span>)
+<span class="ansi-green-fg">--&gt; 899</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_call_log_prob</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_resolve_value</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">name</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">name</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/distribution.py:1269</span>, in <span class="ansi-cyan-fg">Distribution._call_log_prob</span><span class="ansi-blue-fg">(self, value, name, **kwargs)</span>
+<span class="ansi-green-fg ansi-bold">   1267</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_name_and_control_scope(name, value, kwargs):
+<span class="ansi-green-fg ansi-bold">   1268</span>   <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">hasattr</span>(<span style="color:rgb(0,135,0)">self</span>, <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">_log_prob</span><span style="color:rgb(175,0,0)">'</span>):
+<span class="ansi-green-fg">-&gt; 1269</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_log_prob</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">value</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">   1270</span>   <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">hasattr</span>(<span style="color:rgb(0,135,0)">self</span>, <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">_prob</span><span style="color:rgb(175,0,0)">'</span>):
+<span class="ansi-green-fg ansi-bold">   1271</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> tf<span style="color:rgb(98,98,98)">.</span>math<span style="color:rgb(98,98,98)">.</span>log(<span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_prob(value, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>kwargs))
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py:677</span>, in <span class="ansi-cyan-fg">JointDistribution._log_prob</span><span class="ansi-blue-fg">(self, value)</span>
+<span class="ansi-green-fg ansi-bold">    675</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">_log_prob</span>(<span style="color:rgb(0,135,0)">self</span>, value):
+<span class="ansi-green-fg ansi-bold">    676</span>   <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_reduce_log_probs_over_dists(
+<span class="ansi-green-fg">--&gt; 677</span>       <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_map_measure_over_dists</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">log_prob</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">value</span><span class="ansi-yellow-bg">)</span>)
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py:742</span>, in <span class="ansi-cyan-fg">JointDistribution._map_measure_over_dists</span><span class="ansi-blue-fg">(self, attr, value)</span>
+<span class="ansi-green-fg ansi-bold">    739</span>   attr_name <span style="color:rgb(98,98,98)">=</span> attr
+<span class="ansi-green-fg ansi-bold">    740</span>   attr <span style="color:rgb(98,98,98)">=</span> <span style="font-weight:bold;color:rgb(0,135,0)">lambda</span> d, x: <span style="color:rgb(0,135,0)">getattr</span>(d, attr_name)(x)
+<span class="ansi-green-fg">--&gt; 742</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_call_execute_model</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg ansi-bold">    743</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">sample_shape</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    744</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">value</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">value</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    745</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">seed</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">samplers</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">zeros_seed</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    746</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">sample_and_trace_fn</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg ansi-bold">    747</span> <span class="ansi-yellow-bg">        </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">lambda</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">dist</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">value</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">_</span><span class="ansi-yellow-bg">:</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">ValueWithTrace</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">value</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">value</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg">  </span><span style="font-style:italic;color:rgb(95,135,135)" class="ansi-yellow-bg"># pylint: disable=g-long-lambda</span>
+<span class="ansi-green-fg ansi-bold">    748</span> <span class="ansi-yellow-bg">                                                </span><span class="ansi-yellow-bg">traced</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">attr</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">dist</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">value</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py:850</span>, in <span class="ansi-cyan-fg">JointDistribution._call_execute_model</span><span class="ansi-blue-fg">(self, sample_shape, seed, value, sample_and_trace_fn)</span>
+<span class="ansi-green-fg ansi-bold">    846</span>   use_vectorized_map <span style="color:rgb(98,98,98)">=</span> (sample_shape_may_be_nontrivial <span style="font-weight:bold;color:rgb(175,0,255)">or</span>
+<span class="ansi-green-fg ansi-bold">    847</span>                         value_might_have_sample_dims)
+<span class="ansi-green-fg ansi-bold">    849</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> use_vectorized_map:
+<span class="ansi-green-fg">--&gt; 850</span>   <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_execute_model</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg ansi-bold">    851</span> <span class="ansi-yellow-bg">      </span><span class="ansi-yellow-bg">sample_shape</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">sample_shape</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">seed</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">seed</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">value</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">flat_value</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    852</span> <span class="ansi-yellow-bg">      </span><span class="ansi-yellow-bg">sample_and_trace_fn</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">sample_and_trace_fn</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">    854</span> <span style="font-style:italic;color:rgb(95,135,135)"># Set up for autovectorized sampling. To support the `value` arg, we need to</span>
+<span class="ansi-green-fg ansi-bold">    855</span> <span style="font-style:italic;color:rgb(95,135,135)"># first understand which dims are from the model itself, then wrap</span>
+<span class="ansi-green-fg ansi-bold">    856</span> <span style="font-style:italic;color:rgb(95,135,135)"># `_call_execute_model` to batch over all remaining dims.</span>
+<span class="ansi-green-fg ansi-bold">    857</span> flat_value_core_ndims <span style="color:rgb(98,98,98)">=</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py:1005</span>, in <span class="ansi-cyan-fg">JointDistribution._execute_model</span><span class="ansi-blue-fg">(self, sample_shape, seed, value, stop_index, sample_and_trace_fn)</span>
+<span class="ansi-green-fg ansi-bold">   1003</span>   value_at_index <span style="color:rgb(98,98,98)">=</span> value[index]
+<span class="ansi-green-fg ansi-bold">   1004</span> <span style="font-weight:bold;color:rgb(0,135,0)">try</span>:
+<span class="ansi-green-fg">-&gt; 1005</span>   next_value, traced_values <span style="color:rgb(98,98,98)">=</span> sample_and_trace_fn(
+<span class="ansi-green-fg ansi-bold">   1006</span>       actual_distribution,
+<span class="ansi-green-fg ansi-bold">   1007</span>       sample_shape<span style="color:rgb(98,98,98)">=</span>sample_shape <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">isinstance</span>(d, <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>Root) <span style="font-weight:bold;color:rgb(0,135,0)">else</span> (),
+<span class="ansi-green-fg ansi-bold">   1008</span>       seed<span style="color:rgb(98,98,98)">=</span>(stateful_sample_seed <span style="font-weight:bold;color:rgb(0,135,0)">if</span> stateless_sample_seed <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>
+<span class="ansi-green-fg ansi-bold">   1009</span>             <span style="font-weight:bold;color:rgb(0,135,0)">else</span> stateless_sample_seed),
+<span class="ansi-green-fg ansi-bold">   1010</span>       value<span style="color:rgb(98,98,98)">=</span>value_at_index)
+<span class="ansi-green-fg ansi-bold">   1011</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">TypeError</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> e:
+<span class="ansi-green-fg ansi-bold">   1012</span>   <span style="font-weight:bold;color:rgb(0,135,0)">if</span> (<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">Expected int for argument</span><span style="color:rgb(175,0,0)">'</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> <span style="color:rgb(0,135,0)">str</span>(e) <span style="font-weight:bold;color:rgb(175,0,255)">and</span>
+<span class="ansi-green-fg ansi-bold">   1013</span>       TENSOR_SEED_MSG_PREFIX <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> <span style="color:rgb(0,135,0)">str</span>(e)) <span style="font-weight:bold;color:rgb(175,0,255)">or</span> (
+<span class="ansi-green-fg ansi-bold">   1014</span>           stateful_sample_seed <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>):
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py:748</span>, in <span class="ansi-cyan-fg">JointDistribution._map_measure_over_dists.&lt;locals&gt;.&lt;lambda&gt;</span><span class="ansi-blue-fg">(dist, value, **_)</span>
+<span class="ansi-green-fg ansi-bold">    739</span>   attr_name <span style="color:rgb(98,98,98)">=</span> attr
+<span class="ansi-green-fg ansi-bold">    740</span>   attr <span style="color:rgb(98,98,98)">=</span> <span style="font-weight:bold;color:rgb(0,135,0)">lambda</span> d, x: <span style="color:rgb(0,135,0)">getattr</span>(d, attr_name)(x)
+<span class="ansi-green-fg ansi-bold">    742</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_call_execute_model(
+<span class="ansi-green-fg ansi-bold">    743</span>     sample_shape<span style="color:rgb(98,98,98)">=</span>(),
+<span class="ansi-green-fg ansi-bold">    744</span>     value<span style="color:rgb(98,98,98)">=</span>value,
+<span class="ansi-green-fg ansi-bold">    745</span>     seed<span style="color:rgb(98,98,98)">=</span>samplers<span style="color:rgb(98,98,98)">.</span>zeros_seed(),
+<span class="ansi-green-fg ansi-bold">    746</span>     sample_and_trace_fn<span style="color:rgb(98,98,98)">=</span>(
+<span class="ansi-green-fg ansi-bold">    747</span>         <span style="font-weight:bold;color:rgb(0,135,0)">lambda</span> dist, value, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>_: ValueWithTrace(value<span style="color:rgb(98,98,98)">=</span>value,  <span style="font-style:italic;color:rgb(95,135,135)"># pylint: disable=g-long-lambda</span>
+<span class="ansi-green-fg">--&gt; 748</span>                                                 traced<span style="color:rgb(98,98,98)">=</span><span class="ansi-yellow-bg">attr</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">dist</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">value</span><span class="ansi-yellow-bg">)</span>)))
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py:740</span>, in <span class="ansi-cyan-fg">JointDistribution._map_measure_over_dists.&lt;locals&gt;.&lt;lambda&gt;</span><span class="ansi-blue-fg">(d, x)</span>
+<span class="ansi-green-fg ansi-bold">    738</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="color:rgb(0,135,0)">callable</span>(attr):
+<span class="ansi-green-fg ansi-bold">    739</span>   attr_name <span style="color:rgb(98,98,98)">=</span> attr
+<span class="ansi-green-fg">--&gt; 740</span>   attr <span style="color:rgb(98,98,98)">=</span> <span style="font-weight:bold;color:rgb(0,135,0)">lambda</span> d, x: <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">getattr</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">d</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">attr_name</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">x</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">    742</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_call_execute_model(
+<span class="ansi-green-fg ansi-bold">    743</span>     sample_shape<span style="color:rgb(98,98,98)">=</span>(),
+<span class="ansi-green-fg ansi-bold">    744</span>     value<span style="color:rgb(98,98,98)">=</span>value,
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-fg ansi-bold">    747</span>         <span style="font-weight:bold;color:rgb(0,135,0)">lambda</span> dist, value, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>_: ValueWithTrace(value<span style="color:rgb(98,98,98)">=</span>value,  <span style="font-style:italic;color:rgb(95,135,135)"># pylint: disable=g-long-lambda</span>
+<span class="ansi-green-fg ansi-bold">    748</span>                                                 traced<span style="color:rgb(98,98,98)">=</span>attr(dist, value))))
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/distribution.py:1287</span>, in <span class="ansi-cyan-fg">Distribution.log_prob</span><span class="ansi-blue-fg">(self, value, name, **kwargs)</span>
+<span class="ansi-green-fg ansi-bold">   1275</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">log_prob</span>(<span style="color:rgb(0,135,0)">self</span>, value, name<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">log_prob</span><span style="color:rgb(175,0,0)">'</span>, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>kwargs):
+<span class="ansi-green-fg ansi-bold">   1276</span> <span style="color:rgb(188,188,188)">  </span><span style="font-style:italic;color:rgb(175,0,0)">"""Log probability density/mass function.</span>
+<span class="ansi-green-fg ansi-bold">   1277</span> 
+<span class="ansi-green-fg ansi-bold">   1278</span> <span style="font-style:italic;color:rgb(175,0,0)">  Args:</span>
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-fg ansi-bold">   1285</span> <span style="font-style:italic;color:rgb(175,0,0)">      values of type `self.dtype`.</span>
+<span class="ansi-green-fg ansi-bold">   1286</span> <span style="font-style:italic;color:rgb(175,0,0)">  """</span>
+<span class="ansi-green-fg">-&gt; 1287</span>   <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_call_log_prob</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">value</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">name</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/distribution.py:1269</span>, in <span class="ansi-cyan-fg">Distribution._call_log_prob</span><span class="ansi-blue-fg">(self, value, name, **kwargs)</span>
+<span class="ansi-green-fg ansi-bold">   1267</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_name_and_control_scope(name, value, kwargs):
+<span class="ansi-green-fg ansi-bold">   1268</span>   <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">hasattr</span>(<span style="color:rgb(0,135,0)">self</span>, <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">_log_prob</span><span style="color:rgb(175,0,0)">'</span>):
+<span class="ansi-green-fg">-&gt; 1269</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_log_prob</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">value</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">   1270</span>   <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">hasattr</span>(<span style="color:rgb(0,135,0)">self</span>, <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">_prob</span><span style="color:rgb(175,0,0)">'</span>):
+<span class="ansi-green-fg ansi-bold">   1271</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> tf<span style="color:rgb(98,98,98)">.</span>math<span style="color:rgb(98,98,98)">.</span>log(<span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_prob(value, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>kwargs))
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/sample.py:288</span>, in <span class="ansi-cyan-fg">_Sample._log_prob</span><span class="ansi-blue-fg">(self, x, **kwargs)</span>
+<span class="ansi-green-fg ansi-bold">    286</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">_log_prob</span>(<span style="color:rgb(0,135,0)">self</span>, x, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>kwargs):
+<span class="ansi-green-fg ansi-bold">    287</span>   x, aux <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_prepare_for_underlying(x)
+<span class="ansi-green-fg">--&gt; 288</span>   <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_finish_log_prob</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg ansi-bold">    289</span> <span class="ansi-yellow-bg">      </span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">distribution</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">log_prob</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">x</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    290</span> <span class="ansi-yellow-bg">      </span><span class="ansi-yellow-bg">aux</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/sample.py:261</span>, in <span class="ansi-cyan-fg">_Sample._finish_log_prob</span><span class="ansi-blue-fg">(self, lp, aux)</span>
+<span class="ansi-green-fg ansi-bold">    258</span> (sample_ndims, extra_sample_ndims, batch_ndims) <span style="color:rgb(98,98,98)">=</span> aux
+<span class="ansi-green-fg ansi-bold">    259</span> <span style="font-style:italic;color:rgb(95,135,135)"># (1) Ensure lp is fully broadcast in the sample dims, i.e. ensure lp has</span>
+<span class="ansi-green-fg ansi-bold">    260</span> <span style="font-style:italic;color:rgb(95,135,135)">#     full sample shape in the sample axes, before we reduce.</span>
+<span class="ansi-green-fg">--&gt; 261</span> bcast_lp_shape <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">ps</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">broadcast_shape</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg ansi-bold">    262</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">ps</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">shape</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">lp</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    263</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">ps</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">concat</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">ps</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">ones</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">sample_ndims</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">tf</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">int32</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    264</span> <span class="ansi-yellow-bg">               </span><span class="ansi-yellow-bg">ps</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">reshape</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">sample_shape</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">shape</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">-</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">1</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">    265</span> <span class="ansi-yellow-bg">               </span><span class="ansi-yellow-bg">ps</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">ones</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">batch_ndims</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">tf</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">int32</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">axis</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">0</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">    266</span> lp <span style="color:rgb(98,98,98)">=</span> tf<span style="color:rgb(98,98,98)">.</span>broadcast_to(lp, bcast_lp_shape)
+<span class="ansi-green-fg ansi-bold">    267</span> <span style="font-style:italic;color:rgb(95,135,135)"># (2) Make the final reduction.</span>
+
+File <span class="ansi-green-fg">~/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/internal/prefer_static.py:218</span>, in <span class="ansi-cyan-fg">broadcast_shape</span><span class="ansi-blue-fg">(x_shape, y_shape)</span>
+<span class="ansi-green-fg ansi-bold">    215</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> (x_shape_static <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>) <span style="font-weight:bold;color:rgb(175,0,255)">or</span> (y_shape_static <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>):
+<span class="ansi-green-fg ansi-bold">    216</span>   <span style="font-weight:bold;color:rgb(0,135,0)">return</span> tf<span style="color:rgb(98,98,98)">.</span>broadcast_dynamic_shape(x_shape, y_shape)
+<span class="ansi-green-fg">--&gt; 218</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">tf</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">broadcast_static_shape</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg ansi-bold">    219</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">tf</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">TensorShape</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">x_shape_static</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">tf</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">TensorShape</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">y_shape_static</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">)</span>
+
+<span class="ansi-red-fg">ValueError</span>: in user code:
+
+    File "/tmp/ipykernel_2978305/220366675.py", line 69, in run_chain  *
+        trace_fn=lambda _, pkr: pkr.inner_results.is_accepted
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/sample.py", line 330, in sample_chain  **
+        previous_kernel_results = kernel.bootstrap_results(current_state)
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/simple_step_size_adaptation.py", line 443, in bootstrap_results
+        inner_results = self.inner_kernel.bootstrap_results(init_state)
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/hmc.py", line 533, in bootstrap_results
+        return self._impl.bootstrap_results(init_state)
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/metropolis_hastings.py", line 273, in bootstrap_results
+        pkr = self.inner_kernel.bootstrap_results(init_state)
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/hmc.py", line 741, in bootstrap_results
+        ] = mcmc_util.maybe_call_fn_and_grads(self.target_log_prob_fn, init_state)
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/internal/util.py", line 297, in maybe_call_fn_and_grads
+        result, grads = _value_and_gradients(fn, fn_arg_list, result, grads)
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/mcmc/internal/util.py", line 265, in _value_and_gradients
+        return tfp_math_value_and_gradients(fn, fn_arg_list)
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/math/gradient.py", line 108, in value_and_gradient
+        return _value_and_grad_impl(
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/math/gradient.py", line 378, in _value_and_grad_impl
+        y, dydx, aux = grad_fn(lambda: f(*args, **kwargs) if _has_args(f) else f(),
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/math/gradient.py", line 330, in _gradient_old
+        y, aux = f()
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/math/gradient.py", line 378, in &lt;lambda&gt;
+        y, dydx, aux = grad_fn(lambda: f(*args, **kwargs) if _has_args(f) else f(),
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/math/gradient.py", line 375, in &lt;lambda&gt;
+        f = lambda *args, **kwargs: (real_f(*args, **kwargs)  # pylint: disable=g-long-lambda
+    File "/tmp/ipykernel_2978305/220366675.py", line 40, in target_log_prob
+        return joint_distribution.log_prob({'p': p, 'obs': tf.cast(observed_data, tf.int32)})
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py", line 899, in log_prob
+        return self._call_log_prob(self._resolve_value(*args, **kwargs), name=name)
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/distribution.py", line 1269, in _call_log_prob
+        return self._log_prob(value, **kwargs)
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py", line 677, in _log_prob
+        self._map_measure_over_dists('log_prob', value))
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py", line 742, in _map_measure_over_dists
+        return self._call_execute_model(
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py", line 850, in _call_execute_model
+        return self._execute_model(
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py", line 1005, in _execute_model
+        next_value, traced_values = sample_and_trace_fn(
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py", line 748, in &lt;lambda&gt;
+        traced=attr(dist, value))))
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/joint_distribution.py", line 740, in &lt;lambda&gt;
+        attr = lambda d, x: getattr(d, attr_name)(x)
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/distribution.py", line 1287, in log_prob
+        return self._call_log_prob(value, name, **kwargs)
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/distribution.py", line 1269, in _call_log_prob
+        return self._log_prob(value, **kwargs)
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/sample.py", line 288, in _log_prob
+        return self._finish_log_prob(
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/distributions/sample.py", line 261, in _finish_log_prob
+        bcast_lp_shape = ps.broadcast_shape(
+    File "/home/kantundpeterpan/miniconda3/envs/tf/lib/python3.12/site-packages/tensorflow_probability/python/internal/prefer_static.py", line 218, in broadcast_shape
+        return tf.broadcast_static_shape(
+
+    ValueError: Incompatible shapes for broadcasting. Two shapes are compatible if for each dimension pair they are either equal or one of them is 1. Received: (100, 4) and (1, 100).
+</pre>
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

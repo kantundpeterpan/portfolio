@@ -33,18 +33,34 @@ from: https://github.com/quarto-dev/quarto-cli/discussions/2538#discussioncommen
   width: 12%;
 }
 
+.section-info {
+  font-size: small !important;
+}
+
+.section-info ul li p {
+  margin-bottom: 2px !important;
+}
+
 @media print {
   @page {
-      size: a4 portrait;
-      counter-increment: page;
-      @bottom-center {
-        content: counter(page)
-      }
+    size: a4 portrait;
+    counter-increment: page;
+    @bottom-center {
+      content: counter(page)
+    }
+  }
+  
+  .section-info  {
+    font-size: small !important;
+  }
+
+  .section-info ul li p {
+    margin-bottom: 0px !important;
   }
 
   .center {
     margin: auto;
-    width: 70%;
+    width: 75%;
     text-align: center;
   }
 
@@ -104,6 +120,7 @@ from: https://github.com/quarto-dev/quarto-cli/discussions/2538#discussioncommen
     /* color: green; */
   }
 
+  /*
   p {
     font-size: small;
   }
@@ -111,10 +128,12 @@ from: https://github.com/quarto-dev/quarto-cli/discussions/2538#discussioncommen
   ul li{
     font-size: smaller;
   }
+  */
 
   a {
     text-decoration: none;
     font-weight: 700;
     color: #36a7e9;
   }
+
 }
